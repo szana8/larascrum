@@ -1,95 +1,37 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+@section('content')
+<div class="">
+    <div class="bg-blue-darkest mb-8">
+        <div class="container mx-auto px-6 py-12">
+            <h1 class="text-white pt-16 font-normal mb-6">Larascrum</h1>
+            <h2 class="text-white text-4xl md:text-5xl font-display font-semibold mb-4 leading-none">
+                Looking for an online SCRUM application?
+            </h2>
+            <div class="mb-12">
+                 <p class="mb-16 text-grey-darker text-2xl leading-normal">
+                    The modern and easy way to keep your projects up to date <br />
+                    with <strong class="text-white font-bold">minimal effort</strong> and <strong class="text-white font-bold">maximal efficiency</strong>.
+                </p>
             </div>
+            <p class="text-white font-bold text-lg leading-normal mb-4">Get notified whenever we publish something new</p>
+            <form class="sm:flex">
+                <input class="block bg-white w-full mb-2 sm:mb-0 px-6 py-3 rounded text-lg sm:rounded-r-none sm:mb-0 sm:w-64" placeholder="Enter your email">
+                <button class="w-full sm:w-auto bg-indigo hover:bg-indigo-light uppercase text-white font-bold tracking-wide rounded px-6 py-3 sm:rounded-l-none">Subscribe</button>
+            </form>
         </div>
-    </body>
-</html>
+    </div>
+
+    <div class="container mx-auto px-6">
+        <div class="flex items-baseline justify-between border-b-2 border-grey-light mb-10">
+            <span class="font-display font-bold text-blue-darker tracking-wide uppercase py-4 border-b-2 border-blue-darker -mb-2px">Pricing Options</span>
+        </div>
+        <div class="flex flex-wrap -mx-6">
+            @include('cards.essential')
+            @include('cards.complete')
+
+        </div>
+    </div>
+
+</div>
+@endsection

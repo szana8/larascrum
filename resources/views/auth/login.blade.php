@@ -6,12 +6,12 @@
             <div class="m-8">
                 <div class="text-white">
                     <h1 class="text-5xl">Let's get to business!</h1>
-                    <li class="list-reset mt-12 text-xl">
+                    <li class="list-reset mt-12">
                         <div class="flex">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-16 h-16 items-center p-3 text-white fill-current"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.25 8.891l-1.421-1.409-6.105 6.218-3.078-2.937-1.396 1.436 4.5 4.319 7.5-7.627z" /></svg>
                             <div class="ml-4 mt-2">
-                                <h3 class="mb-2">Easy to use</h3>
-                                <small class="text-blue-lighter">Create recuring invoices and receive updates when they're opened.</small>
+                                <h3 class="mb-2 text-xl">Easy to use</h3>
+                                <div class="text-blue-lighter text-md">Create recuring invoices and receive updates when they're opened.</div>
                             </div>
                         </div>
                     </li>
@@ -19,8 +19,8 @@
                         <div class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-16 h-16 items-center p-3 text-white fill-current"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.25 8.891l-1.421-1.409-6.105 6.218-3.078-2.937-1.396 1.436 4.5 4.319 7.5-7.627z" /></svg>
                             <div class="ml-4 mt-2">
-                                <h3 class="mb-2">Multi currency</h3>
-                                <small class="text-blue-lighter">Recognize foregign currency accounts, with exchange rules updated hourly.</small>
+                                <h3 class="mb-2 text-xl">Multi currency</h3>
+                                <div class="text-blue-lighter text-md">Recognize foregign currency accounts, with exchange rules updated hourly.</div>
                             </div>
                         </div>
                     </li>
@@ -28,8 +28,8 @@
                         <div class="flex">
                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-16 h-16 items-center p-3 text-white fill-current"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.25 8.891l-1.421-1.409-6.105 6.218-3.078-2.937-1.396 1.436 4.5 4.319 7.5-7.627z" /></svg>
                             <div class="ml-4 mt-2">
-                                <h3 class="mb-2">Expanses</h3>
-                                <small class="text-blue-lighter">Handle personal experiences with easy. Just review and approve receipts.</small>
+                                <h3 class="mb-2 text-xl">Expanses</h3>
+                                <div class="text-blue-lighter text-md">Handle personal experiences with easy. Just review and approve receipts.</div>
                             </div>
                         </div>
                     </li>

@@ -3417,6 +3417,10 @@ table {
   margin: 1px;
 }
 
+.m-2px {
+  margin: 2px;
+}
+
 .my-0 {
   margin-top: 0;
   margin-bottom: 0;
@@ -3575,6 +3579,16 @@ table {
 .mx-px {
   margin-left: 1px;
   margin-right: 1px;
+}
+
+.my-2px {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.mx-2px {
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .mt-0 {
@@ -3833,6 +3847,22 @@ table {
   margin-left: 1px;
 }
 
+.mt-2px {
+  margin-top: 2px;
+}
+
+.mr-2px {
+  margin-right: 2px;
+}
+
+.mb-2px {
+  margin-bottom: 2px;
+}
+
+.ml-2px {
+  margin-left: 2px;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -3959,6 +3989,10 @@ table {
 
 .-m-px {
   margin: -1px;
+}
+
+.-m-2px {
+  margin: -2px;
 }
 
 .-my-0 {
@@ -4109,6 +4143,16 @@ table {
 .-mx-px {
   margin-left: -1px;
   margin-right: -1px;
+}
+
+.-my-2px {
+  margin-top: -2px;
+  margin-bottom: -2px;
+}
+
+.-mx-2px {
+  margin-left: -2px;
+  margin-right: -2px;
 }
 
 .-mt-0 {
@@ -4351,6 +4395,22 @@ table {
   margin-left: -1px;
 }
 
+.-mt-2px {
+  margin-top: -2px;
+}
+
+.-mr-2px {
+  margin-right: -2px;
+}
+
+.-mb-2px {
+  margin-bottom: -2px;
+}
+
+.-ml-2px {
+  margin-left: -2px;
+}
+
 .opacity-0 {
   opacity: 0;
 }
@@ -4493,6 +4553,10 @@ table {
 
 .p-px {
   padding: 1px;
+}
+
+.p-2px {
+  padding: 2px;
 }
 
 .py-0 {
@@ -4643,6 +4707,16 @@ table {
 .px-px {
   padding-left: 1px;
   padding-right: 1px;
+}
+
+.py-2px {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.px-2px {
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 .pt-0 {
@@ -4883,6 +4957,22 @@ table {
 
 .pl-px {
   padding-left: 1px;
+}
+
+.pt-2px {
+  padding-top: 2px;
+}
+
+.pr-2px {
+  padding-right: 2px;
+}
+
+.pb-2px {
+  padding-bottom: 2px;
+}
+
+.pl-2px {
+  padding-left: 2px;
 }
 
 .pointer-events-none {
@@ -9101,6 +9191,10 @@ table {
     margin: 1px;
   }
 
+  .sm\:m-2px {
+    margin: 2px;
+  }
+
   .sm\:my-0 {
     margin-top: 0;
     margin-bottom: 0;
@@ -9259,6 +9353,16 @@ table {
   .sm\:mx-px {
     margin-left: 1px;
     margin-right: 1px;
+  }
+
+  .sm\:my-2px {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .sm\:mx-2px {
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   .sm\:mt-0 {
@@ -9517,6 +9621,22 @@ table {
     margin-left: 1px;
   }
 
+  .sm\:mt-2px {
+    margin-top: 2px;
+  }
+
+  .sm\:mr-2px {
+    margin-right: 2px;
+  }
+
+  .sm\:mb-2px {
+    margin-bottom: 2px;
+  }
+
+  .sm\:ml-2px {
+    margin-left: 2px;
+  }
+
   .sm\:max-h-full {
     max-height: 100%;
   }
@@ -9643,6 +9763,10 @@ table {
 
   .sm\:-m-px {
     margin: -1px;
+  }
+
+  .sm\:-m-2px {
+    margin: -2px;
   }
 
   .sm\:-my-0 {
@@ -9793,6 +9917,16 @@ table {
   .sm\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .sm\:-my-2px {
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .sm\:-mx-2px {
+    margin-left: -2px;
+    margin-right: -2px;
   }
 
   .sm\:-mt-0 {
@@ -10035,6 +10169,22 @@ table {
     margin-left: -1px;
   }
 
+  .sm\:-mt-2px {
+    margin-top: -2px;
+  }
+
+  .sm\:-mr-2px {
+    margin-right: -2px;
+  }
+
+  .sm\:-mb-2px {
+    margin-bottom: -2px;
+  }
+
+  .sm\:-ml-2px {
+    margin-left: -2px;
+  }
+
   .sm\:opacity-0 {
     opacity: 0;
   }
@@ -10169,6 +10319,10 @@ table {
 
   .sm\:p-px {
     padding: 1px;
+  }
+
+  .sm\:p-2px {
+    padding: 2px;
   }
 
   .sm\:py-0 {
@@ -10319,6 +10473,16 @@ table {
   .sm\:px-px {
     padding-left: 1px;
     padding-right: 1px;
+  }
+
+  .sm\:py-2px {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+  .sm\:px-2px {
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   .sm\:pt-0 {
@@ -10559,6 +10723,22 @@ table {
 
   .sm\:pl-px {
     padding-left: 1px;
+  }
+
+  .sm\:pt-2px {
+    padding-top: 2px;
+  }
+
+  .sm\:pr-2px {
+    padding-right: 2px;
+  }
+
+  .sm\:pb-2px {
+    padding-bottom: 2px;
+  }
+
+  .sm\:pl-2px {
+    padding-left: 2px;
   }
 
   .sm\:pointer-events-none {
@@ -14755,6 +14935,10 @@ table {
     margin: 1px;
   }
 
+  .md\:m-2px {
+    margin: 2px;
+  }
+
   .md\:my-0 {
     margin-top: 0;
     margin-bottom: 0;
@@ -14913,6 +15097,16 @@ table {
   .md\:mx-px {
     margin-left: 1px;
     margin-right: 1px;
+  }
+
+  .md\:my-2px {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .md\:mx-2px {
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   .md\:mt-0 {
@@ -15171,6 +15365,22 @@ table {
     margin-left: 1px;
   }
 
+  .md\:mt-2px {
+    margin-top: 2px;
+  }
+
+  .md\:mr-2px {
+    margin-right: 2px;
+  }
+
+  .md\:mb-2px {
+    margin-bottom: 2px;
+  }
+
+  .md\:ml-2px {
+    margin-left: 2px;
+  }
+
   .md\:max-h-full {
     max-height: 100%;
   }
@@ -15297,6 +15507,10 @@ table {
 
   .md\:-m-px {
     margin: -1px;
+  }
+
+  .md\:-m-2px {
+    margin: -2px;
   }
 
   .md\:-my-0 {
@@ -15447,6 +15661,16 @@ table {
   .md\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .md\:-my-2px {
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .md\:-mx-2px {
+    margin-left: -2px;
+    margin-right: -2px;
   }
 
   .md\:-mt-0 {
@@ -15689,6 +15913,22 @@ table {
     margin-left: -1px;
   }
 
+  .md\:-mt-2px {
+    margin-top: -2px;
+  }
+
+  .md\:-mr-2px {
+    margin-right: -2px;
+  }
+
+  .md\:-mb-2px {
+    margin-bottom: -2px;
+  }
+
+  .md\:-ml-2px {
+    margin-left: -2px;
+  }
+
   .md\:opacity-0 {
     opacity: 0;
   }
@@ -15823,6 +16063,10 @@ table {
 
   .md\:p-px {
     padding: 1px;
+  }
+
+  .md\:p-2px {
+    padding: 2px;
   }
 
   .md\:py-0 {
@@ -15973,6 +16217,16 @@ table {
   .md\:px-px {
     padding-left: 1px;
     padding-right: 1px;
+  }
+
+  .md\:py-2px {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+  .md\:px-2px {
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   .md\:pt-0 {
@@ -16213,6 +16467,22 @@ table {
 
   .md\:pl-px {
     padding-left: 1px;
+  }
+
+  .md\:pt-2px {
+    padding-top: 2px;
+  }
+
+  .md\:pr-2px {
+    padding-right: 2px;
+  }
+
+  .md\:pb-2px {
+    padding-bottom: 2px;
+  }
+
+  .md\:pl-2px {
+    padding-left: 2px;
   }
 
   .md\:pointer-events-none {
@@ -20409,6 +20679,10 @@ table {
     margin: 1px;
   }
 
+  .lg\:m-2px {
+    margin: 2px;
+  }
+
   .lg\:my-0 {
     margin-top: 0;
     margin-bottom: 0;
@@ -20567,6 +20841,16 @@ table {
   .lg\:mx-px {
     margin-left: 1px;
     margin-right: 1px;
+  }
+
+  .lg\:my-2px {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .lg\:mx-2px {
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   .lg\:mt-0 {
@@ -20825,6 +21109,22 @@ table {
     margin-left: 1px;
   }
 
+  .lg\:mt-2px {
+    margin-top: 2px;
+  }
+
+  .lg\:mr-2px {
+    margin-right: 2px;
+  }
+
+  .lg\:mb-2px {
+    margin-bottom: 2px;
+  }
+
+  .lg\:ml-2px {
+    margin-left: 2px;
+  }
+
   .lg\:max-h-full {
     max-height: 100%;
   }
@@ -20951,6 +21251,10 @@ table {
 
   .lg\:-m-px {
     margin: -1px;
+  }
+
+  .lg\:-m-2px {
+    margin: -2px;
   }
 
   .lg\:-my-0 {
@@ -21101,6 +21405,16 @@ table {
   .lg\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .lg\:-my-2px {
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .lg\:-mx-2px {
+    margin-left: -2px;
+    margin-right: -2px;
   }
 
   .lg\:-mt-0 {
@@ -21343,6 +21657,22 @@ table {
     margin-left: -1px;
   }
 
+  .lg\:-mt-2px {
+    margin-top: -2px;
+  }
+
+  .lg\:-mr-2px {
+    margin-right: -2px;
+  }
+
+  .lg\:-mb-2px {
+    margin-bottom: -2px;
+  }
+
+  .lg\:-ml-2px {
+    margin-left: -2px;
+  }
+
   .lg\:opacity-0 {
     opacity: 0;
   }
@@ -21477,6 +21807,10 @@ table {
 
   .lg\:p-px {
     padding: 1px;
+  }
+
+  .lg\:p-2px {
+    padding: 2px;
   }
 
   .lg\:py-0 {
@@ -21627,6 +21961,16 @@ table {
   .lg\:px-px {
     padding-left: 1px;
     padding-right: 1px;
+  }
+
+  .lg\:py-2px {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+  .lg\:px-2px {
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   .lg\:pt-0 {
@@ -21867,6 +22211,22 @@ table {
 
   .lg\:pl-px {
     padding-left: 1px;
+  }
+
+  .lg\:pt-2px {
+    padding-top: 2px;
+  }
+
+  .lg\:pr-2px {
+    padding-right: 2px;
+  }
+
+  .lg\:pb-2px {
+    padding-bottom: 2px;
+  }
+
+  .lg\:pl-2px {
+    padding-left: 2px;
   }
 
   .lg\:pointer-events-none {
@@ -26063,6 +26423,10 @@ table {
     margin: 1px;
   }
 
+  .xl\:m-2px {
+    margin: 2px;
+  }
+
   .xl\:my-0 {
     margin-top: 0;
     margin-bottom: 0;
@@ -26221,6 +26585,16 @@ table {
   .xl\:mx-px {
     margin-left: 1px;
     margin-right: 1px;
+  }
+
+  .xl\:my-2px {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .xl\:mx-2px {
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   .xl\:mt-0 {
@@ -26479,6 +26853,22 @@ table {
     margin-left: 1px;
   }
 
+  .xl\:mt-2px {
+    margin-top: 2px;
+  }
+
+  .xl\:mr-2px {
+    margin-right: 2px;
+  }
+
+  .xl\:mb-2px {
+    margin-bottom: 2px;
+  }
+
+  .xl\:ml-2px {
+    margin-left: 2px;
+  }
+
   .xl\:max-h-full {
     max-height: 100%;
   }
@@ -26605,6 +26995,10 @@ table {
 
   .xl\:-m-px {
     margin: -1px;
+  }
+
+  .xl\:-m-2px {
+    margin: -2px;
   }
 
   .xl\:-my-0 {
@@ -26755,6 +27149,16 @@ table {
   .xl\:-mx-px {
     margin-left: -1px;
     margin-right: -1px;
+  }
+
+  .xl\:-my-2px {
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .xl\:-mx-2px {
+    margin-left: -2px;
+    margin-right: -2px;
   }
 
   .xl\:-mt-0 {
@@ -26997,6 +27401,22 @@ table {
     margin-left: -1px;
   }
 
+  .xl\:-mt-2px {
+    margin-top: -2px;
+  }
+
+  .xl\:-mr-2px {
+    margin-right: -2px;
+  }
+
+  .xl\:-mb-2px {
+    margin-bottom: -2px;
+  }
+
+  .xl\:-ml-2px {
+    margin-left: -2px;
+  }
+
   .xl\:opacity-0 {
     opacity: 0;
   }
@@ -27131,6 +27551,10 @@ table {
 
   .xl\:p-px {
     padding: 1px;
+  }
+
+  .xl\:p-2px {
+    padding: 2px;
   }
 
   .xl\:py-0 {
@@ -27281,6 +27705,16 @@ table {
   .xl\:px-px {
     padding-left: 1px;
     padding-right: 1px;
+  }
+
+  .xl\:py-2px {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+  .xl\:px-2px {
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   .xl\:pt-0 {
@@ -27521,6 +27955,22 @@ table {
 
   .xl\:pl-px {
     padding-left: 1px;
+  }
+
+  .xl\:pt-2px {
+    padding-top: 2px;
+  }
+
+  .xl\:pr-2px {
+    padding-right: 2px;
+  }
+
+  .xl\:pb-2px {
+    padding-bottom: 2px;
+  }
+
+  .xl\:pl-2px {
+    padding-left: 2px;
   }
 
   .xl\:pointer-events-none {
