@@ -22,7 +22,7 @@
 </head>
 
 <body class="antialiased font-sans" cz-shortcut-listen="true">
-    <div id="app" class="w-full bg-grey-lighter pb-12">
+    <div id="app" class="w-full bg-grey-lighter">
         @yield('content')
     </div>
 </body>

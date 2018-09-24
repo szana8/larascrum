@@ -6483,6 +6483,24 @@ table {
   * @import "utilities/skew-transforms";
   */
 
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #0c9;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 3px #999;
+          box-shadow: 2px 2px 3px #999;
+}
+
+.my-float {
+  margin-top: 22px;
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

@@ -1,3 +1,11 @@
+import router from './router'
+import store from './vuex'
+import localforage from 'localforage'
+
+localforage.config({
+	driver:localforage.LOCALSTORAGE,
+	storeName: 'larascrum'
+})
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -15,8 +23,20 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('app', require('./components/App.vue'));
+Vue.component('navigation', require('./components/Navigation.vue'));
+
+store.dispatch('auth/setToken').then(() => {
+	store.dispatch('auth/fetchUser').catch(() => {
+		store.dispatch('auth/clearAuthentication')
+		router.replace({ name: 'login' })
+	})
+}).catch(() => {
+	store.dispatch('auth/clearAuthentication')
+})
 
 const app = new Vue({
+    router: router,
+    store: store,
     el: '#app'
 });
