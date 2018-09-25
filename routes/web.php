@@ -11,4 +11,5 @@
 |
 */
 
+Route::view('/design', 'design');
 Route::view('/{any}', 'home')->where('any', '.*');
