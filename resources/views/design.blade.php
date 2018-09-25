@@ -5,7 +5,7 @@
 		{{-- Sidebar Begin --}}
 		<div class="md:w-1/6 w-full md:h-screen border-r border-grey-lighter">
 			{{-- Logo --}}
-			<div class="py-6 border-b border-grey-light text-center bg-blue">
+			<div class="py-6 border-b border-blue text-center bg-blue">
 				<li class="list-reset text-white font-semibold">
 					<img src="{{ asset('storage/images/logo.png') }}" class="w-10 h-10 absolute -mt-2 -ml-12">
 					European Demo Facility
@@ -125,6 +125,7 @@
 
 			</div>
 		</div>
+		{{-- End sidebar --}}
 
 		<div class="md:w-5/6 w-full">
 			{{-- Navbar --}}
@@ -147,7 +148,7 @@
 					<li class="list-reset py-6 px-4"><a href="#" class="text-blue-lighter font-semibold no-underline">Settings</a></li>
 				</div>
 				<div class="flex">
-					<input type="text" name="search" placeholder="Search..." class=" w-64 appearance-none text-grey-darkest shadow px-3 py-2 rounded-full absolute mt-4 -ml-6">
+					<input type="text" name="search" placeholder="Search..." class=" w-64 appearance-none text-grey-darkest shadow px-6 py-2 rounded-full absolute mt-4 -ml-6">
 				</div>
 				{{-- Menu End --}}
 
@@ -166,24 +167,24 @@
 						<h4 class="text-grey-darkest p-4">Priority</h4>
 						<div class="flex px-4">
 							<div class="w-1/3">
-								<button class="bg-grey-darkest text-white rounded-full py-1 w-24">All</button>
+								<button class="bg-grey-darkest text-sm text-white rounded-full py-1 w-24">All</button>
 							</div>
 							<div class="w-1/3">
-								<button class="bg-white shadow-md text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white">Blocker</button>
+								<button class="bg-white shadow-md text-sm text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white">Blocker</button>
 							</div>
 							<div class="w-1/3">
-								<button class="bg-white shadow-md text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white">Critical</button>
+								<button class="bg-white shadow-md text-sm text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white">Critical</button>
 							</div>
 						</div>
 						<div class="flex p-4">
 							<div class="w-1/3">
-								<button class="bg-white shadow-md text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white">Major</button>
+								<button class="bg-white shadow-md text-sm text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white">Major</button>
 							</div>
 							<div class="w-1/3">
-								<button class="bg-white shadow-md text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white">Minor</button>
+								<button class="bg-white shadow-md text-sm text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white">Minor</button>
 							</div>
 							<div class="w-1/3">
-								<button class="bg-white shadow-md text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white">Trivial</button>
+								<button class="bg-white shadow-md text-sm text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white">Trivial</button>
 							</div>
 						</div>
 						{{-- End Priority List --}}
@@ -319,10 +320,10 @@
 					{{-- Issue detail --}}
 					<div class="bg-white mt-2 rounded">
 						<div class="border-b border-grey-lighter py-5">
-							<a href="#" class="inline-block no-underline font-semibold text-blue px-8">Edit</a>
-							<a href="#" class="inline-block no-underline font-semibold text-blue px-8">Assign</a>
-							<a href="#" class="inline-block no-underline font-semibold text-blue px-8">In Progress</a>
-							<a href="#" class="inline-block no-underline font-semibold text-blue px-8">More</a>
+							<a href="#" class="inline-block no-underline font-semibold text-sm text-blue px-8">Edit</a>
+							<a href="#" class="inline-block no-underline font-semibold text-sm text-blue px-8">Assign</a>
+							<a href="#" class="inline-block no-underline font-semibold text-sm text-blue px-8">In Progress</a>
+							<a href="#" class="inline-block no-underline font-semibold text-sm text-blue px-8">More</a>
 						</div>
 						<div class="px-8 py-8">
 							<div class="flex">
@@ -349,10 +350,10 @@
 
 					{{-- Issue tabs --}}
 					<div class="flex mt-4 mb-10">
-						<button class="bg-grey-darkest text-white rounded-full py-1 w-24 mx-4">Comments</button>
-						<button class="bg-white shadow text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white mx-4">Work Log</button>
-						<button class="bg-white shadow text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white mx-4">History</button>
-						<button class="bg-white shadow text-grey-darkest rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white mx-4">Activity</button>
+						<button class="bg-grey-darkest text-sm text-white rounded-full py-1 w-24 mx-4">Comments</button>
+						<button class="bg-white shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white mx-4">Work Log</button>
+						<button class="bg-white shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white mx-4">History</button>
+						<button class="bg-white shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-grey-dark hover:text-white mx-4">Activity</button>
 					</div>
 					{{-- End Issue tabs --}}
 
@@ -439,7 +440,7 @@
 						</div>
 
 						<div class="mt-4 border-b-2 border-grey pb-2">
-							<h4 class="mb-8">Details</h4>
+							<h4 class="mb-8 text-grey-darkest">Details</h4>
 							<div class="flex">
 								<div class="text-grey-dark text-sm">Type</div>
 								<div class="ml-12">
@@ -480,7 +481,7 @@
 						</div>
 
 						<div class="mt-4">
-							<h4 class="mb-8">People</h4>
+							<h4 class="mb-8 text-grey-darkest">People</h4>
 							<div class="flex my-5">
 								<h4 class="text-grey font-normal text-sm">Assignee</h4>
 								<div class="flex -mt-2">
