@@ -24,6 +24,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('app', require('./components/App.vue'));
+Vue.component('sidebar', require('./components/Sidebar.vue'));
 Vue.component('navigation', require('./components/Navigation.vue'));
 
 store.dispatch('auth/setToken').then(() => {

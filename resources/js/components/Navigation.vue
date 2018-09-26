@@ -1,28 +1,27 @@
 <template>
-	<div class="">
-		<a href="#" class="float">
-		<i class="fa fa-plus my-float"></i>
-		</a>
-		<nav class="bg-blue-darker border-b border-grey-light py-6">
-			<div class="flex">
-				<div class="w-1/4 felx items-center">
+	<nav class="bg-blue-darker w-full px-4 flex justify-between">
 
-				</div>
-				<div class="w-1/2 felx items-center">
-					<router-link :to="{ name: 'home' }" class="no-underline text-grey-dark mr-8">Home</router-link>
-					<router-link :to="{ name: 'home' }" class="no-underline text-grey-dark mr-8">Inventory</router-link>
-					<router-link :to="{ name: 'home' }" class="no-underline text-grey-dark mr-8">Items</router-link>
-					<router-link :to="{ name: 'home' }" class="no-underline text-grey-dark mr-8">Reservations</router-link>
-					<router-link :to="{ name: 'home' }" class="no-underline text-grey-dark mr-8">Settings</router-link>
-				</div>
-				<div class="w-1/4 text-right">
-					<router-link :to="{ name: 'logout' }" class="inline-block no-underline text-grey-dark mr-8">Logout</router-link>
-					<router-link :to="{ name: 'login' }" class="inline-block no-underline text-grey-dark mr-8">Login</router-link>
-					<router-link :to="{ name: 'logout' }" class="inline-block no-underline text-grey-dark mr-8">Register</router-link>
-				</div>
+		<div class="flex">
+			<div class="py-6">
+				<img src="storage/avatars/3/avatar.png" class="w-10 h-10 absolute -mt-2 ml-2 inline-block">
+				<a href="#" class="text-blue-lighter font-semibold ml-16 no-underline hover:text-blue-lightest">Grace Parkinson</a>
 			</div>
-		</nav>
-	</div>
+		</div>
+
+		<div class="flex">
+			<li class="list-reset px-4 py-6"><a href="#" class="text-blue bg-white rounded-full py-2 px-8 font-semibold no-underline border hover:bg-blue-darker hover:border-white hover:text-white">Create</a></li>
+			<li class="list-reset py-6 px-4 border-b border-white"><a href="#" class="text-white font-semibold no-underline">Teams</a></li>
+			<li class="list-reset py-6 px-4"><a href="#" class="text-blue-lighter font-semibold no-underline hover:text-blue-lightest">Boards</a></li>
+			<li class="list-reset py-6 px-4"><a href="#" class="text-blue-lighter font-semibold no-underline hover:text-blue-lightest">Calendar</a></li>
+			<li class="list-reset py-6 px-4"><a href="#" class="text-blue-lighter font-semibold no-underline hover:text-blue-lightest">Settings</a></li>
+		</div>
+		<div class="md:flex hidden md:block">
+			<input type="text" name="search" placeholder="Search..." class=" w-64 appearance-none text-grey-darkest shadow px-6 py-2 rounded-full absolute mt-4 -ml-6">
+		</div>
+		<div class="flex">
+			<li class="list-reset py-6 px-4"><a href="#" class="text-blue-lighter hover:text-blue-lightest font-semibold no-underline" @click="signout">Logout</a></li>
+		</div>
+	</nav>
 </template>
 
 <script>
@@ -32,6 +31,7 @@ import { mapGetters, mapActions } from 'vuex'
         computed: mapGetters({
             user: 'auth/user',
         }),
+
         methods: {
             ...mapActions({
                 logout: 'auth/logout'
