@@ -39,9 +39,7 @@
 		},
 
 		mounted () {
-			axios.get('api/issues').then((response) => {
-				this.index = response.data.data
-			})
+
 		}
 	}
 </script>

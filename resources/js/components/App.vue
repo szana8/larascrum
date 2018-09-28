@@ -13,9 +13,7 @@
 		</div>
 	</div>
 
-	<div class="w-full" v-else>
-		<router-view></router-view>
-	</div>
+
 </template>
 
 <script>

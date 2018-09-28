@@ -17,16 +17,17 @@ class ReadIssueTest extends TestCase
     {
     	$this->artisan('passport:install');
 
-    	$issue =  factory(Issue::class)->create();
-
+    	$issue = create(Issue::class, [] , 10);
         $user = create(User::class, ['active' => true]);
 
-        $response = $this->post(route('login'), [
+        $userResponse = $this->post(route('login'), [
             'email' => $user->email,
             'password' => 'secret'
         ]);
 
-        $issues = $this->call(route('issues'),['Authorization' => 'Bearer ' . json_decode($response->getContent())->access_token]);
-        dd($issues);
+        $response = $this->get(route('issues'), ['Authorization' => 'Bearer ' . json_decode($userResponse->getContent())->access_token]);
+
+        $response->assertSuccessful();
+        $this->assertEquals(count(json_decode($response->getContent())), $issue->count());
     }
 }

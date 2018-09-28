@@ -9,14 +9,5 @@ export default [
 			guest: false,
 			needsAuth: true
 		}
-	},
-	{
-		path: '/home',
-		component: Home,
-		name: 'home',
-		meta: {
-			guest: false,
-			needsAuth: true
-		}
 	}
 ]

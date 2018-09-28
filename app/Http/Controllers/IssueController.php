@@ -14,7 +14,7 @@ class IssueController extends Controller
      */
     public function index()
     {
-        return Issue::all();
+        return response(Issue::all(), 201);
     }
 
     /**
