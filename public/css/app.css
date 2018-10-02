@@ -6505,6 +6505,15 @@ table {
   margin-top: 22px;
 }
 
+html {
+  overflow: hidden;
+}
+
+.bg-smoke-dark,
+.hover\:bg-smoke-dark:hover {
+  background-color: rgba(0, 0, 0, .6);
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

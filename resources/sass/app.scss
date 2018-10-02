@@ -77,3 +77,12 @@
 .my-float{
   margin-top:22px;
 }
+
+html {
+  overflow: hidden;
+}
+
+.bg-smoke-dark,
+.hover\:bg-smoke-dark:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}

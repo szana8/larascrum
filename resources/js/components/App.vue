@@ -1,15 +1,23 @@
 <template>
-	<div class="" v-if="user.authenticated">
-		<div class="flex">
-			<div class="md:w-1/6 md:h-screen h-auto border-r border-grey-lighter hidden md:block">
-				<sidebar></sidebar>
-			</div>
-			<div class="md:w-5/6 block">
-				<navigation></navigation>
-				<div class="flex">
-			 		<router-view></router-view>
+	<div>
+		<div class="" v-if="user.authenticated">
+			<project-search></project-search>
+
+			<div class="flex">
+				<div class="md:w-1/6 md:h-screen h-auto border-r border-grey-lighter hidden md:block">
+					<sidebar></sidebar>
+				</div>
+				<div class="md:w-5/6 block">
+					<navigation></navigation>
+					<div class="flex">
+						<router-view v-if="user.authenticated"></router-view>
+					</div>
 				</div>
 			</div>
+		</div>
+
+		<div v-else>
+			<router-view></router-view>
 		</div>
 	</div>
 

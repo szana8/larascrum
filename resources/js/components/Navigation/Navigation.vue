@@ -1,31 +1,36 @@
 <template>
 	<nav class="bg-blue-darker w-full px-4 flex justify-between">
 
-		<div class="flex">
+		<div class="flex w-1/4">
 			<div class="py-6">
 				<img src="storage/avatars/3/avatar.png" class="w-10 h-10 absolute -mt-2 ml-2 inline-block">
 				<a href="#" class="text-blue-lighter font-semibold ml-16 no-underline hover:text-blue-lightest">Grace Parkinson</a>
 			</div>
 		</div>
 
-		<div class="flex">
+		<div class="flex w-1/2" id="navbar">
 			<li class="list-reset px-4 py-6"><a href="#" class="text-blue bg-white rounded-full py-2 px-8 font-semibold no-underline border hover:bg-blue-darker hover:border-white hover:text-white">Create</a></li>
-			<li class="list-reset py-6 px-4 border-b border-white"><a href="#" class="text-white font-semibold no-underline">Teams</a></li>
-			<li class="list-reset py-6 px-4"><a href="#" class="text-blue-lighter font-semibold no-underline hover:text-blue-lightest">Boards</a></li>
-			<li class="list-reset py-6 px-4"><a href="#" class="text-blue-lighter font-semibold no-underline hover:text-blue-lightest">Calendar</a></li>
-			<li class="list-reset py-6 px-4"><a href="#" class="text-blue-lighter font-semibold no-underline hover:text-blue-lightest">Settings</a></li>
+			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" :to="{ name: 'home' }" exact>Dashboards</router-link>
+			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" :to="{ name: 'issues' }" exact>Issues</router-link>
+			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" to="/boards" exact>Boards</router-link>
+			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" to="/calendar" exact>Calendar</router-link>
+			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" to="/settings" exact>Settings</router-link>
 		</div>
-		<div class="md:flex hidden md:block">
-			<input type="text" name="search" placeholder="Search..." class=" w-64 appearance-none text-grey-darkest shadow px-6 py-2 rounded-full absolute mt-4 -ml-6">
+
+		<div class="flex w-1/4 justify-end">
+			<div>
+				<input type="text" name="search" placeholder="Search..." class=" w-64 appearance-none text-grey-darkest shadow px-6 py-2 rounded-full mt-4 -ml-10">
+			</div>
+			<div>
+				<li class="list-reset py-6 px-4"><a href="#" class="text-blue-lighter hover:text-blue-lightest font-semibold no-underline" 	@click="signout">Logout</a></li>
+			</div>
 		</div>
-		<div class="flex">
-			<li class="list-reset py-6 px-4"><a href="#" class="text-blue-lighter hover:text-blue-lightest font-semibold no-underline" @click="signout">Logout</a></li>
-		</div>
+
 	</nav>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+	import { mapGetters, mapActions } from 'vuex'
 
     export default {
         computed: mapGetters({
@@ -49,3 +54,9 @@ import { mapGetters, mapActions } from 'vuex'
         }
     }
 </script>
+
+<style>
+#navbar > .router-link-active {
+  @apply text-white border-b border-white
+}
+</style>
