@@ -27,6 +27,6 @@ Route::group(['namespace' => 'Auth', 'middleware' => 'api', 'prefix' => 'passwor
     Route::post('reset', 'PasswordResetController@reset');
 });
 
-Route::group(['middleware' => 'api'], function () {
+Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/issues', 'IssueController@index')->name('issues');
 });

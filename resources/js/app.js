@@ -27,6 +27,7 @@ window.Vue = require('vue');
 Vue.component('app', require('./components/App.vue'));
 Vue.component('sidebar', require('./components/Navigation/Sidebar.vue'));
 Vue.component('navigation', require('./components/Navigation/Navigation.vue'));
+Vue.component('projectSearch', require('./components/Navigation/ProjectSearch.vue'));
 
 /**
  * Check the user token is exist or not, depends on that we redirect the user

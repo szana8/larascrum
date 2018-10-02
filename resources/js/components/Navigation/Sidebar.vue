@@ -21,18 +21,18 @@
 			<div class="mt-10">
 				<div class="">
 					<div class="ml-12">
-						<a href="#" class="no-underline text-grey-darkest font-semibold text-sm hover:text-blue">
+						<a href="#" class="no-underline text-grey-darkest font-semibold text-sm hover:text-blue" @click="isIssueOpen = !isIssueOpen">
 							<img src="svg/align-left.svg" class="w-4 h-4 mr-4">
 							Issues
 						</a>
 					</div>
-					<div class="py-2 bg-white list-reset text-sm text-grey-dark pl-24 mt-2 flex border-r-4 border-blue rounded-r">
+					<div class="py-2 bg-white list-reset text-sm text-grey-dark pl-24 mt-2 flex border-r-4 border-blue rounded-r" v-if="isIssueOpen">
 						<a href="#" class="no-underline text-grey-dark">
 							<div class="inline-block w-24">All</div>
 							<div class="inline-block">74</div>
 						</a>
 					</div>
-					<div class="py-2 list-reset text-sm text-grey-dark pl-24 flex">
+					<div class="py-2 list-reset text-sm text-grey-dark pl-24 flex" v-if="isIssueOpen">
 						<a href="#" class="no-underline text-grey-dark">
 							<div class="inline-block w-24">My</div>
 							<div class="inline-block">12</div>
@@ -96,7 +96,7 @@
 
 			</div>
 
-			<div class="bg-white text-center py-4 flex mt-10">
+			<div class="bg-white my-2 text-center py-4 flex mt-10 shadow hover:shadow-md cursor-pointer">
 				<div class="text-center">
 					<img src="svg/two-tubes.svg" class="w-10 h-10 ml-12 border rounded-full border-grey-darkest">
 				</div>
@@ -107,7 +107,7 @@
 				<div></div>
 			</div>
 
-			<div class="bg-white text-center py-4 flex border-t border-grey-light">
+			<div class="bg-white my-2 text-center py-4 flex shadow hover:shadow-md cursor-pointer">
 				<div class="text-center">
 					<img src="svg/creative.png" class="w-10 h-10 ml-12 rounded-full bg-blue">
 				</div>
@@ -123,6 +123,14 @@
 
 <script>
 	export default {
+		data() {
+			return {
+				isIssueOpen: false
+			}
+		},
 
+		methods: {
+			//
+		}
 	}
 </script>

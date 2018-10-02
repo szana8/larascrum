@@ -49,7 +49,7 @@ class AuthController extends Controller
      */
     public function login(UserSignInRequest $request)
     {
-        if (!Auth::attempt(array_merge($request->only('email', 'password'), ['active' => 1, 'deleted_at' => null]))) {
+        if (!Auth::attempt(array_merge($request->only('email', 'password'), ['active' => 0, 'deleted_at' => null]))) {
             return response()->json([
                 'message' => 'You can not login with this credentials!',
             ], 401);
@@ -97,6 +97,12 @@ class AuthController extends Controller
         return response()->json($request->user());
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $token
+     * @return void
+     */
     public function signupActivate($token)
     {
         $user = User::whereActivationToken($token)->first();
@@ -107,7 +113,7 @@ class AuthController extends Controller
             ], 404);
         }
 
-        $user->active = true;
+        $user->active = 1;
         $user->activation_token = '';
         $user->save();
 

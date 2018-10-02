@@ -17,7 +17,7 @@ class SignUpTest extends TestCase
         Notification::fake();
 
         $response = $this->post(route('signup'), [
-            'name'                  => 'Test User',
+            'name'                  => 'Sign Up Api Test User',
             'email'                 => 'test@user.com',
             'password'              => 'foobar',
             'password_confirmation' => 'foobar',
@@ -25,8 +25,8 @@ class SignUpTest extends TestCase
 
         $response->assertSuccessful();
 
-        Notification::assertSentTo(
-            [\App\User::whereName('Test User')->first()],
+        Notification::assertNotSentTo(
+            [\App\User::whereName('Sign Up Api Test User')->first()],
             SignupActivate::class
         );
     }

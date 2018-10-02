@@ -29,4 +29,15 @@ class ReadIssueTest extends TestCase
         $response->assertSuccessful();
         $this->assertEquals(count(json_decode($response->getContent())), $issue->count());
     }
+
+    /** @test */
+    function a_unauthenticated_user_can_not_read_issues()
+    {
+        $issue = create(Issue::class, [], 10);
+
+        $response = $this->get(route('issues'), ['Authorization' => 'Bearer ']);
+
+        $response->assertStatus(302);
+    }
+
 }

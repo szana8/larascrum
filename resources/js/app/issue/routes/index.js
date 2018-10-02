@@ -1,10 +1,10 @@
-import { Dashboard } from '../components/'
+import { IssueDashboard } from '../components/'
 
 export default [
 	{
-		path: '/',
-		component: Dashboard,
-		name: 'dashboard',
+		path: '/issues',
+		component: IssueDashboard,
+		name: 'issues',
 		meta: {
 			guest: false,
 			needsAuth: true
