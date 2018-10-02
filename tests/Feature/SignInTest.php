@@ -2,24 +2,22 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use \Illuminate\Support\Facades\Notification;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class SignInTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    function users_can_activate_themselfs()
+    public function users_can_activate_themselfs()
     {
         $this->post(route('signup'), [
-            'name' => 'Test User Sign In',
-			'email' => 'testsignin@user.com',
-			'password' => 'foobar',
-			'password_confirmation' => 'foobar'
+            'name'                  => 'Test User Sign In',
+            'email'                 => 'testsignin@user.com',
+            'password'              => 'foobar',
+            'password_confirmation' => 'foobar',
         ]);
 
         $user = User::whereName('Test User Sign In')->first();
@@ -29,15 +27,15 @@ class SignInTest extends TestCase
     }
 
     /** @test */
-    function an_activated_user_can_sign_in()
+    public function an_activated_user_can_sign_in()
     {
         $this->artisan('passport:install');
 
         $user = create(User::class, ['active' => true]);
 
         $response = $this->post(route('login'), [
-            'email' => $user->email,
-            'password' => 'secret'
+            'email'    => $user->email,
+            'password' => 'secret',
         ]);
 
         $response->assertSuccessful();
@@ -45,32 +43,32 @@ class SignInTest extends TestCase
     }
 
     /** @test */
-    function an_inactive_user_can_not_sign_in()
+    public function an_inactive_user_can_not_sign_in()
     {
         $user = create(User::class, ['active' => false]);
 
         $response = $this->post(route('login'), [
-            'email' => $user->email,
-            'password' => 'secret'
+            'email'    => $user->email,
+            'password' => 'secret',
         ]);
 
         $response->assertStatus(401);
     }
 
     /** @test */
-    function a_user_can_not_sign_in_without_an_email()
+    public function a_user_can_not_sign_in_without_an_email()
     {
         create(User::class, ['active' => true]);
 
         $response = $this->post(route('login'), [
-            'password' => 'secret'
+            'password' => 'secret',
         ]);
 
         $response->assertStatus(302);
     }
 
     /** @test */
-    function a_user_can_not_sign_in_without_a_password()
+    public function a_user_can_not_sign_in_without_a_password()
     {
         $user = create(User::class, ['active' => true]);
 
@@ -82,13 +80,13 @@ class SignInTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_not_sign_in_with_invalid_password()
+    public function a_user_can_not_sign_in_with_invalid_password()
     {
         $user = create(User::class, ['active' => true]);
 
         $response = $this->post(route('login'), [
-            'email' => $user->email,
-            'password' => 'secrets'
+            'email'    => $user->email,
+            'password' => 'secrets',
         ]);
 
         $response->assertStatus(401);

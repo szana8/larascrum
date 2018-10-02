@@ -3,13 +3,11 @@
 namespace App;
 
 use Avatar;
-use App\User;
-use App\Events\UserSignedUp;
-use Laravel\Passport\HasApiTokens;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -22,23 +20,20 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     *
      */
     protected $fillable = [
-        'name', 'email', 'password', 'active', 'activation_token', 'avatar'
+        'name', 'email', 'password', 'active', 'activation_token', 'avatar',
     ];
 
     /**
      * The attributes that should be hidden for arrays.
-     *
      */
     protected $hidden = [
-        'password', 'remember_token', 'activation_token'
+        'password', 'remember_token', 'activation_token',
     ];
 
     /**
      * Don't auto-apply mass assignment protection.
-     *
      */
     protected $guarded = [];
 
@@ -48,7 +43,7 @@ class User extends Authenticatable
     protected $appends = ['avatar_url'];
 
     /**
-     * A user has an avatar image
+     * A user has an avatar image.
      */
     public function getAvatarUrlAttribute()
     {

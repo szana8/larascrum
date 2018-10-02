@@ -24,9 +24,9 @@ class UserSignInRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-            'remember_me' => 'boolean'
+            'email'       => 'required|string|email',
+            'password'    => 'required|string',
+            'remember_me' => 'boolean',
         ];
     }
 }
