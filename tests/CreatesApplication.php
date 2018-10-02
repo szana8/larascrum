@@ -18,7 +18,7 @@ trait CreatesApplication
         $app->make(Kernel::class)->bootstrap();
 
         putenv('APP_ENV=sqlite');
-        $app['config']->set('database.default','sqlite');
+        $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite.database', ':memory:');
 
         return $app;
