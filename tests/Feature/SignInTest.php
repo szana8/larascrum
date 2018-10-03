@@ -4,11 +4,18 @@ namespace Tests\Feature;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class SignInTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function setUp()
+    {
+        parent::setUp();
+        Notification::fake();
+    }
 
     /** @test */
     public function users_can_activate_themselfs()
@@ -29,6 +36,7 @@ class SignInTest extends TestCase
     /** @test */
     public function an_activated_user_can_sign_in()
     {
+        Notification::fake();
         $this->artisan('passport:install');
 
         $user = create(User::class, ['active' => true]);

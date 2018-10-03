@@ -5,11 +5,18 @@ namespace Tests\Feature\Issue;
 use App\Issue;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class ReadIssueTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function setUp()
+    {
+        parent::setUp();
+        Notification::fake();
+    }
 
     /** @test */
     public function an_authenticated_user_can_read_issues()
@@ -31,7 +38,7 @@ class ReadIssueTest extends TestCase
     }
 
     /** @test */
-    function a_unauthenticated_user_can_not_read_issues()
+    public function a_unauthenticated_user_can_not_read_issues()
     {
         $issue = create(Issue::class, [], 10);
 
@@ -39,5 +46,4 @@ class ReadIssueTest extends TestCase
 
         $response->assertStatus(302);
     }
-
 }

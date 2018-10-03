@@ -41,7 +41,10 @@ class SignUpActivate extends Notification
      */
     public function toMail($notifiable)
     {
-        dd($notifiable);
+        if ($notifiable->active) {
+            return;
+        }
+
         $url = url("/api/auth/signup/activate/$notifiable->activation_token");
 
         return (new MailMessage())
