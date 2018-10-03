@@ -97,9 +97,10 @@ class AuthController extends Controller
     }
 
     /**
-     * Undocumented function
+     * Undocumented function.
      *
      * @param [type] $token
+     *
      * @return void
      */
     public function signupActivate($token)
