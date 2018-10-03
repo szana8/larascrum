@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="" v-if="user.authenticated">
-			<project-search></project-search>
+			<sidebar-search-panel></sidebar-search-panel>
 
 			<div class="flex">
 				<div class="md:w-1/6 md:h-screen h-auto border-r border-grey-lighter hidden md:block">

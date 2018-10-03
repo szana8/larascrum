@@ -1,9 +1,9 @@
-import { Home } from '../components/'
+import { Dashboard } from '../components/'
 
 export default [
 	{
 		path: '/',
-		component: Home,
+		component: Dashboard,
 		name: 'home',
 		meta: {
 			guest: false,

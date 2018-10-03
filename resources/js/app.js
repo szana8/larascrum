@@ -25,9 +25,10 @@ window.Vue = require('vue');
  * is the entry point and the all of the necessary navigation components.
  */
 Vue.component('app', require('./components/App.vue'));
-Vue.component('sidebar', require('./components/Navigation/Sidebar.vue'));
-Vue.component('navigation', require('./components/Navigation/Navigation.vue'));
-Vue.component('projectSearch', require('./components/Navigation/ProjectSearch.vue'));
+Vue.component('sidebar', require('./components/Navigation/TheSidebar.vue'));
+Vue.component('navigation', require('./components/Navigation/TheNavigation.vue'));
+
+Vue.component('sidebarSearchPanel', require('./components/Panels/SidebarSearchPanel.vue'));
 
 /**
  * Check the user token is exist or not, depends on that we redirect the user
