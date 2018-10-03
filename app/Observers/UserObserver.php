@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Notifications\SignupActivate;
+use App\Notifications\SignUpActivate;
 use App\User;
 
 class UserObserver
@@ -17,7 +17,7 @@ class UserObserver
     public function created(User $user)
     {
         $user->generateAvatar();
-        $user->notify(new SignupActivate());
+        $user->notify(new SignUpActivate());
     }
 
     /**

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserSignInRequest;
 use App\Http\Requests\UserSignUpRequest;
-use App\Notifications\SignupActivate;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
