@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use \App\Notifications\SignupActivate;
+use App\Notifications\SignupActivate;
 use App\User;
 
 class UserObserver
