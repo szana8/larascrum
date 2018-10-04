@@ -1,17 +1,17 @@
 <template>
 	<nav class="bg-blue-darker w-full px-4 flex justify-between">
 
-		<div class="flex w-1/4">
-			<div class="py-6">
-				<img src="storage/avatars/3/avatar.png" class="w-10 h-10 absolute -mt-2 ml-2 inline-block">
-				<a href="#" class="text-blue-lighter font-semibold ml-16 no-underline hover:text-blue-lightest">Grace Parkinson</a>
+		<div class="flex w-1/4 items-stretch">
+			<div class="flex self-center">
+				<img src="storage/avatars/3/avatar.png" class="w-10 h-10 ml-2 inline-block self-center">
+				<a href="#" class="text-blue-lighter font-semibold ml-4 no-underline hover:text-blue-lightest self-center">Grace Parkinson</a>
 			</div>
 		</div>
 
 		<div class="flex w-1/2" id="navbar">
 			<li class="list-reset px-4 py-6"><a href="#" class="text-blue bg-white rounded-full py-2 px-8 font-semibold no-underline border hover:bg-blue-darker hover:border-white hover:text-white">Create</a></li>
 			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" :to="{ name: 'home' }" exact>Dashboards</router-link>
-			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" :to="{ name: 'issues' }" exact>Issues</router-link>
+			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" :to="{ name: 'issues' }">Issues</router-link>
 			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" to="/boards" exact>Boards</router-link>
 			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" to="/calendar" exact>Calendar</router-link>
 			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" to="/settings" exact>Settings</router-link>

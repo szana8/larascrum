@@ -9,5 +9,15 @@ export default [
 			guest: false,
 			needsAuth: true
 		}
+	},
+	{
+		path: '/issues/:project/:type?',
+		component: IssueDashboard,
+		name: 'issues_with_project',
+		props: true,
+		meta: {
+			guest: false,
+			needsAuth: true
+		}
 	}
 ]
