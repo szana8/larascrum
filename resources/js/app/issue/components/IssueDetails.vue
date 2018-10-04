@@ -89,109 +89,9 @@
 
 				<div class="mt-4">
 
-					<div class="bg-white rounded shadow my-4">
 
-						<div class="flex py-4">
+					<comment-card></comment-card>
 
-							<img src="storage/avatars/3/avatar.png" class="w-8 h-8 mx-8">
-
-							<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">Grace Parkinson</a>
-
-							<span class="mt-2 text-sm text-grey-dark">added a comment - </span>
-
-							<span class="mt-2 text-sm text-grey-dark">Yesterday</span>
-
-						</div>
-
-						<p class="px-8 pb-8 leading-normal">
-
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque id eros vel sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ornare rhoncus diam, tincidunt interdum diam auctor
-
-							sit amet. Pellentesque dapibus, lacus ac gravida blandit, nisl ligula porta felis, gravida vulputate enim mi quis tortor.
-
-						</p>
-
-					</div>
-
-					<div class="bg-white rounded shadow my-4">
-
-						<div class="flex py-4">
-
-							<img src="storage/avatars/3/avatar.png" class="w-8 h-8 mx-8">
-
-							<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">Grace Parkinson</a>
-
-							<span class="mt-2 text-sm text-grey-dark">added a comment - </span>
-
-							<span class="mt-2 text-sm text-grey-dark">Yesterday</span>
-
-						</div>
-
-						<p class="px-8 pb-8 leading-normal">
-
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque id eros vel sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ornare rhoncus diam, tincidunt interdum diam auctor
-
-							sit amet. Pellentesque dapibus, lacus ac gravida blandit, nisl ligula porta felis, gravida vulputate enim mi quis tortor.
-
-						</p>
-
-					</div>
-
-
-
-					<div class="bg-white rounded shadow my-4">
-
-						<div class="flex py-4">
-
-							<img src="storage/avatars/5/avatar.png" class="w-8 h-8 mx-8">
-
-							<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">Bill Zuchmenn</a>
-
-							<span class="mt-2 text-sm text-grey-dark">added a comment - </span>
-
-							<span class="mt-2 text-sm text-grey-dark">1h ago</span>
-
-						</div>
-
-						<p class="px-8 pb-8 leading-normal">
-
-							Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ornare rhoncus diam, tincidunt interdum diam auctor sit amet.
-
-						</p>
-
-						<div class="flex px-8 pb-8">
-
-							<div class="flex mr-4">
-
-								<img src="storage/icons/file.png" class="w-8 h-8">
-
-								<div class="ml-2 text-sm">
-
-									<a href="#" class="text-blue no-underline font-semibold hover:text-blue-light">Specification.doc</a>
-
-									<div class="text-grey">12.01.18</div>
-
-								</div>
-
-							</div>
-
-							<div class="flex mr-4">
-
-								<img src="storage/icons/image.png" class="w-8 h-8">
-
-								<div class="ml-2 text-sm">
-
-									<a href="#" class="text-blue no-underline font-semibold hover:text-blue-light">HodieConcept.png</a>
-
-									<div class="text-grey">12.01.18</div>
-
-								</div>
-
-							</div>
-
-						</div>
-
-					</div>
 
 					<div class="h-32"></div>
 
@@ -216,6 +116,7 @@
 
 <script>
 	import IssueAttributesPanel from './IssueAttributesPanel'
+	import CommentCard from './CommentCard'
 
 	import {
 
@@ -229,7 +130,8 @@
 
 			IssueAttributesPanel: IssueAttributesPanel,
 
-			PerfectScrollbar: PerfectScrollbar
+			PerfectScrollbar: PerfectScrollbar,
+			CommentCard: CommentCard
 
 		},
 
