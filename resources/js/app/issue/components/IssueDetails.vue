@@ -8,14 +8,26 @@
 				<div class="bg-white rounded">
 
 					<div class="border-b border-grey-lighter">
+						<div class="flex justify-between">
+							<div>
+								<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Edit</a>
 
-						<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Edit</a>
+								<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Assign</a>
 
-						<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Assign</a>
+								<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">
+									In Progress
+								</a>
 
-						<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">In Progress</a>
+								<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">More</a>
+							</div>
 
-						<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">More</a>
+							<div>
+								<button class="mr-6 mt-4 bg-white border border-grey-light shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-blue hover:text-white mx-4">Export</button>
+							</div>
+						</div>
+
+
+
 
 					</div>
 
@@ -49,23 +61,35 @@
 
 					</div>
 
-					<div class="px-8 pb-8 leading-normal">
+					<div class="px-8 pb-6 leading-normal display-block" :class="[this.isMore ? 'h-auto' : 'h-32 overflow-hidden']">
 
-						<p>
+						<p class="relative">
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque id eros vel sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ornare rhoncus diam, tincidunt interdum diam auctor
 
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque id eros vel sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ornare rhoncus diam, tincidunt interdum diam auctor
+								sit amet. Pellentesque dapibus, lacus ac gravida blandit, nisl ligula porta felis, gravida vulputate enim mi quis tortor. Mauris justo velit, scelerisque nec facilisis nec, dapibus a turpis. Aenean euismod lorem non faucibus interdum. Fusce sed
 
-							sit amet. Pellentesque dapibus, lacus ac gravida blandit, nisl ligula porta felis, gravida vulputate enim mi quis tortor. Mauris justo velit, scelerisque nec facilisis nec, dapibus a turpis. Aenean euismod lorem non faucibus interdum. Fusce sed
+								justo vitae massa tincidunt mollis vitae in sapien. Cras ultricies quis metus sit amet pulvinar. Phasellus in egestas mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+							</p>
 
-							justo vitae massa tincidunt mollis vitae in sapien. Cras ultricies quis metus sit amet pulvinar. Phasellus in egestas mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque id eros vel sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ornare rhoncus diam, tincidunt interdum diam auctor
+
+								sit amet. Pellentesque dapibus, lacus ac gravida blandit, nisl ligula porta felis, gravida vulputate enim mi quis tortor. Mauris justo velit, scelerisque nec facilisis nec, dapibus a turpis. Aenean euismod lorem non faucibus interdum. Fusce sed
+
+								justo vitae massa tincidunt mollis vitae in sapien. Cras ultricies quis metus sit amet pulvinar. Phasellus in egestas mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+							</p>
 
 						</p>
 
-						<p class="text-center mt-8 border-t border-grey-lighter">
-							<a href="#" class="text-blue no-underline text-sm font-semibold hover:text-blue-light">More</a>
-						</p>
+
 
 					</div>
+
+					<p class="text-center mt-8 border-t border-grey-lighter py-6" v-if="!isMore">
+						<a href="#" class="text-blue no-underline text-sm font-semibold hover:text-blue-light"  @click="isMore = true">More</a>
+					</p>
 
 				</div>
 
@@ -117,39 +141,40 @@
 <script>
 	import IssueAttributesPanel from './IssueAttributesPanel'
 	import CommentCard from './CommentCard'
-
-	import {
-
-		PerfectScrollbar
-
-	} from 'vue2-perfect-scrollbar'
+	import StatusCard from './StatusCard'
+	import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
 
 	export default {
 
 		components: {
-
 			IssueAttributesPanel: IssueAttributesPanel,
-
 			PerfectScrollbar: PerfectScrollbar,
-			CommentCard: CommentCard
-
+			CommentCard: CommentCard,
+			StatusCard: StatusCard
 		},
-
 
 
 		data() {
-
 			return {
-
 				settings: {
-
 					maxScrollbarLength: 60
-
-				}
-
+				},
+				isMore: false
 			}
-
 		},
+
+		methods: {
+			showMore() {
+				this.isMore = true;
+			},
+
+			moreClass() {
+				if (this.isMore === true)
+					return 'h-auto';
+
+				return 'h-32';
+			}
+		}
 
 	}
 </script>

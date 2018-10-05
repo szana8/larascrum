@@ -1,6 +1,8 @@
 <template>
 	<nav class="bg-blue-darker w-full px-4 flex justify-between">
 
+		<create-panel></create-panel>
+
 		<div class="flex w-1/4 items-stretch">
 			<div class="flex self-center">
 				<img src="storage/avatars/3/avatar.png" class="w-10 h-10 ml-2 inline-block self-center">
@@ -9,7 +11,7 @@
 		</div>
 
 		<div class="flex w-1/2" id="navbar">
-			<li class="list-reset px-4 py-6"><a href="#" class="text-blue bg-white rounded-full py-2 px-8 font-semibold no-underline border hover:bg-blue-darker hover:border-white hover:text-white">Create</a></li>
+			<li class="list-reset px-4 py-6"><a href="#" class="text-blue bg-white rounded-full py-2 px-8 font-semibold no-underline border hover:bg-blue-darker hover:border-white hover:text-white" @click="openCreatePanel()">Create</a></li>
 			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" :to="{ name: 'home' }" exact>Dashboards</router-link>
 			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" :to="{ name: 'issues' }">Issues</router-link>
 			<router-link tag="li" class="list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer" to="/boards" exact>Boards</router-link>
@@ -31,8 +33,15 @@
 
 <script>
 	import { mapGetters, mapActions } from 'vuex'
+	import CreatePanel from '../Panels/CreatePanel'
+	import { EventBus } from '../../event-bus.js'
+
 
     export default {
+		components: {
+			CreatePanel
+		},
+
         computed: mapGetters({
             user: 'auth/user',
         }),
@@ -50,7 +59,11 @@
 
             navBarRedirect (page) {
                 this.$router.replace({ name: page })
-            }
+			},
+
+			openCreatePanel() {
+				EventBus.$emit('openCreatePanel');
+			}
         }
     }
 </script>

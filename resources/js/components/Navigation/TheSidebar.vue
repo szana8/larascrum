@@ -15,7 +15,7 @@
 
 		<div>
 			<perfect-scrollbar class="scroll-area w-full mt-2" :settings="settings">
-				<project-card v-for="project in projects" :key="project.id" :project="project" /></project-card>
+				<project-card v-for="project in projects" :key="project.id" :project="project" />
 			</perfect-scrollbar>
 		</div>
 	</div>
@@ -23,7 +23,7 @@
 
 <script>
 	import { EventBus } from '../../event-bus.js'
-	import ProjectCard from './ProjectCard'
+	import ProjectCard from './Project/ProjectCard'
 	import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
 
 	export default {
@@ -34,8 +34,8 @@
 
 		data() {
 			return {
-				isIssueOpen: false,
 				projects: null,
+				isIssueOpen: false,
 				settings: {
 					maxScrollbarLength: 60
 				}
@@ -43,22 +43,24 @@
 		},
 
 		mounted() {
-			axios.get('/api/projects').then((response) => {
-				console.log(response)
-				this.projects = response.data
-			}).catch((error) => {
-				console.log(error)
-			})
+			this.getProjects();
 		},
 
 		methods: {
+			/* Fiure an event to open the search side modal to find a specific issue or peoject */
 			openSearchProjectModal () {
             	EventBus.$emit('showProjectSearch');
-            },
+			},
 
-            calculateBorderColor(color_code) {
-            	return 'border-' + color_code;
-            }
+			/* Call the project API to get all of the relevant projects */
+			getProjects() {
+				axios.get('/api/projects').then((response) => {
+					this.projects = response.data;
+				}).catch((error) => {
+					console.log(error);
+				});
+			}
+
 		}
 	}
 </script>
