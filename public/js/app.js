@@ -53469,7 +53469,7 @@ var staticRenderFns = [
             "button",
             {
               staticClass:
-                "bg-blue-darkest text-xs lg:text-sm text-white rounded-full py-1 w-16 xl:w-24"
+                "bg-blue-darker focus:outline-none text-xs lg:text-sm text-white rounded-full py-1 w-16 xl:w-24"
             },
             [_vm._v("All")]
           )
@@ -53480,7 +53480,7 @@ var staticRenderFns = [
             "button",
             {
               staticClass:
-                "bg-white shadow-md text-xs lg:text-sm text-grey-darkest rounded-full py-1 w-16 xl:w-24 hover:bg-blue hover:text-white"
+                "bg-white focus:outline-none shadow-md text-xs lg:text-sm text-grey-darkest rounded-full py-1 w-16 xl:w-24 hover:bg-blue hover:text-white"
             },
             [_vm._v("Blocker")]
           )
@@ -53491,7 +53491,7 @@ var staticRenderFns = [
             "button",
             {
               staticClass:
-                "bg-white shadow-md text-xs lg:text-sm text-grey-darkest rounded-full py-1 w-16 xl:w-24 hover:bg-blue hover:text-white"
+                "bg-white focus:outline-none shadow-md text-xs lg:text-sm text-grey-darkest rounded-full py-1 w-16 xl:w-24 hover:bg-blue hover:text-white"
             },
             [_vm._v("Critical")]
           )
@@ -53502,7 +53502,7 @@ var staticRenderFns = [
             "button",
             {
               staticClass:
-                "bg-white shadow-md text-xs lg:text-sm text-grey-darkest rounded-full py-1 w-16 xl:w-24 hover:bg-blue hover:text-white"
+                "bg-white focus:outline-none shadow-md text-xs lg:text-sm text-grey-darkest rounded-full py-1 w-16 xl:w-24 hover:bg-blue hover:text-white"
             },
             [_vm._v("Major")]
           )
@@ -53513,7 +53513,7 @@ var staticRenderFns = [
             "button",
             {
               staticClass:
-                "bg-white shadow-md text-xs lg:text-sm text-grey-darkest rounded-full py-1 w-16 xl:w-24 hover:bg-blue hover:text-white"
+                "bg-white focus:outline-none shadow-md text-xs lg:text-sm text-grey-darkest rounded-full py-1 w-16 xl:w-24 hover:bg-blue hover:text-white"
             },
             [_vm._v("Minor")]
           )
@@ -53524,7 +53524,7 @@ var staticRenderFns = [
             "button",
             {
               staticClass:
-                "bg-white shadow-md text-xs lg:text-sm text-grey-darkest rounded-full py-1 w-16 xl:w-24 hover:bg-blue hover:text-white"
+                "bg-white focus:outline-none shadow-md text-xs lg:text-sm text-grey-darkest rounded-full py-1 w-16 xl:w-24 hover:bg-blue hover:text-white"
             },
             [_vm._v("Trivial")]
           )
