@@ -1,8 +1,9 @@
 <template>
     <div>
         <!-- Smokey background -->
+
         <div class="fixed z-40 pin overflow-auto bg-smoke-dark flex" v-if="isActive"></div>
-        <transition name="slide">
+         <slide-x-left-transition :duration="500">
             <div class="w-1/3 fixed h-screen bg-white broder-r border-grey-darker z-50" v-if="isActive" v-click-outside="hide">
                 <div class="p-12">
                     <div class="text-right">
@@ -115,14 +116,19 @@
                     </div>
                 </div>
             </div>
-        </transition>
+         </slide-x-left-transition>
     </div>
 </template>
 <script>
 	import { EventBus } from '../../event-bus.js'
-	import ClickOutside from 'vue-click-outside'
+    import ClickOutside from 'vue-click-outside'
+    import { SlideXLeftTransition } from 'vue2-transitions'
 
 	export default {
+        components: {
+            SlideXLeftTransition
+        },
+
 	    name: 'SidebarSearchPanel',
 
 	    data() {

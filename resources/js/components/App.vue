@@ -4,10 +4,7 @@
 			<sidebar-search-panel></sidebar-search-panel>
 
 			<div class="flex">
-				<div class="md:w-1/6 md:h-screen h-auto border-r border-grey-lighter hidden md:block">
-					<sidebar></sidebar>
-				</div>
-				<div class="md:w-5/6 block">
+				<div class="w-full block md:h-screen h-auto">
 					<navigation></navigation>
 					<div class="flex">
 						<router-view v-if="user.authenticated"></router-view>

@@ -1,7 +1,7 @@
 <template>
     <div class="md:flex min-h-screen">
-        <div class="w-full md:w-1/2 bg-blue-darker flex items-center justify-left">
-            <div class="m-8">
+        <div class="w-1/3 md:w-2/3 flex items-center justify-left" style="background: url('storage/images/planning.jpg') no-repeat; background-size: 200%;">
+            <div class="m-8 hidden">
                 <div class="text-white">
                     <h1 class="text-5xl">Let's get to business!</h1>
                     <li class="list-reset mt-12">
@@ -35,9 +35,9 @@
             </div>
         </div>
 
-        <div class="w-full flex md:w-1/2 items-center justify-left">
+        <div class="w-2/3 flex md:w-1/3 items-center justify-left">
             <div class="m-12 w-full">
-                <div class="text-blue-darker">
+                <div class="text-blue">
                     <h1 class="text-5xl mb-2">Sign in</h1>
                     <small class="text-lg text-grey-dark">Enter your email and password</small>
                     <form class="mt-12" method="POST" @submit.prevent="submit">
@@ -54,16 +54,16 @@
                         <div class="flex justify-between">
                             <div>
                                  <input class="mr-2 leading-tight" type="checkbox" name="remember">
-                                  <span class="font-bold text-blue-darker hover:text-blue-dark cursor-pointer">
+                                  <span class="font-bold text-blue hover:text-blue-dark cursor-pointer">
                                     Remember me
                                   </span>
                             </div>
                             <div>
-                                <a href="#" class="font-bold no-underline text-blue-darker hover:text-blue-dark">Forgot your password?</a>
+                                <a href="#" class="font-bold no-underline text-blue hover:text-blue-dark">Forgot your password?</a>
                             </div>
                         </div>
                         <div class="mt-6">
-                            <button type="submit" class="w-full py-6 rounded bg-blue-darker text-white uppercase font-bold hover:bg-blue-dark"  :class="{'bg-blue-dark': this.loading}">
+                            <button type="submit" class="w-full py-6 rounded bg-blue shadow-md text-white uppercase font-bold hover:bg-blue-dark"  :class="{'bg-blue-dark': this.loading}">
                                 <img src="gif/three-bar-loader.gif" alt="" class="w-16 h-16 absolute -m-8" v-if="this.loading" :disabled="this.loading">
                                 <span v-else>Log In</span>
                             </button>
@@ -71,7 +71,7 @@
                         <div class="mt-6">
                             <span class="text-grey-dark font-bold">Don't have any account?</span>
                             <span>
-                                <router-link class="font-bold no-underline text-blue-darker hover:text-blue-dark" to="/register" exact>Sign up!</router-link>
+                                <router-link class="font-bold no-underline text-blue hover:text-blue-dark" to="/register" exact>Sign up!</router-link>
                             </span>
                         </div>
                     </form>
