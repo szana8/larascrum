@@ -1,20 +1,21 @@
 <template>
 	<div>
 		<perfect-scrollbar class="scroll-area w-full mt-2" :settings="settings">
-			<project-card v-for="project in projects" :key="project.id" :project="project" />
+			<project v-for="project in projects" :key="project.id" :project="project" />
 		</perfect-scrollbar>
 	</div>
 </template>
 
 <script>
-	import { EventBus } from '../../event-bus.js'
-	import ProjectCard from './Project/ProjectCard'
+	import Project from './Cards/Project'
+
+	import { EventBus } from '../../../../event-bus.js'
 	import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
 
 	export default {
 		components: {
-			ProjectCard: ProjectCard,
-			PerfectScrollbar: PerfectScrollbar
+			Project,
+			PerfectScrollbar
 		},
 
 		data() {
@@ -32,8 +33,6 @@
 		},
 
 		methods: {
-
-
 			/* Call the project API to get all of the relevant projects */
 			getProjects() {
 				axios.get('/api/projects').then((response) => {
@@ -42,7 +41,6 @@
 					console.log(error);
 				});
 			}
-
 		}
 	}
 </script>

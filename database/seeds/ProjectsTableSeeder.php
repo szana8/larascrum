@@ -21,7 +21,6 @@ class ProjectsTableSeeder extends Seeder
     			'type' => 'business',
     			'icon' => 'storage/icons/project/business.svg',
     			'owner_id' => 1,
-    			'color_code' => 'purple'
     		],
     		[
     			'name' => 'Sales Marketing',
@@ -30,7 +29,6 @@ class ProjectsTableSeeder extends Seeder
     			'type' => 'software',
     			'icon' => 'storage/icons/project/software.svg',
     			'owner_id' => 1,
-    			'color_code' => 'red'
     		],
     		[
     			'name' => 'Marketing Aerodefense',
@@ -39,7 +37,6 @@ class ProjectsTableSeeder extends Seeder
     			'type' => 'service_desk',
     			'icon' => 'storage/icons/project/service_desk.svg',
     			'owner_id' => 1,
-    			'color_code' => 'blue'
     		]
     	]);
     }

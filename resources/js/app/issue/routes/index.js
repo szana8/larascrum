@@ -11,7 +11,17 @@ export default [
 		}
 	},
 	{
-		path: '/issues/:project/:type?',
+		path: '/issues/:project/:slug',
+		component: IssueDashboard,
+		name: 'issue_by_slug',
+		props: true,
+		meta: {
+			guest: false,
+			needsAuth: true
+		}
+	},
+	{
+		path: '/issues/browse/:project/:type',
 		component: IssueDashboard,
 		name: 'issues_with_project',
 		props: true,

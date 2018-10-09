@@ -16,7 +16,7 @@ class CreateIssuesTable extends Migration
         Schema::create('issues', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('body')->nullable();
+            $table->text('body')->nullable();
             $table->string('slug');
             $table->integer('type_id')->index();
             $table->integer('project_id')->index();

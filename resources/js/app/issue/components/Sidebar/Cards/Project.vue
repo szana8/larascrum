@@ -21,15 +21,15 @@
 						</a>
                     </div>
 
-                    <router-link  v-if="isIssueOpen" tag="div" :to="{ name: 'issues_with_project', params: { project: project.slug, type: 'all' } }" class="py-2 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer">
+                    <div v-if="isIssueOpen" tag="div" @click="navigate('all')" class="py-2 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer">
                         <div class="inline-block w-24">All</div>
                         <div class="inline-block" v-text="project.allIssuesInThisProjectCount"></div>
-                    </router-link>
+                    </div>
 
-                    <router-link  v-if="isIssueOpen" tag="div" :to="{ name: 'issues_with_project', params: { project: project.slug, type: 'my' } }" class="py-2 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer">
+                    <div v-if="isIssueOpen" tag="div" class="py-2 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer" @click="navigate('my')">
                         <div class="inline-block w-24">My</div>
                         <div class="inline-block" v-text="project.myIssuesInThisProjectCount"></div>
-                    </router-link>
+                    </div>
 
                 </div>
                 <div class="mt-4">
@@ -84,7 +84,7 @@
         </div>
 </template>
 <script>
-import { EventBus } from '../../../event-bus.js'
+import { EventBus } from '../../../../../event-bus.js'
 
 export default {
     props: ['project'],
@@ -111,6 +111,11 @@ export default {
 
         close() {
             this.isOpen = false;
+        },
+
+        navigate(type) {
+            this.$router.replace({name: 'issues_with_project', params: {project: this.project.slug, type: type}})
+            EventBus.$emit('refreshList');
         }
     }
 }

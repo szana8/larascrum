@@ -11,7 +11,7 @@ class Issue extends Model
      *
      * @var [type]
      */
-    protected $with = ['reporter', 'assignee'];
+    protected $with = ['reporter', 'assignee', 'type', 'project'];
 
     /**
      * Don't auto-apply mass assignment protection.
@@ -25,7 +25,7 @@ class Issue extends Model
      *
      * @var array
      */
-    protected $appends = ['issueColor'];
+    protected $appends = [];
 
     /**
      * Every issue has to be a reporter.
@@ -47,11 +47,18 @@ class Issue extends Model
         return $this->belongsTo(User::class, 'assignee_id');
     }
 
-    public function getIssueColorAttribute()
+    /**
+     * Every issue belongs to a type.
+     *
+     * @return App\IssueType    Issue type
+     */
+    public function type()
     {
-        switch ($this->type_id) {
-            case 1: return 'red';
-            default: return 'blue';
-        }
+        return $this->belongsTo(IssueType::class, 'type_id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 }

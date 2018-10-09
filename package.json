@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "localforage": "^1.7.2",
+        "moment": "^2.22.2",
         "vue-click-outside": "^1.0.7",
         "vue-router": "^3.0.1",
         "vue2-perfect-scrollbar": "^1.0.2",

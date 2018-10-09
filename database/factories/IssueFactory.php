@@ -3,12 +3,14 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Issue::class, function (Faker $faker) {
+    $title = $faker->sentence;
+
     return [
-        'title'                   => $faker->sentence,
-        'body'                    => $faker->paragraph,
-        'slug'                    => 'slug',
-        'type_id'                 => 1,
-        'project_id'              => 1,
+        'title'                   => $title,
+        'body'                    => $faker->paragraph(3),
+        'slug'                    => str_slug($title),
+        'type_id'                 => $faker->numberBetween(1,5),
+        'project_id'              => $faker->numberBetween(1,3),
         'enviroment'              => 'dev',
         'components'              => 'Dev',
         'priority_id'             => 1,

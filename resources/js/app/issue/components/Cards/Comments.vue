@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white rounded shadow my-4" @mouseover="checkEditable" @mouseleave="isEditable = false">
 
-        <div class="flex py-4 px-4 w-full  justify-between">
+        <div class="flex py-4 px-4 w-full justify-between">
             <div class="flex">
                 <img src="storage/avatars/3/avatar.png" class="w-8 h-8 mx-4">
                 <a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">Grace Parkinson</a>
