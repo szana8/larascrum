@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\IssueType;
+use Illuminate\Database\Seeder;
 
 class IssueTypeSeeder extends Seeder
 {
@@ -14,39 +14,39 @@ class IssueTypeSeeder extends Seeder
     {
         IssueType::insert([
             [
-                'name' => 'Bug',
-                'slug' => 'bug',
-                'icon' => 'storage/icons/issuetypes/bug.png',
-                'color_code' => 'red',
-                'description' => ''
+                'name'        => 'Bug',
+                'slug'        => 'bug',
+                'icon'        => 'storage/icons/issuetypes/bug.png',
+                'color_code'  => 'red',
+                'description' => '',
             ],
             [
-                'name' => 'Epic',
-                'slug' => 'epic',
-                'icon' => 'storage/icons/issuetypes/epic.png',
-                'color_code' => 'purple',
-                'description' => ''
+                'name'        => 'Epic',
+                'slug'        => 'epic',
+                'icon'        => 'storage/icons/issuetypes/epic.png',
+                'color_code'  => 'purple',
+                'description' => '',
             ],
             [
-                'name' => 'Improvement',
-                'slug' => 'improvement',
-                'icon' => 'storage/icons/issuetypes/improvement.png',
-                'color_code' => 'green',
-                'description' => ''
+                'name'        => 'Improvement',
+                'slug'        => 'improvement',
+                'icon'        => 'storage/icons/issuetypes/improvement.png',
+                'color_code'  => 'green',
+                'description' => '',
             ],
             [
-                'name' => 'Story',
-                'slug' => 'story',
-                'icon' => 'storage/icons/issuetypes/story.png',
-                'color_code' => 'orange',
-                'description' => ''
+                'name'        => 'Story',
+                'slug'        => 'story',
+                'icon'        => 'storage/icons/issuetypes/story.png',
+                'color_code'  => 'orange',
+                'description' => '',
             ],
             [
-                'name' => 'Task',
-                'slug' => 'task',
-                'icon' => 'storage/icons/issuetypes/task.png',
-                'color_code' => 'blue',
-                'description' => ''
+                'name'        => 'Task',
+                'slug'        => 'task',
+                'icon'        => 'storage/icons/issuetypes/task.png',
+                'color_code'  => 'blue',
+                'description' => '',
             ],
         ]);
     }

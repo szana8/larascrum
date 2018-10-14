@@ -2,12 +2,12 @@
 
 namespace App;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Project extends Model
 {
-	 /**
+    /**
      * The relationships to always eager-load.
      *
      * @var [type]
@@ -29,33 +29,33 @@ class Project extends Model
     protected $appends = ['allIssuesInThisProjectCount', 'myIssuesInThisProjectCount'];
 
     /**
-     * Every project has many issues
+     * Every project has many issues.
      *
-     * @return App\Issue    Collection of Issue objeczs
+     * @return App\Issue Collection of Issue objeczs
      */
-	/* public function issues()
-	{
-		return $this->hasMany(Issue::class);
-	} */
+    /* public function issues()
+    {
+        return $this->hasMany(Issue::class);
+    } */
 
     /**
-     * Count the issues which belongs to the project
+     * Count the issues which belongs to the project.
      *
-     * @return number   Number of Issues which belongs to the project
+     * @return number Number of Issues which belongs to the project
      */
     public function getAllIssuesInThisProjectCountAttribute()
     {
-      return Issue::where('project_id', $this->id)->count();
+        return Issue::where('project_id', $this->id)->count();
     }
 
     /**
      * Count the issues in the current project which belongs to the authenticated
-     * user
+     * user.
      *
-     * @return number   Number of issues
+     * @return number Number of issues
      */
     public function getMyIssuesInThisProjectCountAttribute()
     {
-      return Issue::where('project_id', $this->id)->where('assignee_id', Auth::id())->count();
+        return Issue::where('project_id', $this->id)->where('assignee_id', Auth::id())->count();
     }
 }

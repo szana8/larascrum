@@ -50,7 +50,7 @@ class Issue extends Model
     /**
      * Every issue belongs to a type.
      *
-     * @return App\IssueType    Issue type
+     * @return App\IssueType Issue type
      */
     public function type()
     {
