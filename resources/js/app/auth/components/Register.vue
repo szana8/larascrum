@@ -83,7 +83,8 @@
                             </button>
                         </div>
                         <div class="mt-6">
-                            <span class="text-grey-dark font-bold">You have an account?</span> <span><a href="#" class="font-bold no-underline text-blue-darker hover:text-blue-dark">Sign ip!</a></span>
+
+                            <span class="text-grey-dark font-bold">You have an account?</span> <span><router-link class="font-bold no-underline text-blue hover:text-blue-dark" to="/login" exact>Sign in!</router-link></span>
                         </div>
                     </form>
                 </div>

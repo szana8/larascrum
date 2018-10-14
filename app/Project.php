@@ -58,4 +58,14 @@ class Project extends Model
     {
         return Issue::where('project_id', $this->id)->where('assignee_id', Auth::id())->count();
     }
+
+    /**
+     * Get the route key name.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

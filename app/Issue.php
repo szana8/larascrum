@@ -7,28 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 class Issue extends Model
 {
     /**
-     * The relationships to always eager-load.
+     * The relationships to always eager-load
      *
      * @var [type]
      */
     protected $with = ['reporter', 'assignee', 'type', 'project'];
 
     /**
-     * Don't auto-apply mass assignment protection.
+     * Don't auto-apply mass assignment protection
      *
      * @var array
      */
     protected $guarded = [];
 
     /**
-     * The accessors to append to the model's array form.
+     * The accessors to append to the model's array form
      *
      * @var array
      */
     protected $appends = [];
 
     /**
-     * Every issue has to be a reporter.
+     * Every issue has to be a reporter
      *
      * @return App\User Reporter user
      */
@@ -38,7 +38,7 @@ class Issue extends Model
     }
 
     /**
-     * Every issue can be a assignee.
+     * Every issue can be a assignee
      *
      * @return App\User Assignee user
      */
@@ -48,7 +48,7 @@ class Issue extends Model
     }
 
     /**
-     * Every issue belongs to a type.
+     * Every issue belongs to a type
      *
      * @return App\IssueType Issue type
      */
@@ -57,8 +57,25 @@ class Issue extends Model
         return $this->belongsTo(IssueType::class, 'type_id');
     }
 
+    /**
+     * Every issue belongs to a project
+     *
+     * @return App\Project  Project
+     */
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * Apply all relevant issue filters.
+     *
+     * @param $query
+     * @param $filters
+     * @return mixed
+     */
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
     }
 }

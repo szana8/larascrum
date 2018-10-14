@@ -1,23 +1,16 @@
 <template>
 	<div>
-		<div class="" v-if="user.authenticated">
-			<sidebar-search-panel></sidebar-search-panel>
+		<sidebar-search-panel v-if="user.authenticated"></sidebar-search-panel>
 
-			<div class="flex">
-				<div class="w-full block md:h-screen h-auto">
-					<navigation></navigation>
-					<div class="flex">
-						<router-view v-if="user.authenticated"></router-view>
-					</div>
+		<div :class="[user.authenticated? 'flex' : '']">
+			<div :class="[user.authenticated ? 'w-full block md:h-screen h-auto' : '']">
+				<navigation v-if="user.authenticated"></navigation>
+				<div :class="[user.authenticated ? 'flex' : '']">
+					<router-view></router-view>
 				</div>
 			</div>
 		</div>
-
-		<div v-else>
-			<!-- <router-view></router-view> -->
-		</div>
 	</div>
-
 
 </template>
 
@@ -25,14 +18,16 @@
     import { mapGetters, mapActions } from 'vuex'
 
     export default {
-        computed: mapGetters({
-            user: 'auth/user',
-        }),
+        computed: {
+			...mapGetters({
+            	user: 'auth/user'
+			})
+		},
 
         methods: {
             ...mapActions({
                 logout: 'auth/logout'
-            })
+			}),
         }
     }
 </script>
