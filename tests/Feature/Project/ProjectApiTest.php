@@ -2,16 +2,15 @@
 
 namespace Tests\Feature\Project;
 
-use App\User;
 use App\Project;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Notification;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
+use Tests\TestCase;
 
 class ProjectApiTest extends TestCase
 {
-	 use RefreshDatabase;
+    use RefreshDatabase;
 
     public function setUp()
     {
@@ -20,9 +19,9 @@ class ProjectApiTest extends TestCase
     }
 
     /** @test */
-    function an_authenticated_user_can_list_projects()
+    public function an_authenticated_user_can_list_projects()
     {
-    	 $this->artisan('passport:install');
+        $this->artisan('passport:install');
 
         $project = create(Project::class, [], 10);
         $user = create(User::class, ['active' => true]);

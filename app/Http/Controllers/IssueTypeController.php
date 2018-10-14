@@ -30,7 +30,8 @@ class IssueTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +42,8 @@ class IssueTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\IssueType  $issueType
+     * @param \App\IssueType $issueType
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(IssueType $issueType)
@@ -52,7 +54,8 @@ class IssueTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\IssueType  $issueType
+     * @param \App\IssueType $issueType
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(IssueType $issueType)
@@ -63,8 +66,9 @@ class IssueTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\IssueType  $issueType
+     * @param \Illuminate\Http\Request $request
+     * @param \App\IssueType           $issueType
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, IssueType $issueType)
@@ -75,7 +79,8 @@ class IssueTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\IssueType  $issueType
+     * @param \App\IssueType $issueType
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(IssueType $issueType)

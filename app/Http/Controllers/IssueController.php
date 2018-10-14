@@ -15,9 +15,10 @@ class IssueController extends Controller
      */
     public function index()
     {
-        $issues = Issue::whereHas('project', function($query) {
-            $query->where("slug", 'MKRT');
+        $issues = Issue::whereHas('project', function ($query) {
+            $query->where('slug', 'MKRT');
         });
+
         return response($issues->get(), 201);
     }
 
