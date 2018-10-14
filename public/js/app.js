@@ -69544,7 +69544,7 @@ if (false) {
 		needsAuth: true
 	}
 }, {
-	path: '/issues/browse/:project/:type',
+	path: '/issues/browse/:project/:by',
 	component: __WEBPACK_IMPORTED_MODULE_0__components___["a" /* IssueDashboard */],
 	name: 'issues_with_project',
 	props: true,
@@ -69619,14 +69619,15 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar_Sidebar__ = __webpack_require__(179);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Sidebar_Sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Sidebar_Sidebar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Cards_Details__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Cards_Details___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Cards_Details__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Filters_QuickFilters__ = __webpack_require__(201);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Filters_QuickFilters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Filters_QuickFilters__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Lists_FilteredIssueList__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Lists_FilteredIssueList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Lists_FilteredIssueList__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Sidebar_Sidebar__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Sidebar_Sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Sidebar_Sidebar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Cards_Details__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Cards_Details___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Cards_Details__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Filters_QuickFilters__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Filters_QuickFilters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Filters_QuickFilters__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Lists_FilteredIssueList__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Lists_FilteredIssueList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Lists_FilteredIssueList__);
 //
 //
 //
@@ -69646,6 +69647,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 
 
@@ -69654,16 +69657,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	components: {
-		Sidebar: __WEBPACK_IMPORTED_MODULE_0__Sidebar_Sidebar___default.a,
-		QuickFilters: __WEBPACK_IMPORTED_MODULE_2__Filters_QuickFilters___default.a,
-		IssueDetails: __WEBPACK_IMPORTED_MODULE_1__Cards_Details___default.a,
-		FilteredIssueList: __WEBPACK_IMPORTED_MODULE_3__Lists_FilteredIssueList___default.a
+		Sidebar: __WEBPACK_IMPORTED_MODULE_1__Sidebar_Sidebar___default.a,
+		QuickFilters: __WEBPACK_IMPORTED_MODULE_3__Filters_QuickFilters___default.a,
+		IssueDetails: __WEBPACK_IMPORTED_MODULE_2__Cards_Details___default.a,
+		FilteredIssueList: __WEBPACK_IMPORTED_MODULE_4__Lists_FilteredIssueList___default.a
 	},
 
 	data: function data() {
 		return {
-			index: null
+			index: null,
+			issues: null
 		};
+	},
+	mounted: function mounted() {
+		this.getIssues();
+		__WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$on('refreshList', this.getIssues);
+	},
+
+
+	methods: {
+		getIssues: function getIssues() {
+			var _this = this;
+
+			this.$nextTick(function () {
+				axios.get('api/issues', { params: {
+						'project': _this.$route.params.project,
+						'by': _this.$route.params.by
+					} }).then(function (response) {
+					_this.issues = response.data;
+				});
+			});
+		}
 	}
 });
 
@@ -70037,7 +70061,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['project'],
+    props: {
+        'project': {
+            type: Object,
+            required: true
+        }
+    },
 
     data: function data() {
         return {
@@ -70051,18 +70080,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
+        /* Show all of the submenu which belongs to the project */
         open: function open(project_id) {
             if (project_id == this.project.id && this.isOpen === true) return this.close();
 
             __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('closeEveryOpenProjectCard');
             this.isOpen = true;
         },
+
+
+        /* Close the project card */
         close: function close() {
             this.isOpen = false;
         },
-        navigate: function navigate(type) {
-            this.$router.replace({ name: 'issues_with_project', params: { project: this.project.slug, type: type } });
+
+
+        /* Select the issue type than filter the list and set the proper url */
+        selectIssueType: function selectIssueType(type) {
+            this.$router.replace({ name: 'issues_with_project', params: { project: this.project.slug, by: type } });
             __WEBPACK_IMPORTED_MODULE_0__event_bus_js__["a" /* EventBus */].$emit('refreshList');
+        },
+
+
+        /* Set the submenu active class depends on the url */
+        isActiveClass: function isActiveClass(param) {
+            if (this.$route.params.project == this.project.slug && this.$route.params.by == param) {
+                return 'border-r-4 border-blue bg-white rounded';
+            }
+            return '';
         }
     }
 });
@@ -70132,7 +70177,7 @@ var render = function() {
                     staticClass: "w-4 h-4 mr-4",
                     attrs: { src: "svg/align-left.svg" }
                   }),
-                  _vm._v("\n\t\t\t\t\t\t\tIssues\n\t\t\t\t\t\t")
+                  _vm._v("\n\t\t\t\t\t\tIssues\n\t\t\t\t\t")
                 ]
               )
             ]),
@@ -70142,11 +70187,12 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "py-2 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer",
+                      "py-2 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer hover:bg-grey-lightest",
+                    class: _vm.isActiveClass("all"),
                     attrs: { tag: "div" },
                     on: {
                       click: function($event) {
-                        _vm.navigate("all")
+                        _vm.selectIssueType("all")
                       }
                     }
                   },
@@ -70172,11 +70218,12 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "py-2 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer",
+                      "py-2 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer hover:bg-grey-lightest",
+                    class: _vm.isActiveClass("my"),
                     attrs: { tag: "div" },
                     on: {
                       click: function($event) {
-                        _vm.navigate("my")
+                        _vm.selectIssueType("my")
                       }
                     }
                   },
@@ -70231,7 +70278,7 @@ var staticRenderFns = [
               staticClass: "w-4 h-4 mr-4",
               attrs: { src: "svg/reports.png" }
             }),
-            _vm._v("\n\t\t\t\t\t\t\tReports\n\t\t\t\t\t\t")
+            _vm._v("\n\t\t\t\t\t\tReports\n\t\t\t\t\t")
           ]
         )
       ])
@@ -70255,7 +70302,7 @@ var staticRenderFns = [
               staticClass: "w-4 h-4 mr-4",
               attrs: { src: "svg/rocket.png" }
             }),
-            _vm._v("\n\t\t\t\t\t\t\tReleases\n\t\t\t\t\t\t")
+            _vm._v("\n\t\t\t\t\t\tReleases\n\t\t\t\t\t")
           ]
         )
       ])
@@ -70279,7 +70326,7 @@ var staticRenderFns = [
               staticClass: "w-4 h-4 mr-4",
               attrs: { src: "svg/copy.png" }
             }),
-            _vm._v("\n\t\t\t\t\t\t\tComponents\n\t\t\t\t\t\t")
+            _vm._v("\n                        Components\n                    ")
           ]
         )
       ])
@@ -70303,7 +70350,7 @@ var staticRenderFns = [
               staticClass: "w-4 h-4 mr-4",
               attrs: { src: "svg/clock.png" }
             }),
-            _vm._v("\n\t\t\t\t\t\t\tTimesheets\n\t\t\t\t\t\t")
+            _vm._v("\n                        Timesheets\n                    ")
           ]
         )
       ])
@@ -70327,7 +70374,7 @@ var staticRenderFns = [
               staticClass: "w-4 h-4 mr-4",
               attrs: { src: "svg/signal.png" }
             }),
-            _vm._v("\n\t\t\t\t\t\t\tTests\n\t\t\t\t\t\t")
+            _vm._v("\n                        Tests\n                    ")
           ]
         )
       ])
@@ -70351,7 +70398,7 @@ var staticRenderFns = [
               staticClass: "w-4 h-4 mr-4",
               attrs: { src: "svg/database.png" }
             }),
-            _vm._v("\n\t\t\t\t\t\t\tAdd-ons\n\t\t\t\t\t\t")
+            _vm._v("\n                        Add-ons\n                    ")
           ]
         )
       ])
@@ -71780,11 +71827,11 @@ exports.push([module.i, "\n.scroll-area[data-v-4661c0af] {\n  height: 760px;\n}\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Cards_Issue__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Cards_Issue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Cards_Issue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_perfect_scrollbar__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_perfect_scrollbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue2_perfect_scrollbar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Cards_Issue__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Cards_Issue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Cards_Issue__);
 //
 //
 //
@@ -71800,8 +71847,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
+    props: {
+        'issues': {
+            type: Object,
+            required: true
+        }
+    },
+
     components: {
-        Issue: __WEBPACK_IMPORTED_MODULE_0__Cards_Issue___default.a,
+        Issue: __WEBPACK_IMPORTED_MODULE_2__Cards_Issue___default.a,
         PerfectScrollbar: __WEBPACK_IMPORTED_MODULE_1_vue2_perfect_scrollbar__["PerfectScrollbar"]
     },
 
@@ -71811,28 +71865,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 maxScrollbarLength: 60
             },
             scrollPosition: 100,
-            issues: null
+            selectedIssue: null
         };
-    },
-    mounted: function mounted() {
-        this.getIssues();
-        __WEBPACK_IMPORTED_MODULE_2__event_bus_js__["a" /* EventBus */].$on('refreshList', this.getIssues);
     },
 
 
     methods: {
-        getIssues: function getIssues() {
-            var _this = this;
-
-            axios.get('api/issues', { params: {
-                    'project': this.$route.params.project,
-                    'type': this.$route.params.type ? this.$route.params.type : 'all'
-                } }).then(function (response) {
-                _this.issues = response.data;
-            });
+        setSelectedIssue: function setSelectedIssue(id) {
+            this.selectedIssue = id;
         }
     }
-
 });
 
 /***/ }),
@@ -71926,12 +71968,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {},
 
     props: {
         'issue': {
             type: Object,
             required: true
+        },
+        'selectedIssue': {
+            type: Number
         }
     },
 
@@ -71968,8 +72012,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
-        openIssue: function openIssue() {
-            this.$router.replace({ name: 'issue_by_slug', params: { project: this.issue.project.slug, slug: this.issue.id } });
+        openIssue: function openIssue(id) {
+            this.$emit('selected', id);
         },
         getEstimateTime: function getEstimateTime() {
             if (!this.issue.original_estimate_time || !this.issue.remaining_estimate_time) return;
@@ -72260,12 +72304,16 @@ var render = function() {
     {
       staticClass: "my-4 bg-grey-lighter rounded p-4 border-l-4 w-90",
       class: [
-        this.issue.id == this.$route.params.slug
+        this.issue.id == this.selectedIssue
           ? "bg-white shadow"
           : "bg-grey-lighter shadow-md hover:bg-grey-lightest hover:shadow-lg cursor-pointer",
         "border-" + this.issue.type.color_code
       ],
-      on: { click: _vm.openIssue }
+      on: {
+        click: function($event) {
+          _vm.openIssue(_vm.issue.id)
+        }
+      }
     },
     [
       _c("div", { staticClass: "flex" }, [
@@ -72371,7 +72419,11 @@ var render = function() {
         "perfect-scrollbar",
         { staticClass: "scroll-area mx-2", attrs: { settings: _vm.settings } },
         _vm._l(_vm.issues, function(issue) {
-          return _c("issue", { key: issue.id, attrs: { issue: issue } })
+          return _c("issue", {
+            key: issue.id,
+            attrs: { issue: issue, selectedIssue: _vm.selectedIssue },
+            on: { selected: _vm.setSelectedIssue }
+          })
         })
       )
     ],
@@ -72406,7 +72458,12 @@ var render = function() {
         [
           _c("quick-filters"),
           _vm._v(" "),
-          _c("div", { staticClass: "ml-4" }, [_c("filtered-issue-list")], 1)
+          _c(
+            "div",
+            { staticClass: "ml-4" },
+            [_c("filtered-issue-list", { attrs: { issues: _vm.issues } })],
+            1
+          )
         ],
         1
       ),

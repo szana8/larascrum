@@ -20,7 +20,7 @@ trait IssueFilterable
         $issues = Issue::latest()->filter($filters);
 
         if ($project->exists) {
-            $issues->where('category_id', $project->id);
+            $issues->where('project_id', $project->id);
         }
         return $issues->get();
     }

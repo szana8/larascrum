@@ -16,7 +16,6 @@ $factory->define(\App\Project::class, function (Faker $faker) {
         },
         'owner_id' => function () {
             return factory('App\User')->create()->id;
-        },
-        'color_code' => $faker->randomElement(['blue', 'red', 'green', 'blue', 'purple', 'orange', 'teal']),
+        }
     ];
 });

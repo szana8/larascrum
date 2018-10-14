@@ -1,5 +1,5 @@
 <template>
-    <div class="my-4 bg-grey-lighter rounded p-4 border-l-4 w-90" :class="[this.issue.id == this.$route.params.slug ? 'bg-white shadow' : 'bg-grey-lighter shadow-md hover:bg-grey-lightest hover:shadow-lg cursor-pointer', 'border-' + this.issue.type.color_code]" @click="openIssue">
+    <div class="my-4 bg-grey-lighter rounded p-4 border-l-4 w-90" :class="[this.issue.id == this.selectedIssue ? 'bg-white shadow' : 'bg-grey-lighter shadow-md hover:bg-grey-lightest hover:shadow-lg cursor-pointer', 'border-' + this.issue.type.color_code]" @click="openIssue(issue.id)">
         <div class="flex">
            <img :src="issue.reporter.avatar_url" class="block rounded-full mb-4 w-8 h-8">
             <div class="ml-4 w-full">
@@ -34,21 +34,21 @@
     import moment from 'moment';
 
     export default {
-        components: {
-
-        },
 
         props: {
             'issue': {
                 type: Object,
                 required: true,
+            },
+            'selectedIssue': {
+                type: Number
             }
         },
 
         data() {
             return {
                 selected: null,
-                estimateTime: null
+                estimateTime: null,
             }
         },
 
@@ -82,8 +82,8 @@
         },
 
         methods: {
-            openIssue() {
-                this.$router.replace({name: 'issue_by_slug', params: {project: this.issue.project.slug, slug: this.issue.id}})
+            openIssue(id) {
+                this.$emit('selected', id);
             },
 
             getEstimateTime() {

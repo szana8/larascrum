@@ -1,17 +1,24 @@
 <template>
     <div>
         <perfect-scrollbar class="scroll-area mx-2" :settings="settings">
-            <issue v-for="issue in issues" :key="issue.id" :issue="issue"></issue>
+            <issue v-for="issue in issues" :key="issue.id" :issue="issue" :selectedIssue="selectedIssue" @selected="setSelectedIssue"></issue>
         </perfect-scrollbar>
     </div>
 </template>
 <script>
+    import { EventBus } from '../../../../event-bus.js'
+    import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
+
     import Issue from './Cards/Issue'
 
-    import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
-    import { EventBus } from '../../../../event-bus.js'
-
     export default {
+
+        props: {
+            'issues': {
+                type: Object,
+                required: true
+            }
+        },
 
         components: {
             Issue,
@@ -24,26 +31,15 @@
                     maxScrollbarLength: 60
                 },
                 scrollPosition: 100,
-                issues: null
+                selectedIssue: null
             }
-        },
-
-        mounted() {
-           this.getIssues();
-            EventBus.$on('refreshList', this.getIssues);
         },
 
         methods: {
-            getIssues() {
-                 axios.get('api/issues', { params: {
-                    'project': this.$route.params.project,
-                    'type': this.$route.params.type ? this.$route.params.type : 'all'
-                }}).then((response) => {
-                    this.issues = response.data
-                });
+            setSelectedIssue(id) {
+                this.selectedIssue = id
             }
         }
-
     }
 </script>
 

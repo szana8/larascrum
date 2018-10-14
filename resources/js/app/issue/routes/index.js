@@ -21,7 +21,7 @@ export default [
 		}
 	},
 	{
-		path: '/issues/browse/:project/:type',
+		path: '/issues/browse/:project/:by',
 		component: IssueDashboard,
 		name: 'issues_with_project',
 		props: true,
