@@ -1,9 +1,10 @@
 <?php
 
-use App\Issue;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
+use App\User;
 
-class IssueSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +13,6 @@ class IssueSeeder extends Seeder
      */
     public function run()
     {
-        factory(Issue::class, 200)->create();
+        factory(User::class, 10)->create();
     }
 }

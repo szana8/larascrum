@@ -126,7 +126,7 @@
 
         methods: {
             ...mapActions({
-                login: 'auth/register'
+                register: 'auth/register'
             }),
 
             submit() {
@@ -134,7 +134,7 @@
                 this.error = null;
                 this.errors = [];
 
-                this.login({
+                this.register({
                     payload: {
                         name: this.name,
                         email: this.email,

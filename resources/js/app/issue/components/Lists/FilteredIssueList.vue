@@ -1,11 +1,15 @@
 <template>
     <div>
-        <perfect-scrollbar class="scroll-area mx-2" :settings="settings">
-            <issue v-for="issue in issues" :key="issue.id" :issue="issue" :selectedIssue="selectedIssue" @selected="setSelectedIssue"></issue>
+        <perfect-scrollbar ref="ps" class="scroll-area mx-2" :settings="settings" @ps-y-reach-end="loadMoreResults">
+            <div id="issue-scroll">
+                <issue v-for="issue in issues" :key="issue.id" :issue="issue" :selectedIssue="selectedIssue" @selected="setSelectedIssue"></issue>
+                <div v-if="isMoreResultExists" class="my-8 text-center">Loading more...</div>
+            </div>
         </perfect-scrollbar>
     </div>
 </template>
 <script>
+    import { throttle } from 'lodash'
     import { EventBus } from '../../../../event-bus.js'
     import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
 
@@ -15,8 +19,12 @@
 
         props: {
             'issues': {
-                type: Object,
-                required: true
+                type: Array
+            },
+
+            'isMoreResultExists': {
+                type: Boolean,
+                default: false
             }
         },
 
@@ -27,18 +35,27 @@
 
         data() {
             return {
+                scrollPosition: 100,
+                selectedIssue: null,
                 settings: {
                     maxScrollbarLength: 60
                 },
-                scrollPosition: 100,
-                selectedIssue: null
             }
         },
 
         methods: {
+            // Set the selected issue, change the style and load the details
             setSelectedIssue(id) {
                 this.selectedIssue = id
-            }
+            },
+
+            // Load more issues if it is possible for the infinite loop
+            loadMoreResults: throttle(function (e) {
+                if (this.isMoreResultExists) {
+                    EventBus.$emit('loadMore')
+                    this.$refs.ps.update()
+                }
+            }, 500, { 'trailing': false })
         }
     }
 </script>

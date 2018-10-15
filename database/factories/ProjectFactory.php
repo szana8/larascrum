@@ -15,7 +15,7 @@ $factory->define(\App\Project::class, function (Faker $faker) {
             return \Illuminate\Support\Facades\Storage::url('public/icons/project/'.$type.'.svg');
         },
         'owner_id' => function () {
-            return factory('App\User')->create()->id;
+            return User::inRandomOrder()->first()->id;
         }
     ];
 });

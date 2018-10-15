@@ -35,15 +35,10 @@
 
     export default {
 
-        props: {
-            'issue': {
-                type: Object,
-                required: true,
-            },
-            'selectedIssue': {
-                type: Number
-            }
-        },
+        props: [
+            'issue',
+            'selectedIssue'
+        ],
 
         data() {
             return {

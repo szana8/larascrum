@@ -22,6 +22,6 @@ trait IssueFilterable
         if ($project->exists) {
             $issues->where('project_id', $project->id);
         }
-        return $issues->get();
+        return $issues->paginate(15);
     }
 }
