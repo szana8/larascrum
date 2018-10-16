@@ -47,6 +47,7 @@
             // Set the selected issue, change the style and load the details
             setSelectedIssue(id) {
                 this.selectedIssue = id
+                this.$emit('selected', id);
             },
 
             // Load more issues if it is possible for the infinite loop

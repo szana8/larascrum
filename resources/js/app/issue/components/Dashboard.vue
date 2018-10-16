@@ -10,12 +10,12 @@
 			<div class="w-1/4">
 				<quick-filters></quick-filters>
 				<div class="ml-4">
-					<filtered-issue-list :issues="issues" :is-more-result-exists="isMoreResult"></filtered-issue-list>
+					<filtered-issue-list :issues="issues" :is-more-result-exists="isMoreResult" @selected="refreshDetails"></filtered-issue-list>
 				</div>
 			</div>
 
 			<div class="w-3/4">
-				<issue-details></issue-details>
+				<issue-details :issue-id="issue" ref="child"></issue-details>
 			</div>
 
 		</div>
@@ -44,7 +44,8 @@
 			return {
 				page: 1,
 				lastPage: 1,
-				issues: null
+				issues: null,
+				issue: null,
 			}
 		},
 
@@ -110,6 +111,9 @@
 				this.lastPage = 1;
 			},
 
+			refreshDetails(id) {
+				this.issue = id
+			}
         }
 	}
 </script>

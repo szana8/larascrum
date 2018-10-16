@@ -11,7 +11,7 @@ class Issue extends Model
      *
      * @var [type]
      */
-    protected $with = ['reporter', 'assignee', 'type', 'project'];
+    protected $with = ['reporter', 'assignee', 'type', 'project', 'comments'];
 
     /**
      * Don't auto-apply mass assignment protection
@@ -65,6 +65,16 @@ class Issue extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * An issue could have many comments.
+     *
+     * @return App\Comment  Comments
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     /**

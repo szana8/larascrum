@@ -73,13 +73,13 @@
 
 				<div class="flex mt-4 mb-10">
 
-					<button class="bg-blue-darkest text-sm text-white rounded-full py-1 w-24 mx-4">Comments</button>
+					<button class="focus:outline-none bg-blue-darkest text-sm text-white rounded-full py-1 w-24 mx-4">Comments</button>
 
-					<button class="bg-white shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-blue hover:text-white mx-4">Work Log</button>
+					<button class="focus:outline-none bg-white shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-blue hover:text-white mx-4">Work Log</button>
 
-					<button class="bg-white shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-blue hover:text-white mx-4">History</button>
+					<button class="focus:outline-none bg-white shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-blue hover:text-white mx-4">History</button>
 
-					<button class="bg-white shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-blue hover:text-white mx-4">Activity</button>
+					<button class="focus:outline-none bg-white shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-blue hover:text-white mx-4">Activity</button>
 
 				</div>
 
@@ -110,12 +110,19 @@
 			PerfectScrollbar,
 		},
 
+		props: {
+			'issueId': {
+				type: Number
+			}
+		},
+
 		data() {
 			return {
 				settings: {
 					maxScrollbarLength: 60
 				},
-				showMore: false
+				showMore: false,
+				issue: null,
 			}
 		},
 
@@ -125,8 +132,18 @@
 			}
 		},
 
+		mounted() {
+			this.loadDetails();
+		},
+
 		methods: {
-			//
+
+			loadDetails() {
+				axios.get('/issues/' + this.issueId).then((response) => {
+					this.issue = response.data
+				})
+			}
+
 		}
 
 	}
