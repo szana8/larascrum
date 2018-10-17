@@ -1,0 +1,57 @@
+<template>
+    <div class="fixed z-40 pin overflow-auto bg-smoke-dark flex" v-if="isActive">
+        <div class="w-3/5 fixed pin-b pin-x mx-auto flex-col flex bg-white border-t border-r border-l border-blue p-6 shadow-md rounded-t">
+            <div class="w-full py-4 text-grey-darker border-b border-grey-light font-bold">
+                <svg version="1.1" viewBox="0 0 384 384" class="w-4 h-4 text-grey" style="enable-background:new 0 0 384 384;" xml:space="preserve">
+                    <path d="M149.333,117.333V32L0,181.333l149.333,149.333V243.2C256,243.2,330.667,277.333,384,352
+                        C362.667,245.333,298.667,138.667,149.333,117.333z" fill="currentColor" />
+                </svg>
+                Reply to <span class="text-blue uppercase">{{ this.title }}</span>
+            </div>
+            <div class="py-2 border-b border-grey-light">
+                <textarea class="w-full h-32 focus:outline-none text-grey-dark resize-none" placeholder="Here is the thing" v-model="reply"></textarea>
+            </div>
+            <div class="text-grey-darker py-4 flex justify-between">
+                <span class="text-xs mt-2">Use Markdown with <a href="#" class="text-blue no-underline">Github flavored</a> code blocks.</span>
+                <div class="flex">
+                    <button class="bg-white text-grey-darker border border-grey-dark rounded-full px-4 py-2 text-sm  hover:border-blue hover:text-blue uppercase font-semibold focus:outline-none" @click="closeReply">Cancel</button>
+                    <button class="bg-blue text-grey-lightest border border-blue rounded-full px-4 py-2 text-sm hover:bg-blue-light hover:border-blue-light uppercase mx-2 font-semibold focus:outline-none">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import { EventBus } from '../../../../event-bus.js'
+
+    export default {
+        data() {
+            return {
+                isActive: false,
+                reply: null,
+                id: null,
+                title: null
+            }
+        },
+
+        mounted() {
+            EventBus.$on('openReply', this.openReply);
+        },
+
+        methods: {
+            openReply(id, title) {
+                this.id = id;
+                this.title = title;
+                this.isActive = true;
+            },
+
+            closeReply() {
+                this.isActive = false;
+                this.reply = null;
+                this.id = null;
+                this.title = null;
+            }
+        }
+    }
+</script>

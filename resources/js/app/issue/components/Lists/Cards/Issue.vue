@@ -32,6 +32,7 @@
 
 <script>
     import moment from 'moment';
+    import { EventBus } from '../../../../../event-bus.js'
 
     export default {
 
@@ -78,7 +79,7 @@
 
         methods: {
             openIssue(id) {
-                this.$emit('selected', id);
+                EventBus.$emit('issueSelected', id);
             },
 
             getEstimateTime() {

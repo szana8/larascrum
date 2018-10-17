@@ -3,8 +3,8 @@
 		<h4 class="text-grey-darkest p-4">Priority</h4>
 		<div class="flex flex-wrap px-4 ml-4">
 			<filter-button  v-for="filter in filters"
-							:name="filter.name"
-							:key="filter.name"
+							:filter="filter"
+							:key="filter.id"
 							:active="activeFilter"
 							@updated="setFilter">
 			</filter-button>
@@ -22,25 +22,31 @@
 
 		data() {
 			return {
-				activeFilter: 'All2',
+				activeFilter: 0,
 				filters: [
 					{
-						name: 'All'
+						name: 'All',
+						id: 0
 					},
 					{
-						name: 'Blocker'
+						name: 'Blocker',
+						id: 1
 					},
 					{
-						name: 'Critical'
+						name: 'Critical',
+						id: 2
 					},
 					{
-						name: 'Major'
+						name: 'Major',
+						id: 3
 					},
 					{
-						name: 'Minor'
+						name: 'Minor',
+						id: 4
 					},
 					{
-						name: 'Trivial'
+						name: 'Trivial',
+						id: 5
 					},
 				]
 			}
@@ -51,12 +57,10 @@
 		},
 
 		methods: {
-			isFilterActive(filter) {
-				return this.activeFilter === filter
-			},
 
 			setFilter(filter) {
 				this.activeFilter = filter
+				this.$emit('updated', filter)
 			}
 		}
 	}

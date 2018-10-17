@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Issue;
-use App\Project;
+use App\Priority;
 use Illuminate\Http\Request;
-use App\Filters\IssueFilters;
-use App\Traits\IssueFilterable;
 
-class IssueController extends Controller
+class PriorityController extends Controller
 {
-    use IssueFilterable;
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Project $project, IssueFilters $filters)
+    public function index()
     {
-        $issues = $this->getFilteredIssues($project, $filters);
-
-        return response($issues, 201);
+        //
     }
 
     /**
@@ -37,8 +30,7 @@ class IssueController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -49,23 +41,21 @@ class IssueController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Issue $issue
-     *
+     * @param  \App\Priority  $priority
      * @return \Illuminate\Http\Response
      */
-    public function show(Issue $issue)
+    public function show(Priority $priority)
     {
-        return response($issue->load(['comments', 'priority']), 201);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Issue $issue
-     *
+     * @param  \App\Priority  $priority
      * @return \Illuminate\Http\Response
      */
-    public function edit(Issue $issue)
+    public function edit(Priority $priority)
     {
         //
     }
@@ -73,12 +63,11 @@ class IssueController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Issue               $issue
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Priority  $priority
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Issue $issue)
+    public function update(Request $request, Priority $priority)
     {
         //
     }
@@ -86,11 +75,10 @@ class IssueController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Issue $issue
-     *
+     * @param  \App\Priority  $priority
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Issue $issue)
+    public function destroy(Priority $priority)
     {
         //
     }

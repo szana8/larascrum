@@ -7,28 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 class Issue extends Model
 {
     /**
-     * The relationships to always eager-load
+     * The relationships to always eager-load.
      *
      * @var [type]
      */
-    protected $with = ['reporter', 'assignee', 'type', 'project', 'comments'];
+    protected $with = ['reporter', 'assignee', 'type', 'project'];
 
     /**
-     * Don't auto-apply mass assignment protection
+     * Don't auto-apply mass assignment protection.
      *
      * @var array
      */
     protected $guarded = [];
 
     /**
-     * The accessors to append to the model's array form
+     * The accessors to append to the model's array form.
      *
      * @var array
      */
     protected $appends = [];
 
     /**
-     * Every issue has to be a reporter
+     * Every issue has to be a reporter.
      *
      * @return App\User Reporter user
      */
@@ -38,7 +38,7 @@ class Issue extends Model
     }
 
     /**
-     * Every issue can be a assignee
+     * Every issue can be a assignee.
      *
      * @return App\User Assignee user
      */
@@ -48,7 +48,7 @@ class Issue extends Model
     }
 
     /**
-     * Every issue belongs to a type
+     * Every issue belongs to a type.
      *
      * @return App\IssueType Issue type
      */
@@ -58,7 +58,7 @@ class Issue extends Model
     }
 
     /**
-     * Every issue belongs to a project
+     * Every issue belongs to a project.
      *
      * @return App\Project  Project
      */
@@ -75,6 +75,16 @@ class Issue extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * An issue belongs to a priority.
+     *
+     * @return App\Priority     Priority
+     */
+    public function priority()
+    {
+        return $this->belongsTo(Priority::class, 'priority_id');
     }
 
     /**

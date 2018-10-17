@@ -8,14 +8,16 @@
 		<div class="w-5/6 flex">
 
 			<div class="w-1/4">
-				<quick-filters></quick-filters>
+				<quick-filters @updated="updateQuickFilter"></quick-filters>
+
 				<div class="ml-4">
-					<filtered-issue-list :issues="issues" :is-more-result-exists="isMoreResult" @selected="refreshDetails"></filtered-issue-list>
+					<filtered-issue-list :issues="issues" :is-more-result-exists="isMoreResult"></filtered-issue-list>
 				</div>
+
 			</div>
 
 			<div class="w-3/4">
-				<issue-details :issue-id="issue" ref="child"></issue-details>
+				<issue-details :issue-id="issueId"></issue-details>
 			</div>
 
 		</div>
@@ -28,7 +30,7 @@
 	import { EventBus } from '../../../event-bus.js'
 
 	import Sidebar from './Sidebar/Sidebar'
-	import IssueDetails from './Cards/Details'
+	import IssueDetails from './Details/Details'
 	import QuickFilters from './Filters/QuickFilters'
 	import FilteredIssueList from './Lists/FilteredIssueList'
 
@@ -45,7 +47,8 @@
 				page: 1,
 				lastPage: 1,
 				issues: null,
-				issue: null,
+				issueId: null,
+				quickFilter: null,
 			}
 		},
 
@@ -77,11 +80,15 @@
 						payload: {
 							project: this.$route.params.project,
 							by: this.$route.params.by,
+							priority: this.quickFilter,
 							page: this.page
 						}
 					}).then((response) => {
 						this.lastPage = response.last_page
 						this.issues = response.data
+
+						if (response.data[0])
+							EventBus.$emit('issueSelected', response.data[0].id);
 					})
 				})
 			},
@@ -96,6 +103,7 @@
 						payload: {
 							project: this.$route.params.project,
 							by: this.$route.params.by,
+							priority: this.quickFilter,
 							page: this.page
 						}
 					}).then((response) => {
@@ -111,8 +119,23 @@
 				this.lastPage = 1;
 			},
 
-			refreshDetails(id) {
-				this.issue = id
+			updateQuickFilter(filter) {
+				this.quickFilter = filter
+
+				this.fetchIssues({
+					payload: {
+						project: this.$route.params.project,
+						by: this.$route.params.by,
+						priority: this.quickFilter,
+						page: this.page
+					}
+				}).then((response) => {
+					this.lastPage = response.last_page
+					this.issues = response.data
+
+					if (response.data[0])
+						EventBus.$emit('issueSelected', response.data[0].id);
+				})
 			}
         }
 	}

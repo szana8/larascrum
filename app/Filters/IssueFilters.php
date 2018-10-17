@@ -12,7 +12,7 @@ class IssueFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['by', 'project'];
+    protected $filters = ['by', 'project', 'priority'];
 
     /**
      * Filter the query by the given username.
@@ -36,8 +36,25 @@ class IssueFilters extends Filters
      */
     public function project($projectSlug)
     {
+        if (!$projectSlug)
+            return $this->builder;
+
         $project = Project::where('slug', $projectSlug)->firstOrFail();
 
         return $this->builder->where('project_id', $project->id);
+    }
+
+    /**
+     * Filter the query by the givven priority
+     *
+     * @param [type] $priority_id
+     * @return void
+     */
+    public function priority($priority_id)
+    {
+        if ($priority_id == 0)
+            return $this->builder;
+
+        return $this->builder->where('priority_id', $priority_id);
     }
 }

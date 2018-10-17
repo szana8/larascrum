@@ -28,7 +28,7 @@ Route::group(['namespace' => 'Auth', 'middleware' => 'api', 'prefix' => 'passwor
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/issues', 'IssueController@index')->name('issues');
-    Route::get('/issue/{id}', 'IssueController@show');
-    Route::get('/issues/{project}/{type}', 'IssueController@index');
+    Route::get('/issues/{issue}', 'IssueController@show');
+    Route::get('/issues/{project}/{filters}', 'IssueController@index');
     Route::get('/projects', 'ProjectController@index')->name('projects');
 });

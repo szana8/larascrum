@@ -1,11 +1,16 @@
 <template>
     <div>
-        <perfect-scrollbar ref="ps" class="scroll-area mx-2" :settings="settings" @ps-y-reach-end="loadMoreResults">
-            <div id="issue-scroll">
-                <issue v-for="issue in issues" :key="issue.id" :issue="issue" :selectedIssue="selectedIssue" @selected="setSelectedIssue"></issue>
-                <div v-if="isMoreResultExists" class="my-8 text-center">Loading more...</div>
-            </div>
-        </perfect-scrollbar>
+        <div v-if="this.issues && this.issues.length > 0">
+            <perfect-scrollbar ref="ps" class="scroll-area mx-2" :settings="settings" @ps-y-reach-end="loadMoreResults">
+                <div id="issue-scroll">
+                    <issue v-for="issue in issues" :key="issue.id" :issue="issue" :selectedIssue="selectedIssue"></issue>
+                    <div v-if="isMoreResultExists" class="my-8 text-center">Loading more...</div>
+                </div>
+            </perfect-scrollbar>
+        </div>
+        <div v-else>
+            <div class="text-center mt-4">There is no result with these criterias...</div>
+        </div>
     </div>
 </template>
 <script>
@@ -43,11 +48,14 @@
             }
         },
 
+        mounted() {
+            EventBus.$on('issueSelected', this.setSelectedIssue)
+        },
+
         methods: {
             // Set the selected issue, change the style and load the details
             setSelectedIssue(id) {
                 this.selectedIssue = id
-                this.$emit('selected', id);
             },
 
             // Load more issues if it is possible for the infinite loop
