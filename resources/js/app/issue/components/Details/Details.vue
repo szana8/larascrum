@@ -2,7 +2,7 @@
 	<div>
 		<div class="flex overflow:hidden" v-if="this.issue && !this.loading">
 			<div class="w-2/3">
-				<perfect-scrollbar class="scroll-area w-full mt-2 pr-4" :settings="settings">
+				<perfect-scrollbar @ps-scroll-y="fireScrollEvent" class="scroll-area w-full mt-2 pr-4" :settings="settings">
 					<div class="bg-white rounded">
 						<div class="border-b border-grey-lighter">
 							<div class="flex justify-between">
@@ -74,7 +74,7 @@
 
 
 						<div class="">
-							<button class="focus:outline-none bg-blue shadow text-white text-sm rounded-full py-1 w-24 hover:bg-blue-light hover:text-white mx-4 font-semibold tracking-wide" @click="openReply">
+							<button id="js-issue-reply-button" class="focus:outline-none bg-blue shadow text-white text-sm rounded-full py-1 w-24 hover:bg-blue-dark hover:text-white mx-4 font-semibold tracking-wide" @click="openReply">
 								 <svg version="1.1" viewBox="0 0 384 384" class="w-3 h-3 text-white" style="enable-background:new 0 0 384 384;" xml:space="preserve">
 									<path d="M149.333,117.333V32L0,181.333l149.333,149.333V243.2C256,243.2,330.667,277.333,384,352
 										C362.667,245.333,298.667,138.667,149.333,117.333z" fill="currentColor" />
@@ -86,7 +86,7 @@
 					</div>
 
 					<div class="mt-4">
-						<comments :comments="this.issue.comments"></comments>
+						<comments :issue="this.issue"></comments>
 						<div class="h-32"></div>
 					</div>
 				</perfect-scrollbar>
@@ -153,6 +153,10 @@
 
 			openReply() {
 				EventBus.$emit('openReply', this.issue.id, this.issue.title);
+			},
+
+			fireScrollEvent() {
+				EventBus.$emit('scrollIssue');
 			}
 
 		}

@@ -5,7 +5,7 @@
 		<div :class="[user.authenticated? 'flex' : '']">
 			<div :class="[user.authenticated ? 'w-full block md:h-screen h-auto' : '']">
 				<navigation v-if="user.authenticated"></navigation>
-				<div :class="[user.authenticated ? 'flex' : '']">
+				<div :class="[user.authenticated ? 'flex' : '']" id="container">
 					<router-view></router-view>
 				</div>
 			</div>
