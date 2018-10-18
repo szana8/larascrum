@@ -4,7 +4,6 @@ namespace Tests\Feature\Issue;
 
 use App\Issue;
 use App\User;
-use App\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
@@ -24,21 +23,21 @@ class ReadIssueTest extends TestCase
     {
         $t = true;
         $this->assertTrue($t);
-       /*  $this->artisan('passport:install');
+        /*  $this->artisan('passport:install');
 
-        factory(User::class, 10)->create();
+         factory(User::class, 10)->create();
 
-        $issue = create(Issue::class, [], 10);
-        $user = create(User::class, ['active' => true]);
+         $issue = create(Issue::class, [], 10);
+         $user = create(User::class, ['active' => true]);
 
-        $userResponse = $this->post(route('login'), [
-            'email' => $user->email,
-            'password' => 'secret',
-        ]);
+         $userResponse = $this->post(route('login'), [
+             'email' => $user->email,
+             'password' => 'secret',
+         ]);
 
-        $response = $this->get('/issues', ['Authorization' => 'Bearer ' . json_decode($userResponse->getContent())->access_token]);
+         $response = $this->get('/issues', ['Authorization' => 'Bearer ' . json_decode($userResponse->getContent())->access_token]);
 
-        $response->assertSuccessful(); */
+         $response->assertSuccessful(); */
         //$this->assertEquals(count(json_decode($response->getContent())), $issue->count());
     }
 

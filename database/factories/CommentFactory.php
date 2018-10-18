@@ -1,8 +1,8 @@
 <?php
 
-use Faker\Generator as Faker;
 use App\Issue;
 use App\User;
+use Faker\Generator as Faker;
 
 $factory->define(App\Comment::class, function (Faker $faker) {
     return [
@@ -12,8 +12,8 @@ $factory->define(App\Comment::class, function (Faker $faker) {
         'user_id' => function () {
             return User::inRandomOrder()->first()->id;
         },
-        'text' => $faker->paragraph(2),
-        'parent_id' => null,
-        'created_at' => $faker->dateTime()
+        'text'       => $faker->paragraph(2),
+        'parent_id'  => null,
+        'created_at' => $faker->dateTime(),
     ];
 });

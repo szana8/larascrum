@@ -60,7 +60,7 @@ class Issue extends Model
     /**
      * Every issue belongs to a project.
      *
-     * @return App\Project  Project
+     * @return App\Project Project
      */
     public function project()
     {
@@ -70,7 +70,7 @@ class Issue extends Model
     /**
      * An issue could have many comments.
      *
-     * @return App\Comment  Comments
+     * @return App\Comment Comments
      */
     public function comments()
     {
@@ -80,7 +80,7 @@ class Issue extends Model
     /**
      * An issue belongs to a priority.
      *
-     * @return App\Priority     Priority
+     * @return App\Priority Priority
      */
     public function priority()
     {
@@ -92,6 +92,7 @@ class Issue extends Model
      *
      * @param $query
      * @param $filters
+     *
      * @return mixed
      */
     public function scopeFilter($query, $filters)

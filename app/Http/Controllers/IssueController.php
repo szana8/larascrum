@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\IssueFilters;
 use App\Issue;
 use App\Project;
-use Illuminate\Http\Request;
-use App\Filters\IssueFilters;
 use App\Traits\IssueFilterable;
+use Illuminate\Http\Request;
 
 class IssueController extends Controller
 {

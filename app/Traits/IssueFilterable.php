@@ -2,17 +2,18 @@
 
 namespace App\Traits;
 
+use App\Filters\IssueFilters;
 use App\Issue;
 use App\Project;
-use App\Filters\IssueFilters;
 
 trait IssueFilterable
 {
     /**
      * Fetch all relevant issues.
      *
-     * @param Category $category
+     * @param Category     $category
      * @param IssueFilters $filters
+     *
      * @return mixed
      */
     public function getFilteredIssues(Project $project, IssueFilters $filters)

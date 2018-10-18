@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     /**
-     * The relationships to always eager-load
+     * The relationships to always eager-load.
      *
      * @var [type]
      */
@@ -16,7 +16,7 @@ class Comment extends Model
     /**
      * A comment has an owner.
      *
-     * @return App\User     User
+     * @return App\User User
      */
     public function owner()
     {
