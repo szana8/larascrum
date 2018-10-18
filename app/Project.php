@@ -33,10 +33,10 @@ class Project extends Model
      *
      * @return App\Issue Collection of Issue objeczs
      */
-    /* public function issues()
+    public function issues()
     {
         return $this->hasMany(Issue::class);
-    } */
+    }
 
     /**
      * Count the issues which belongs to the project.
@@ -57,5 +57,15 @@ class Project extends Model
     public function getMyIssuesInThisProjectCountAttribute()
     {
         return Issue::where('project_id', $this->id)->where('assignee_id', Auth::id())->count();
+    }
+
+    /**
+     * Get the route key name.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

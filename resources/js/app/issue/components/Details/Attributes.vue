@@ -10,46 +10,23 @@
 			</div>
 		</div>
 
-		<div class="mt-8 border-b-2 border-grey pb-2">
-			<h4 class="text-grey-darkest">Attachments</h4>
-			<div class="bg-white border border-dashed border-grey py-12 mt-8 text-center font-semibold text-grey-dark">
-				Drop files or <a href="#" class="no-underline text-blue hover:text-blue-light">browse</a>
-			</div>
-
-			<div class="mt-12">
-				<div class="flex mb-4">
-					<img src="storage/icons/file.png" class="w-8 h-8">
-					<div class="ml-2 text-sm">
-						<a href="#" class="text-blue no-underline font-semibold hover:text-blue-light">Specification.doc</a>
-						<div class="text-grey">12.01.18</div>
-					</div>
-				</div>
-
-				<div class="flex mb-4">
-					<img src="storage/icons/image.png" class="w-8 h-8">
-					<div class="ml-2 text-sm">
-						<a href="#" class="text-blue no-underline font-semibold hover:text-blue-light">HodieConcept.png</a>
-						<div class="text-grey">12.01.18</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<attachments></attachments>
 
 		<div class="mt-4 border-b-2 border-grey pb-2">
 			<h4 class="mb-8 text-grey-darkest">Details</h4>
 			<div class="flex">
 				<div class="text-grey-dark text-sm w-1/4">Type</div>
 				<div class="flex w-3/4">
-					<img src="storage/icons/improvement.png" class="mr-2">
-					<h5 class="inline-block text-grey-darkest">Improvements</h5>
+					<img :src="this.issue.type.icon" :alt="this.issue.type.name" class="mr-2">
+					<h5 class="inline-block text-grey-darkest">{{ this.issue.type.name }}</h5>
 				</div>
 			</div>
 
 			<div class="flex my-4">
 				<div class="text-grey-dark text-sm w-1/4">Priority</div>
 				<div class="flex w-3/4">
-					<div class="mr-1 w-4 h-4 bg-orange rounded-full inline-block mr-2"></div>
-					<h5 class="inline-block text-grey-darkest">Normal</h5>
+					<img :src="this.issue.priority.icon" :alt="this.issue.priority.name" class="mr-2">
+					<h5 class="inline-block text-grey-darkest">{{ this.issue.priority.name }}</h5>
 				</div>
 			</div>
 
@@ -80,16 +57,16 @@
 			<div class="flex my-5">
 				<h4 class="text-grey font-normal text-sm w-1/4">Assignee</h4>
 				<div class="flex -mt-2 w-3/4">
-					<img src="storage/avatars/3/avatar.png" class="w-8 h-8 mx-4">
-					<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">Grace Parkinson</a>
+					<img :src="this.issue.assignee.avatar_url" class="w-8 h-8 mx-4">
+					<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">{{ this.issue.assignee.name }}</a>
 				</div>
 			</div>
 
 			<div class="flex my-5">
 				<h4 class="text-grey font-normal text-sm w-1/4">Reporter</h4>
 				<div class="flex -mt-2 w-3/4">
-					<img src="storage/avatars/5/avatar.png" class="w-8 h-8 mx-4">
-					<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">Bill Zuchmenn</a>
+					<img :src="this.issue.reporter.avatar_url" class="w-8 h-8 mx-4">
+					<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">{{ this.issue.reporter.name }}</a>
 				</div>
 			</div>
 		</div>
@@ -97,7 +74,19 @@
 </template>
 
 <script>
+	import Attachments from '../Attachments/Attachments'
+
 	export default {
-		//
+
+		components: {
+			Attachments
+		},
+
+		props: {
+			'issue': {
+				type: Object
+			}
+		}
+
 	}
 </script>

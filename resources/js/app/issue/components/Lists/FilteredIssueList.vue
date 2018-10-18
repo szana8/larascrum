@@ -1,49 +1,69 @@
 <template>
     <div>
-        <perfect-scrollbar class="scroll-area mx-2" :settings="settings">
-            <issue v-for="issue in issues" :key="issue.id" :issue="issue"></issue>
-        </perfect-scrollbar>
+        <div v-if="this.issues && this.issues.length > 0">
+            <perfect-scrollbar ref="ps" class="scroll-area mx-2" :settings="settings" @ps-y-reach-end="loadMoreResults">
+                <div id="issue-scroll">
+                    <issue v-for="issue in issues" :key="issue.id" :issue="issue" :selectedIssue="selectedIssue"></issue>
+                    <div v-if="isMoreResultExists" class="my-8 text-center">Loading more...</div>
+                </div>
+            </perfect-scrollbar>
+        </div>
+        <div v-else>
+            <div class="text-center mt-4">There is no result with these criterias...</div>
+        </div>
     </div>
 </template>
 <script>
-    import Issue from './Cards/Issue'
-
-    import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
+    import { throttle } from 'lodash'
     import { EventBus } from '../../../../event-bus.js'
+
+    import Issue from './Cards/Issue'
 
     export default {
 
+        props: {
+            'issues': {
+                type: Array
+            },
+
+            'isMoreResultExists': {
+                type: Boolean,
+                default: false
+            }
+        },
+
         components: {
-            Issue,
-            PerfectScrollbar
+            Issue
         },
 
         data() {
             return {
+                scrollPosition: 100,
+                selectedIssue: null,
                 settings: {
                     maxScrollbarLength: 60
                 },
-                scrollPosition: 100,
-                issues: null
             }
         },
 
         mounted() {
-           this.getIssues();
-            EventBus.$on('refreshList', this.getIssues);
+            EventBus.$on('issueSelected', this.setSelectedIssue)
         },
 
         methods: {
-            getIssues() {
-                 axios.get('api/issues', { params: {
-                    'project': this.$route.params.project,
-                    'type': this.$route.params.type ? this.$route.params.type : 'all'
-                }}).then((response) => {
-                    this.issues = response.data
-                });
-            }
-        }
+            // Set the selected issue, change the style and load the details
+            setSelectedIssue(id) {
+                this.selectedIssue = id
+            },
 
+            // Load more issues if it is possible for the infinite loop
+            loadMoreResults: throttle(function (e) {
+                if (this.isMoreResultExists) {
+                    EventBus.$emit('loadMore')
+                    this.$refs.ps.update()
+                }
+            }, 500, { 'trailing': false })
+        }
     }
 </script>
 

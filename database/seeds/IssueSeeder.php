@@ -12,6 +12,6 @@ class IssueSeeder extends Seeder
      */
     public function run()
     {
-        factory(Issue::class, 10)->create();
+        factory(Issue::class, 200)->create();
     }
 }

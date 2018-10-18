@@ -1,12 +1,13 @@
 <template>
+
     <div class="bg-white rounded shadow my-4" @mouseover="checkEditable" @mouseleave="isEditable = false">
 
-        <div class="flex py-4 px-4 w-full justify-between">
+         <div class="flex py-4 px-4 w-full justify-between">
             <div class="flex">
-                <img src="storage/avatars/3/avatar.png" class="w-8 h-8 mx-4">
-                <a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">Grace Parkinson</a>
-                <span class="mt-2 text-sm text-grey-dark">added a comment - </span>
-                <span class="mt-2 text-sm text-grey-dark">Yesterday</span>
+                <img :src="this.comment.owner.avatar_url" class="w-8 h-8 mx-4">
+                <a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">{{ this.comment.owner.name }}</a>
+                <span class="mt-2 text-sm text-grey-dark">Posted</span>
+                <span class="mt-2 text-sm text-grey-dark font-semibold ml-1">{{ commentDate }}</span>
             </div>
 
             <div>
@@ -18,26 +19,40 @@
         </div>
 
         <p class="px-8 pb-8 leading-normal">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pellentesque id eros vel sodales. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ornare rhoncus diam, tincidunt interdum diam auctor
-            sit amet. Pellentesque dapibus, lacus ac gravida blandit, nisl ligula porta felis, gravida vulputate enim mi quis tortor.
+            {{ this.comment.text }}
         </p>
 
     </div>
+
+
+
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            isEditable: false,
-            isClicked: false
-        }
-    },
+    import moment from 'moment'
 
-    methods: {
-        checkEditable() {
-            this.isEditable = true;
+    export default {
+
+        props: ['comment'],
+
+        data() {
+            return {
+                isEditable: false,
+                isClicked: false
+            }
+        },
+
+        computed: {
+            commentDate() {
+				return moment(this.comment.created_at).startOf('day').fromNow();
+			}
+        },
+
+        methods: {
+            checkEditable() {
+                this.isEditable = true;
+            }
         }
+
     }
-}
 </script>

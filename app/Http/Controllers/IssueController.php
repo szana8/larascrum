@@ -5,21 +5,23 @@ namespace App\Http\Controllers;
 use App\Issue;
 use App\Project;
 use Illuminate\Http\Request;
+use App\Filters\IssueFilters;
+use App\Traits\IssueFilterable;
 
 class IssueController extends Controller
 {
+    use IssueFilterable;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Project $project, IssueFilters $filters)
     {
-        $issues = Issue::whereHas('project', function ($query) {
-            $query->where('slug', 'MKRT');
-        });
+        $issues = $this->getFilteredIssues($project, $filters);
 
-        return response($issues->get(), 201);
+        return response($issues, 201);
     }
 
     /**
@@ -53,7 +55,7 @@ class IssueController extends Controller
      */
     public function show(Issue $issue)
     {
-        //
+        return response($issue->load(['comments', 'priority']), 201);
     }
 
     /**

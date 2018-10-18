@@ -57,8 +57,45 @@ class Issue extends Model
         return $this->belongsTo(IssueType::class, 'type_id');
     }
 
+    /**
+     * Every issue belongs to a project.
+     *
+     * @return App\Project  Project
+     */
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * An issue could have many comments.
+     *
+     * @return App\Comment  Comments
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * An issue belongs to a priority.
+     *
+     * @return App\Priority     Priority
+     */
+    public function priority()
+    {
+        return $this->belongsTo(Priority::class, 'priority_id');
+    }
+
+    /**
+     * Apply all relevant issue filters.
+     *
+     * @param $query
+     * @param $filters
+     * @return mixed
+     */
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);
     }
 }
