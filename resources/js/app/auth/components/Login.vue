@@ -1,7 +1,7 @@
 <template>
     <div class="md:flex min-h-screen">
-        <div class="w-1/3 md:w-2/3 flex items-center justify-left" style="background: url('storage/images/planning.jpg') no-repeat; background-size: 200%;">
-            <div class="m-8 hidden">
+        <div class="w-full md:w-1/2 bg-blue-darker flex items-center justify-left">
+            <div class="m-8">
                 <div class="text-white">
                     <h1 class="text-5xl">Let's get to business!</h1>
                     <li class="list-reset mt-12">
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="w-2/3 flex md:w-1/3 items-center justify-left">
+        <div class="w-full flex md:w-1/2 items-center justify-left">
             <div class="m-12 w-full">
                 <div class="text-blue">
                     <h1 class="text-5xl mb-2">Sign in</h1>
@@ -83,19 +83,19 @@
 </template>
 
 <script>
+    import { isEmpty } from 'lodash'
     import { mapActions } from 'vuex'
     import localforage from 'localforage'
-    import { isEmpty } from 'lodash'
 
     export default {
         data() {
             return {
+                errors: [],
+                error: null,
                 email: null,
                 password: null,
-                errors: [],
                 loading: false,
                 isDisable: false,
-                error: null
             }
         },
 

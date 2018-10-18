@@ -107,14 +107,13 @@
 	import Attributes from './Attributes'
 	import Comments from '../Comments/Comments'
 
-	import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
 	import { EventBus } from '../../../../event-bus.js'
+
 	export default {
 
 		components: {
 			Comments,
-			Attributes,
-			PerfectScrollbar,
+			Attributes
 		},
 
 		props: ['issueId'],
@@ -124,13 +123,14 @@
 				settings: {
 					maxScrollbarLength: 60
 				},
-				showMore: false,
 				issue: null,
-				loading: true
+				loading: true,
+				showMore: false,
 			}
 		},
 
 		computed: {
+			// Show more details,
 			showMoreClass() {
 				return this.showMore === true ? 'h-auto' : 'h-32 overflow-hidden'
 			}
@@ -141,7 +141,7 @@
 		},
 
 		methods: {
-
+			// Load the issue details based on the issue id
 			loadDetails(id) {
 				this.loading = true
 
@@ -151,10 +151,12 @@
 				})
 			},
 
+			// Open the reply form
 			openReply() {
 				EventBus.$emit('openReply', this.issue.id, this.issue.title);
 			},
 
+			// Fire a scroll event to show/hide the floating action button
 			fireScrollEvent() {
 				EventBus.$emit('scrollIssue');
 			}
@@ -164,7 +166,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.scroll-area {
 		height: 100vh;
 	}

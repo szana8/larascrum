@@ -13,6 +13,7 @@ $factory->define(App\Comment::class, function (Faker $faker) {
             return User::inRandomOrder()->first()->id;
         },
         'text' => $faker->paragraph(2),
-        'parent_id' => null
+        'parent_id' => null,
+        'created_at' => $faker->dateTime()
     ];
 });

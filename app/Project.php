@@ -33,10 +33,10 @@ class Project extends Model
      *
      * @return App\Issue Collection of Issue objeczs
      */
-    /* public function issues()
+    public function issues()
     {
         return $this->hasMany(Issue::class);
-    } */
+    }
 
     /**
      * Count the issues which belongs to the project.

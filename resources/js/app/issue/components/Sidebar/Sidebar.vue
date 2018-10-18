@@ -45,7 +45,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.scroll-area {
 		height: 100vh;
 	}

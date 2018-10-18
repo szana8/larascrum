@@ -119,8 +119,11 @@
 				this.lastPage = 1;
 			},
 
+			// Set the quick filter and update the list, and load the first
+			// element of the list to the details tab
 			updateQuickFilter(filter) {
 				this.quickFilter = filter
+				this.resetPages();
 
 				this.fetchIssues({
 					payload: {

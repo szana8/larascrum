@@ -16,7 +16,6 @@
 <script>
     import { throttle } from 'lodash'
     import { EventBus } from '../../../../event-bus.js'
-    import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
 
     import Issue from './Cards/Issue'
 
@@ -34,8 +33,7 @@
         },
 
         components: {
-            Issue,
-            PerfectScrollbar
+            Issue
         },
 
         data() {

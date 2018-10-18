@@ -101,14 +101,14 @@
     export default {
         data() {
             return {
+                errors: [],
+                name: null,
+                error: null,
                 email: null,
                 password: null,
-                password_confirmation: null,
-                name: null,
-                errors: [],
                 loading: false,
                 isDisable: false,
-                error: null
+                password_confirmation: null,
             }
         },
 

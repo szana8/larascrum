@@ -6,17 +6,25 @@
 
 <script>
     export default {
-        props: ['filter', 'active'],
+        props: {
+            'filter': {
+                type: Object
+            },
+            'active': {
+                type: Number
+            }
+        },
 
         computed: {
+            // Calculate the style of the filter button based on the active flag
             isFilterActive() {
                 return this.filter.id === this.active ? 'bg-blue-darker text-white' : 'bg-white hover:bg-blue hover:text-white text-grey-darkest shadow-md'
             }
         },
 
         methods: {
+            // Set the selected filter
             setFilter(filter) {
-                console.log(filter)
                 this.$emit('updated', filter)
             }
         }

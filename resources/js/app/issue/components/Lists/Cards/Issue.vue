@@ -1,5 +1,5 @@
 <template>
-    <div class="my-4 bg-grey-lighter rounded p-4 border-l-4 w-90" :class="[this.issue.id == this.selectedIssue ? 'bg-white shadow' : 'bg-grey-lighter shadow-md hover:bg-grey-lightest hover:shadow-lg cursor-pointer', 'border-' + this.issue.type.color_code]" @click="openIssue(issue.id)">
+    <div class="my-4 bg-grey-lighter rounded p-4 border-l-4 w-90" :class="[this.issue.id == this.selectedIssue ? 'bg-white shadow' : 'bg-grey-lighter shadow-md hover:bg-grey-lightest hover:shadow-lg cursor-pointer', 'border-' + this.issue.type.color_code]" @click="loadIssueDetails(issue.id)">
         <div class="flex">
            <img :src="issue.reporter.avatar_url" class="block rounded-full mb-4 w-8 h-8">
             <div class="ml-4 w-full">
@@ -36,10 +36,14 @@
 
     export default {
 
-        props: [
-            'issue',
-            'selectedIssue'
-        ],
+        props: {
+            'issue': {
+                type: Array
+            },
+            "selectedIssue": {
+                type: Number
+            }
+        },
 
         data() {
             return {
@@ -49,14 +53,18 @@
         },
 
         computed: {
+            // Calculate due date with moment.js
             due_date_ago() {
                 return moment(this.issue.due_date).format("MMM Do YYYY")
             },
 
+            // If the original date and the estimate date is not existrs, hide the
+            // percentage on the cards
             hidden() {
                 return this.issue.original_estimate_time && this.issue.remaining_estimate_time;
             },
 
+            // Calculate the estimate colors based on the estimate time
             calculatedEstimateColor() {
                 if (this.estimateTime > 75)
                     return 'bg-green'
@@ -67,6 +75,7 @@
                 return 'bg-red'
             },
 
+            // Calculate estime percentage
             calculatedEstimateRate() {
                 return Number(((this.issue.original_estimate_time - this.issue.remaining_estimate_time) / this.issue.original_estimate_time) * 100).toFixed(1)
             }
@@ -78,16 +87,17 @@
         },
 
         methods: {
-            openIssue(id) {
+            // Load issue details based on the givven issue id
+            loadIssueDetails(id) {
                 EventBus.$emit('issueSelected', id);
             },
 
+            // Calculate the estimate time of the issue
             getEstimateTime() {
                 if (!this.issue.original_estimate_time || !this.issue.remaining_estimate_time)
                     return
 
                this.estimateTime = Number(((this.issue.original_estimate_time - this.issue.remaining_estimate_time) / this.issue.original_estimate_time) * 100).toFixed(1)
-
             }
         }
     }

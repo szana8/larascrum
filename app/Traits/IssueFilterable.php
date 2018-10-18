@@ -20,7 +20,6 @@ trait IssueFilterable
         $issues = Issue::latest()->filter($filters);
 
         if ($project->exists) {
-            dd('here');
             $issues->where('project_id', $project->id);
         }
 

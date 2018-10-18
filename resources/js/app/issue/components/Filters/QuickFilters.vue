@@ -52,12 +52,8 @@
 			}
 		},
 
-		computed: {
-
-		},
-
 		methods: {
-
+			// Set the selected filter
 			setFilter(filter) {
 				this.activeFilter = filter
 				this.$emit('updated', filter)

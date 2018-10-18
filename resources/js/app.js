@@ -20,6 +20,16 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
+/**
+ * Register prefect scrollbar globally, so it can be used in any
+ * components.
+ */
+import PerfectScrollbar from 'vue2-perfect-scrollbar'
+import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
+
+Vue.use(PerfectScrollbar)
+
 /**
  * Register the Vue application main components like the application which
  * is the entry point and the all of the necessary navigation components.

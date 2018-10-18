@@ -156,6 +156,7 @@
     transform: translateY(-50px);
     opacity: 0;
 }
+
 .project-card > .router-link-active {
   @apply bg-white border-r-4 border-blue rounded-r
 }
