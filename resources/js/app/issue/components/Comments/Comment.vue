@@ -4,10 +4,10 @@
 
          <div class="flex py-4 px-4 w-full justify-between">
             <div class="flex">
-                <img :src="this.comment.owner.avatar_url" class="w-8 h-8 mx-4">
-                <a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">{{ this.comment.owner.name }}</a>
+                <img :src="this.reply.owner.avatar_url" class="w-8 h-8 mx-4 rounded-full">
+                <a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">{{ this.reply.owner.name }}</a>
                 <span class="mt-2 text-sm text-grey-dark">Posted</span>
-                <span class="mt-2 text-sm text-grey-dark font-semibold ml-1">{{ commentDate }}</span>
+                <span class="mt-2 text-sm text-grey-dark font-semibold ml-1">{{ replyDate }}</span>
             </div>
 
             <div>
@@ -19,7 +19,7 @@
         </div>
 
         <p class="px-8 pb-8 leading-normal">
-            {{ this.comment.text }}
+            {{ this.reply.text }}
         </p>
 
     </div>
@@ -33,7 +33,7 @@
 
     export default {
 
-        props: ['comment'],
+        props: ['reply'],
 
         data() {
             return {
@@ -43,8 +43,8 @@
         },
 
         computed: {
-            commentDate() {
-				return moment(this.comment.created_at).startOf('day').fromNow();
+            replyDate() {
+				return moment(this.reply.created_at).fromNow();
 			}
         },
 

@@ -16,7 +16,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $user->generateAvatar();
+        //$user->generateAvatar(); temporary disabled
         $user->notify(new SignUpActivate());
     }
 

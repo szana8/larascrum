@@ -72,9 +72,9 @@ class Issue extends Model
      *
      * @return App\Comment Comments
      */
-    public function comments()
+    public function replies()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Reply::class);
     }
 
     /**
@@ -85,6 +85,20 @@ class Issue extends Model
     public function priority()
     {
         return $this->belongsTo(Priority::class, 'priority_id');
+    }
+
+    /**
+     * Add a reply to the issue.
+     *
+     * @param $reply
+     * @return Model
+     */
+    public function addReply($reply)
+    {
+        $reply = $this->replies()->create($reply);
+        //event(new IssueReceivedNewReply($reply));
+
+        return $reply;
     }
 
     /**

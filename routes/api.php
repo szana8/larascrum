@@ -31,4 +31,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/issues/{issue}', 'IssueController@show');
     Route::get('/issues/{project}/{filters}', 'IssueController@index');
     Route::get('/projects', 'ProjectController@index')->name('projects');
+
+    Route::post('/issues/{issue}/reply', 'ReplyController@store');
 });

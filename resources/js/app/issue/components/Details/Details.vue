@@ -54,6 +54,12 @@
 
 						</div>
 
+						<div class="mt-4 px-8">
+							<p class="py-6 border-t border-grey-lighter text-grey text-sm">
+								{{ this.issue.replies.length }} replies
+							</p>
+						</div>
+
 						<!-- <p class="text-center mt-8 border-t border-grey-lighter py-6" v-if="!showMore">
 							<a href="#" class="text-blue no-underline text-sm font-semibold hover:text-blue-light" @click="showMore = true">More</a>
 						</p> -->

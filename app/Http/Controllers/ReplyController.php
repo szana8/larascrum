@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
+use App\Issue;
+use Illuminate\Support\Facades\Auth;
 
-class CommentController extends Controller
+class ReplyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,9 +36,12 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Issue $issue, Request $request)
     {
-        //
+        return $issue->addReply([
+            'text' => request('text'),
+            'user_id' => Auth::user()->id
+        ])->load('owner');
     }
 
     /**

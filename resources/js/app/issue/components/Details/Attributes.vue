@@ -57,7 +57,7 @@
 			<div class="flex my-5">
 				<h4 class="text-grey font-normal text-sm w-1/4">Assignee</h4>
 				<div class="flex -mt-2 w-3/4">
-					<img :src="this.issue.assignee.avatar_url" class="w-8 h-8 mx-4">
+					<img :src="this.issue.assignee.avatar_url" class="w-8 h-8 mx-4 rounded-full">
 					<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">{{ this.issue.assignee.name }}</a>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 			<div class="flex my-5">
 				<h4 class="text-grey font-normal text-sm w-1/4">Reporter</h4>
 				<div class="flex -mt-2 w-3/4">
-					<img :src="this.issue.reporter.avatar_url" class="w-8 h-8 mx-4">
+					<img :src="this.issue.reporter.avatar_url" class="w-8 h-8 mx-4 rounded-full">
 					<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">{{ this.issue.reporter.name }}</a>
 				</div>
 			</div>

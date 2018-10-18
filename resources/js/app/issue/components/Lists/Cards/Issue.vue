@@ -38,7 +38,7 @@
 
         props: {
             'issue': {
-                type: Array
+
             },
             "selectedIssue": {
                 type: Number

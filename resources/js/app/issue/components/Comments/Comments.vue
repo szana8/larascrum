@@ -1,8 +1,8 @@
 <template>
     <div>
-        <comment v-for="comment in comments" :key="comment.id" :comment="comment"></comment>
+        <comment v-for="reply in replies" :key="reply.id" :reply="reply"></comment>
 
-        <new-comment></new-comment>
+        <new-comment @posted="addNewReplyToList"></new-comment>
 
         <conditional-element :when-hidden="button">
              <button class="float bg-blue text-white shadow-lg focus:outline-none hover:bg-blue-dark" @click="openComment">
@@ -35,7 +35,7 @@
 
         data() {
             return {
-                comments: this.issue.comments,
+                replies: this.issue.replies,
                 button: '#js-issue-reply-button'
             }
         },
@@ -43,6 +43,10 @@
         methods: {
             openComment() {
                 EventBus.$emit('openReply', this.issue.id, this.issue.title);
+            },
+
+            addNewReplyToList(reply) {
+                this.replies.push(reply)
             }
         }
     }

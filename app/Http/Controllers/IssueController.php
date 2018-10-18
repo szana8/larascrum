@@ -55,7 +55,7 @@ class IssueController extends Controller
      */
     public function show(Issue $issue)
     {
-        return response($issue->load(['comments', 'priority']), 201);
+        return response($issue->load(['replies', 'priority']), 201);
     }
 
     /**
