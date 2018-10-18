@@ -1,10 +1,10 @@
 <?php
 
-use Faker\Generator as Faker;
-use App\User;
+use App\IssueType;
 use App\Priority;
 use App\Project;
-use App\IssueType;
+use App\User;
+use Faker\Generator as Faker;
 
 $factory->define(App\Issue::class, function (Faker $faker) {
     $title = $faker->sentence;
@@ -21,7 +21,7 @@ $factory->define(App\Issue::class, function (Faker $faker) {
         },
         'enviroment'              => 'dev',
         'components'              => 'Dev',
-        'priority_id'             => function() {
+        'priority_id'             => function () {
             return Priority::inRandomOrder()->first()->id;
         },
         'epic_link_id'            => null,

@@ -39,6 +39,7 @@ abstract class Filters
      * Apply the filters.
      *
      * @param $builder
+     *
      * @return mixed
      */
     public function apply($builder)

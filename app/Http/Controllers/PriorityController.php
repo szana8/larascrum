@@ -30,7 +30,8 @@ class PriorityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +42,8 @@ class PriorityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Priority  $priority
+     * @param \App\Priority $priority
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Priority $priority)
@@ -52,7 +54,8 @@ class PriorityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Priority  $priority
+     * @param \App\Priority $priority
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Priority $priority)
@@ -63,8 +66,9 @@ class PriorityController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Priority  $priority
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Priority            $priority
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Priority $priority)
@@ -75,7 +79,8 @@ class PriorityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Priority  $priority
+     * @param \App\Priority $priority
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Priority $priority)

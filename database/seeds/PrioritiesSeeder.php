@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Priority;
+use Illuminate\Database\Seeder;
 
 class PrioritiesSeeder extends Seeder
 {
@@ -14,30 +14,30 @@ class PrioritiesSeeder extends Seeder
     {
         Priority::insert([
             [
-                'name' => 'Blocker',
+                'name'        => 'Blocker',
                 'description' => '',
-                'icon' => 'storage/icons/priorities/blocker.png'
+                'icon'        => 'storage/icons/priorities/blocker.png',
             ],
             [
-                'name' => 'Critical',
+                'name'        => 'Critical',
                 'description' => '',
-                'icon' => 'storage/icons/priorities/critical.png'
+                'icon'        => 'storage/icons/priorities/critical.png',
             ],
             [
-                'name' => 'Major',
+                'name'        => 'Major',
                 'description' => '',
-                'icon' => 'storage/icons/priorities/major.png'
+                'icon'        => 'storage/icons/priorities/major.png',
             ],
             [
-                'name' => 'Minor',
+                'name'        => 'Minor',
                 'description' => '',
-                'icon' => 'storage/icons/priorities/minor.png'
+                'icon'        => 'storage/icons/priorities/minor.png',
             ],
             [
-                'name' => 'Trivial',
+                'name'        => 'Trivial',
                 'description' => '',
-                'icon' => 'storage/icons/priorities/trivial.png'
-            ]
+                'icon'        => 'storage/icons/priorities/trivial.png',
+            ],
         ]);
     }
 }
