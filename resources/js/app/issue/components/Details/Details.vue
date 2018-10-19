@@ -56,7 +56,7 @@
 
 						<div class="mt-4 px-8">
 							<p class="py-6 border-t border-grey-lighter text-grey text-sm">
-								{{ this.issue.replies.length }} replies
+								{{ repliesCount }}
 							</p>
 						</div>
 
@@ -69,7 +69,7 @@
 					<div class="flex justify-between mt-4 mb-10">
 
 						<div class="flex">
-							<button class="focus:outline-none bg-blue-darkest text-sm text-white rounded-full py-1 w-24 mx-4">Comments</button>
+							<button class="focus:outline-none bg-blue-darkest text-sm text-white rounded-full py-1 w-24 mx-4">Replies</button>
 
 							<button class="focus:outline-none bg-white shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-blue hover:text-white mx-4">Work Log</button>
 
@@ -92,7 +92,7 @@
 					</div>
 
 					<div class="mt-4">
-						<comments :issue="this.issue"></comments>
+						<replies :issue="this.issue"></replies>
 						<div class="h-32"></div>
 					</div>
 				</perfect-scrollbar>
@@ -111,14 +111,14 @@
 
 <script>
 	import Attributes from './Attributes'
-	import Comments from '../Comments/Comments'
+	import Replies from '../Replies/Replies'
 
 	import { EventBus } from '../../../../event-bus.js'
 
 	export default {
 
 		components: {
-			Comments,
+			Replies,
 			Attributes
 		},
 
@@ -139,6 +139,10 @@
 			// Show more details,
 			showMoreClass() {
 				return this.showMore === true ? 'h-auto' : 'h-32 overflow-hidden'
+			},
+
+			repliesCount() {
+				return this.issue.replies.length > 1 ? this.issue.replies.length + ' replies' : this.issue.replies.length + ' reply';
 			}
 		},
 

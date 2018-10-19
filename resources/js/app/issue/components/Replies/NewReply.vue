@@ -41,12 +41,14 @@
                 isActive: false,
                 reply: null,
                 id: null,
-                title: null
+                title: null,
+                mode: 'insert'
             }
         },
 
         mounted() {
             EventBus.$on('openReply', this.openReply);
+            EventBus.$on('editReply', this.editReply);
         },
 
         methods: {
@@ -62,12 +64,25 @@
                 this.id = null;
                 this.title = null;
                 this.reply = null;
+                this.mode = 'insert';
                 this.isActive = false;
             },
 
             postReply() {
                 if (!this.reply)
                     return
+
+                if (this.mode === 'update') {
+                    return axios.put('api/replies/' + this.id, {
+                        text: this.reply
+                    }).then((response) => {
+                        this.$emit('updated', this.id, this.reply);
+                        this.closeReply();
+                    }).catch((error) => {
+                        console.log(error)
+                    })
+                }
+
 
                 axios.post('api/issues/' + this.id + '/reply', {
                     text: this.reply
@@ -77,6 +92,14 @@
                 }).catch((error) => {
                     console.log(error)
                 })
+
+            },
+
+            editReply(reply) {
+                this.mode = 'update';
+                this.reply = reply.text;
+
+                this.openReply(reply.id, reply.title);
             }
         }
     }

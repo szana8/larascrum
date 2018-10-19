@@ -33,4 +33,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/projects', 'ProjectController@index')->name('projects');
 
     Route::post('/issues/{issue}/reply', 'ReplyController@store');
+
+    Route::put('replies/{reply}', 'ReplyController@update');
+    Route::delete('replies/{reply}', 'ReplyController@destroy');
+
+    Route::post('issues/{issue}/subscribe', 'SubscriptionController@store');
+    Route::delete('issues/{issue}/unscubscribe', 'SubscriptionController@destroy');
 });

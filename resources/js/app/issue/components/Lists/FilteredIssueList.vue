@@ -8,6 +8,7 @@
                 </div>
             </perfect-scrollbar>
         </div>
+
         <div v-else>
             <div class="text-center mt-4">There is no result with these criterias...</div>
         </div>

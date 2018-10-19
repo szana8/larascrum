@@ -57,7 +57,7 @@
 			<div class="flex my-5">
 				<h4 class="text-grey font-normal text-sm w-1/4">Assignee</h4>
 				<div class="flex -mt-2 w-3/4">
-					<img :src="this.issue.assignee.avatar_url" class="w-8 h-8 mx-4 rounded-full">
+					<img :src="this.issue.assignee.avatar_url" class="w-8 h-8 mx-4 rounded-full border-2 border-white">
 					<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">{{ this.issue.assignee.name }}</a>
 				</div>
 			</div>
@@ -65,16 +65,40 @@
 			<div class="flex my-5">
 				<h4 class="text-grey font-normal text-sm w-1/4">Reporter</h4>
 				<div class="flex -mt-2 w-3/4">
-					<img :src="this.issue.reporter.avatar_url" class="w-8 h-8 mx-4 rounded-full">
+					<img :src="this.issue.reporter.avatar_url" class="w-8 h-8 mx-4 rounded-full border-2 border-white">
 					<a href="#" class="text-blue no-underline text-sm mt-2 mr-2 font-semibold hover:text-blue-light">{{ this.issue.reporter.name }}</a>
 				</div>
 			</div>
+
+			<div class="flex my-5">
+				<h4 class="text-grey font-normal text-sm w-1/4">Subscribe</h4>
+				<div class="flex -mt-2 w-3/4 justify-content">
+					<div class="ml-4">
+						<span class="border rounded-full border-grey flex items-center cursor-pointer w-12" :class="subscriptionClass" @click="toggleSubscribe">
+							<span class="rounded-full border w-6 h-6 border-grey shadow-inner shadow bg-white" >
+							</span>
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="flex mt-10">
+				<h4 class="text-grey font-normal text-sm w-1/4">Subscribers</h4>
+				<div class="flex -mt-2 w-3/4 justify-content">
+					<img :src="subscription.user.avatar_url" class="w-8 h-8 ml-4 rounded-full border-2 border-white" v-for="(subscription, index) in this.issue.subscriptions" :class="[index === 0 ? 'ml-4' : '-ml-3']" :key="subscription.id" v-if="index < 5">
+
+					<span class="ml-1 self-end" v-if="this.issue.subscriptions.length > 5"><a href="#" class="text-blue no-underline text-xs font-semibold">...and {{ this.issue.subscriptions.length - 5 }} more</a></span>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </template>
 
 <script>
 	import Attachments from '../Attachments/Attachments'
+	import { mapGetters } from 'vuex'
+
 
 	export default {
 
@@ -85,6 +109,53 @@
 		props: {
 			'issue': {
 				type: Object
+			}
+		},
+
+		data() {
+			return {
+				isSubscribed: false
+			}
+		},
+
+		mounted() {
+			this.isSubscribed = this.issue.isSubscribedTo;
+		},
+
+		computed: {
+			subscriptionClass() {
+				return this.isSubscribed ? 'justify-end bg-blue' : 'justify-start bg-white';
+			},
+
+			...mapGetters({
+            	user: 'auth/user',
+        	})
+		},
+
+		methods: {
+
+			toggleSubscribe() {
+				if (this.isSubscribed) {
+					return this.unScubscribe();
+				}
+
+				return this.subscribe();
+			},
+
+			unScubscribe() {
+				axios.delete('api/issues/' + this.issue.id + '/unscubscribe').then((response) => {
+					var index = this.issue.subscriptions.findIndex(sub => sub.user_id === this.user.id && sub.issue_id === this.issue_id);
+					this.issue.subscriptions.splice(this.issue.subscriptions.indexOf(index), 1);
+
+					this.isSubscribed = false;
+				});
+			},
+
+			subscribe() {
+				axios.post('api/issues/' + this.issue.id + '/subscribe').then((response) => {
+					this.isSubscribed = true;
+					this.issue.subscriptions = response.data
+				});
 			}
 		}
 

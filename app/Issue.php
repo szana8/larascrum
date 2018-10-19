@@ -25,7 +25,7 @@ class Issue extends Model
      *
      * @var array
      */
-    protected $appends = [];
+    protected $appends = ['isSubscribedTo'];
 
     /**
      * Every issue has to be a reporter.
@@ -99,6 +99,53 @@ class Issue extends Model
         //event(new IssueReceivedNewReply($reply));
 
         return $reply;
+    }
+
+    /**
+     * A user can subscribe to an issue.
+     *
+     * @param null $userId
+     * @return Issue
+     */
+    public function subscribe($userId = null)
+    {
+        $this->subscriptions()->create([
+            'user_id' => $userId ?: auth()->id()
+        ]);
+
+        return $this;
+    }
+    /**
+     * A user can unsubscribe from an issue.
+     *
+     * @param null $userId
+     */
+    public function unSubscribe($userId = null)
+    {
+        $this->subscriptions()
+            ->where('user_id', $userId ?: auth()->id())
+            ->delete();
+    }
+    /**
+     * An issue has many subscribers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    /**
+     * Is the authenticated user subscribed to the issue.
+     *
+     * @return bool
+     */
+    public function getIsSubscribedToAttribute()
+    {
+        return $this->subscriptions()
+            ->where('user_id', auth()->id())
+            ->exists();
     }
 
     /**
