@@ -21,7 +21,7 @@ class IssueController extends Controller
     {
         $issues = $this->getFilteredIssues($project, $filters);
 
-        return response($issues, 201);
+        return response($issues->load('replies'), 201);
     }
 
     /**

@@ -115,6 +115,7 @@ class Issue extends Model
 
         return $this;
     }
+
     /**
      * A user can unsubscribe from an issue.
      *
@@ -126,6 +127,7 @@ class Issue extends Model
             ->where('user_id', $userId ?: auth()->id())
             ->delete();
     }
+
     /**
      * An issue has many subscribers.
      *
