@@ -70866,10 +70866,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 	computed: {
-		// Show more details,
+		// Show more details.
 		showMoreClass: function showMoreClass() {
 			return this.showMore === true ? 'h-auto' : 'h-32 overflow-hidden';
 		},
+
+
+		// Show the number of the issue replies.
 		repliesCount: function repliesCount() {
 			return this.issue.replies.length > 1 ? this.issue.replies.length + ' replies' : this.issue.replies.length + ' reply';
 		}
@@ -70881,7 +70884,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 	methods: {
-		// Load the issue details based on the issue id
+		// Load the issue details based on the issue id, if the silent mode is true
+		// not show the load animation.
 		loadDetails: function loadDetails(id, silent) {
 			var _this = this;
 
@@ -70889,29 +70893,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			axios.get('api/issues/' + id).then(function (response) {
 				_this.issue = response.data;
+				_this.mode = null;
+
 				if (!silent) _this.loading = false;
 			});
 		},
 
 
-		// Open the reply form
+		// Open the reply form.
 		openReply: function openReply() {
 			__WEBPACK_IMPORTED_MODULE_3__event_bus_js__["a" /* EventBus */].$emit('openNewReplyPopup', this.issue.id, this.issue.title);
 		},
 
 
-		// Fire a scroll event to show/hide the floating action button
+		// Fire a scroll event to show/hide the floating action button.
 		fireScrollEvent: function fireScrollEvent() {
 			__WEBPACK_IMPORTED_MODULE_3__event_bus_js__["a" /* EventBus */].$emit('scrollIssue');
 		},
+
+
+		// Call the update workdflow api to change the workflow status.
 		updateWorkflowStatus: function updateWorkflowStatus(key, name) {
 			var _this2 = this;
 
 			axios.put('api/issues/' + this.issue.id + '/' + 'status/' + key).then(function (response) {
 				_this2.mode = null;
 				_this2.loadDetails(_this2.issue.id, true);
+			}).catch(function (error) {
+				console.log(error);
 			});
 		},
+
+
+		// If the possbile transitions object empty, we hide the Movo to button.
 		isEmpty: function isEmpty(obj) {
 			return Object(__WEBPACK_IMPORTED_MODULE_2_lodash__["isEmpty"])(obj);
 		}
@@ -72345,7 +72359,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
 
-            axios.post('api/issues/' + this.id + '/reply', {
+            axios.post('api/replies/' + this.id + '/reply', {
                 text: this.reply
             }).then(function (response) {
                 _this2.$emit('posted', response.data);

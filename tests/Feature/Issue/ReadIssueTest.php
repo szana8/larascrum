@@ -23,17 +23,18 @@ class ReadIssueTest extends TestCase
 
         $this->signIn();
         $issue = $this->createIssueWithFactory();
-        $response = $this->getJson(route('issues'));
 
-        $response->assertStatus(201);
-        $this->assertEquals(count(json_decode($response->getContent())), $issue->count());
+        $response = $this->get('api/issues');
+
+        $response->assertStatus(200);
+        $this->assertEquals(count(json_decode($response->getContent())->data), $issue->count());
     }
 
     /** @test */
     public function a_unauthenticated_user_can_not_read_issues()
     {
         $issue = $this->createIssueWithFactory();
-        $response = $this->getJson(route('issues'));
+        $response = $this->getJson('api/issues');
 
         $response->assertStatus(401);
     }

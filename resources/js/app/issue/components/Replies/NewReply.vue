@@ -84,7 +84,7 @@
                 }
 
 
-                axios.post('api/issues/' + this.id + '/reply', {
+                axios.post('api/replies/' + this.id + '/reply', {
                     text: this.reply
                 }).then((response) => {
                     this.$emit('posted', response.data);

@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Filters\IssueFilters;
 use App\Issue;
-use App\Project;
 use App\Traits\IssueFilterable;
 use Illuminate\Http\Request;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use App\Transformers\IssueTransformer;
 
 class IssueController extends Controller
 {
@@ -17,11 +18,15 @@ class IssueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Project $project, IssueFilters $filters)
+    public function index(IssueFilters $filters)
     {
-        $issues = $this->getFilteredIssues($project, $filters);
+        $issues = $this->getFilteredIssues($filters);
 
-        return response($issues, 201);
+        return fractal()
+            ->collection($issues->getCollection())
+            ->transformWith(new IssueTransformer)
+            ->paginateWith(new IlluminatePaginatorAdapter($issues))
+            ->toArray();
     }
 
     /**

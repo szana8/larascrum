@@ -176,11 +176,12 @@
 		},
 
 		computed: {
-			// Show more details,
+			// Show more details.
 			showMoreClass() {
 				return this.showMore === true ? 'h-auto' : 'h-32 overflow-hidden'
 			},
 
+			// Show the number of the issue replies.
 			repliesCount() {
 				return this.issue.replies.length > 1 ? this.issue.replies.length + ' replies' : this.issue.replies.length + ' reply';
 			}
@@ -191,35 +192,42 @@
 		},
 
 		methods: {
-			// Load the issue details based on the issue id
+			// Load the issue details based on the issue id, if the silent mode is true
+			// not show the load animation.
 			loadDetails(id, silent) {
 				if(!silent)
 					this.loading = true
 
 				axios.get('api/issues/' + id).then((response) => {
 					this.issue = response.data
+					this.mode = null;
+
 					if(!silent)
-						this.loading = false
+						this.loading = false;
 				})
 			},
 
-			// Open the reply form
+			// Open the reply form.
 			openReply() {
 				EventBus.$emit('openNewReplyPopup', this.issue.id, this.issue.title);
 			},
 
-			// Fire a scroll event to show/hide the floating action button
+			// Fire a scroll event to show/hide the floating action button.
 			fireScrollEvent() {
 				EventBus.$emit('scrollIssue');
 			},
 
+			// Call the update workdflow api to change the workflow status.
 			updateWorkflowStatus(key, name) {
 				axios.put('api/issues/' + this.issue.id + '/' +  'status/' + key).then((response) => {
 					this.mode = null;
 					this.loadDetails(this.issue.id, true);
+				}).catch((error) => {
+					console.log(error);
 				});
 			},
 
+			// If the possbile transitions object empty, we hide the Movo to button.
 			isEmpty(obj) {
 				return isEmpty(obj);
 			}

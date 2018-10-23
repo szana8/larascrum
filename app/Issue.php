@@ -168,25 +168,31 @@ class Issue extends Model
 
     /**
      * Return the workflow configuration array
+     *
+     * @return array
      */
     public function getLaraflowStates()
     {
         return config('tmp.configuration');
     }
 
+    /**
+     * Return the possible transitions list.
+     *
+     * @return array
+     */
     public function getPossibleTransactionsAttribute()
     {
         return $this->laraflowInstance()->getPossibleTransitions();
     }
 
+    /**
+     * Return the actual step name of the issue.
+     *
+     * @return string
+     */
     public function getActualStepNameAttribute()
     {
         return $this->getActualStepName();
-    }
-
-    public function updateWorkflowStatus($new_status)
-    {
-        $this->transiton(1);
-        return $this->save();
     }
 }

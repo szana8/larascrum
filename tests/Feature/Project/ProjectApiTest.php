@@ -28,11 +28,11 @@ class ProjectApiTest extends TestCase
         $user = create(User::class, ['active' => true]);
 
         $userResponse = $this->post(route('login'), [
-            'email'    => $user->email,
+            'email' => $user->email,
             'password' => 'secret',
         ]);
 
-        $response = $this->get(route('projects'), ['Authorization' => 'Bearer '.json_decode($userResponse->getContent())->access_token]);
+        $response = $this->get('api/projects', ['Authorization' => 'Bearer ' . json_decode($userResponse->getContent())->access_token]);
 
         $response->assertSuccessful();
         $this->assertEquals(count(json_decode($response->getContent())), $project->count());
