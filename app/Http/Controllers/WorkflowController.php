@@ -69,7 +69,10 @@ class WorkflowController extends Controller
      */
     public function update(Issue $issue, $status_id)
     {
-        $issue->updateWorkflowStatus($status_id);
+        $issue->transition($status_id);
+        $issue->save();
+
+        response([], 201);
     }
 
     /**

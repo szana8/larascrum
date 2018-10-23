@@ -12,11 +12,11 @@
 
 										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Assign</a>
 
-										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue" @click="mode = 'workflow'">
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue" @click="mode = 'workflow'" v-if="!isEmpty(this.issue.possibleTransactions)">
 											Move to...
 										</a>
 
-										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">More</a>
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue" @click="mode = 'more'">More</a>
 									</div>
 
 									<div>
@@ -26,9 +26,9 @@
 
 								<div class="flex justify-between" v-if="mode === 'workflow'" key="workflow">
 									<div class="flex">
-										<h4 class="text-sm text-grey-dark inline-block py-5 no-underline font-semibol px-8 border-b border-grey-lighter">Possible statuses:</h4>
+										<h4 class="text-sm text-grey-dark inline-block py-5 no-underline font-semibol px-2 ml-6 border-b border-grey-lighter">Possible statuses:</h4>
 										<div>
-											<button href="#" class="mr-6 mt-4 bg-white border border-grey-light shadow text-grey-darkest text-sm rounded-full py-1 px-2 hover:bg-blue hover:text-white mx-4" v-for="transaction in this.issue.possibleTransactions" :key="transaction.key">{{ transaction.text }}</button>
+											<button href="#" class="mt-4 mx-2 bg-white border border-grey-light shadow text-grey-darkest text-sm rounded-full py-1 px-3 hover:bg-blue hover:text-white" v-for="transaction in this.issue.possibleTransactions" :key="transaction.key" @click="updateWorkflowStatus(transaction.key)">{{ transaction.text }}</button>
 										</div>
 									</div>
 
@@ -38,6 +38,22 @@
 										</a>
 									</div>
 
+								</div>
+
+								<div class="flex justify-between" v-if="mode === 'more'" key="more">
+									<div class="flex">
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Sub Task</a>
+
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Log Work</a>
+
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Clone</a>
+									</div>
+
+									<div class="flex items-stretch">
+										<a href="#" class="text-grey hover:text-grey-darker self-center mr-4" @click="mode = null">
+											<img src="storage/icons/close.svg" width="10" height="10">
+										</a>
+									</div>
 								</div>
 
 							</slide-y-down-transition>
@@ -132,6 +148,7 @@
 	import Attributes from './Attributes'
 	import Replies from '../Replies/Replies'
 
+	import { isEmpty } from 'lodash'
 	import { EventBus } from '../../../../event-bus.js'
 	import { SlideYDownTransition,  SlideYUpTransition } from 'vue2-transitions'
 
@@ -175,12 +192,14 @@
 
 		methods: {
 			// Load the issue details based on the issue id
-			loadDetails(id) {
-				this.loading = true
+			loadDetails(id, silent) {
+				if(!silent)
+					this.loading = true
 
 				axios.get('api/issues/' + id).then((response) => {
 					this.issue = response.data
-					this.loading = false
+					if(!silent)
+						this.loading = false
 				})
 			},
 
@@ -194,10 +213,15 @@
 				EventBus.$emit('scrollIssue');
 			},
 
-			updateWorkflowStatus(status) {
-				axios.put('issues/' + this.issue.id + '/' +  'status/' + status).then((response) => {
-
+			updateWorkflowStatus(key, name) {
+				axios.put('api/issues/' + this.issue.id + '/' +  'status/' + key).then((response) => {
+					this.mode = null;
+					this.loadDetails(this.issue.id, true);
 				});
+			},
+
+			isEmpty(obj) {
+				return isEmpty(obj);
 			}
 
 		}

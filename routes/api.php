@@ -40,5 +40,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('issues/{issue}/subscribe', 'SubscriptionController@store');
     Route::delete('issues/{issue}/unscubscribe', 'SubscriptionController@destroy');
 
-    Route::delete('issues/{issue}/status/{status_id}', 'WorkflowController@update');
+    Route::put('issues/{issue}/status/{status_id}', 'WorkflowController@update');
 });

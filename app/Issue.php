@@ -184,7 +184,9 @@ class Issue extends Model
         return $this->getActualStepName();
     }
 
-    public function updateWorkflowStatus()
+    public function updateWorkflowStatus($new_status)
     {
+        $this->transiton(1);
+        return $this->save();
     }
 }
