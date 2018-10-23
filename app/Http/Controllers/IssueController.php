@@ -6,8 +6,8 @@ use App\Filters\IssueFilters;
 use App\Issue;
 use App\Traits\IssueFilterable;
 use Illuminate\Http\Request;
-use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use App\Transformers\IssueTransformer;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
 class IssueController extends Controller
 {
@@ -23,7 +23,7 @@ class IssueController extends Controller
         $issues = $this->getFilteredIssues($filters);
 
         return fractal()
-            ->collection($issues->getCollection())
+            ->collection($issues)
             ->transformWith(new IssueTransformer)
             ->paginateWith(new IlluminatePaginatorAdapter($issues))
             ->toArray();
@@ -50,7 +50,10 @@ class IssueController extends Controller
      */
     public function show(Issue $issue)
     {
-        return response($issue->load(['priority', 'subscriptions', 'subscriptions.user']), 201);
+        return fractal()
+            ->item($issue->load(['priority', 'subscriptions', 'subscriptions.user']))
+            ->transformWith(new IssueTransformer)
+            ->toArray();
     }
 
     /**

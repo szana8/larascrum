@@ -199,7 +199,7 @@
 					this.loading = true
 
 				axios.get('api/issues/' + id).then((response) => {
-					this.issue = response.data
+					this.issue = response.data.data
 					this.mode = null;
 
 					if(!silent)

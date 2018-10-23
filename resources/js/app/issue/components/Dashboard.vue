@@ -84,7 +84,7 @@
 							page: this.page
 						}
 					}).then((response) => {
-						this.lastPage = response.last_page
+						this.lastPage = response.meta.pagination.total_pages
 						this.issues = response.data
 
 						if (response.data[0])
@@ -133,7 +133,7 @@
 						page: this.page
 					}
 				}).then((response) => {
-					this.lastPage = response.last_page
+					this.lastPage = response.meta.pagination.total_pages
 					this.issues = response.data
 
 					if (response.data[0])

@@ -69761,7 +69761,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 						page: _this.page
 					}
 				}).then(function (response) {
-					_this.lastPage = response.last_page;
+					_this.lastPage = response.meta.pagination.total_pages;
 					_this.issues = response.data;
 
 					if (response.data[0]) __WEBPACK_IMPORTED_MODULE_1__event_bus_js__["a" /* EventBus */].$emit('issueSelected', response.data[0].id);
@@ -69815,7 +69815,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 					page: this.page
 				}
 			}).then(function (response) {
-				_this3.lastPage = response.last_page;
+				_this3.lastPage = response.meta.pagination.total_pages;
 				_this3.issues = response.data;
 
 				if (response.data[0]) __WEBPACK_IMPORTED_MODULE_1__event_bus_js__["a" /* EventBus */].$emit('issueSelected', response.data[0].id);
@@ -70892,7 +70892,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			if (!silent) this.loading = true;
 
 			axios.get('api/issues/' + id).then(function (response) {
-				_this.issue = response.data;
+				_this.issue = response.data.data;
 				_this.mode = null;
 
 				if (!silent) _this.loading = false;
