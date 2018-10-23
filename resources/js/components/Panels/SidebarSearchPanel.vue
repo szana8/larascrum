@@ -8,8 +8,8 @@
                 <div class="p-12">
                     <div class="text-right">
                         <a href="#" class="text-grey hover:text-grey-darker" @click="hide">
-								<img src="storage/icons/close.svg" width="20" height="20">
-							</a>
+                            <img src="storage/icons/close.svg" width="20" height="20">
+                        </a>
                     </div>
                     <div class="border-b-2 border-grey-light mb-12 mt-12">
                     	<input type="text" name="search" class="appearance-none bg-transparent border-none w-full text-grey-darker mr-3 py-1 px-2 leading-tight focus:outline-none text-2xl" placeholder="Search">

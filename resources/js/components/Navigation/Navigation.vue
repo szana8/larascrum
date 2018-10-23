@@ -22,7 +22,7 @@
 			<div class="bg-blue w-full px-4 flex justify-between">
 				<div class="flex w-1/4 items-stretch">
 					<div class="flex self-center">
-						<img :src="user.data.avatar_url" class="w-10 h-10 ml-2 inline-block self-center">
+						<img :src="user.data.avatar_url" class="w-10 h-10 ml-2 inline-block self-center rounded-full">
 						<a href="#" class="text-blue-lighter font-semibold ml-4 no-underline hover:text-blue-lightest self-center" v-text="user.data.name"></a>
 					</div>
 				</div>

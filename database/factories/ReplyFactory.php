@@ -1,10 +1,10 @@
 <?php
 
-use App\Issue;
 use App\User;
+use App\Issue;
 use Faker\Generator as Faker;
 
-$factory->define(App\Comment::class, function (Faker $faker) {
+$factory->define(App\Reply::class, function (Faker $faker) {
     return [
         'issue_id' => function () {
             return Issue::inRandomOrder()->first()->id;

@@ -1,7 +1,7 @@
 <template>
     <fade-transition>
         <div v-show="isVisible">
-                <slot></slot>
+            <slot></slot>
         </div>
     </fade-transition>
 </template>
@@ -15,6 +15,7 @@
         components: {
             FadeTransition
         },
+
         props: ['whenHidden'],
 
         data() {

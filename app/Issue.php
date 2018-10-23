@@ -3,15 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use szana8\Laraflow\Traits\Flowable;
 
 class Issue extends Model
 {
+    use Flowable;
+
     /**
      * The relationships to always eager-load.
      *
      * @var [type]
      */
-    protected $with = ['reporter', 'assignee', 'type', 'project'];
+    protected $with = ['reporter', 'assignee', 'type', 'project', 'replies'];
 
     /**
      * Don't auto-apply mass assignment protection.
@@ -25,7 +28,7 @@ class Issue extends Model
      *
      * @var array
      */
-    protected $appends = [];
+    protected $appends = ['isSubscribedTo', 'possibleTransactions', 'actualStepName'];
 
     /**
      * Every issue has to be a reporter.
@@ -72,9 +75,9 @@ class Issue extends Model
      *
      * @return App\Comment Comments
      */
-    public function comments()
+    public function replies()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Reply::class);
     }
 
     /**
@@ -88,6 +91,69 @@ class Issue extends Model
     }
 
     /**
+     * Add a reply to the issue.
+     *
+     * @param $reply
+     * @return Model
+     */
+    public function addReply($reply)
+    {
+        $reply = $this->replies()->create($reply);
+        //event(new IssueReceivedNewReply($reply));
+
+        return $reply;
+    }
+
+    /**
+     * A user can subscribe to an issue.
+     *
+     * @param null $userId
+     * @return Issue
+     */
+    public function subscribe($userId = null)
+    {
+        $this->subscriptions()->create([
+            'user_id' => $userId ?: auth()->id()
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * A user can unsubscribe from an issue.
+     *
+     * @param null $userId
+     */
+    public function unSubscribe($userId = null)
+    {
+        $this->subscriptions()
+            ->where('user_id', $userId ?: auth()->id())
+            ->delete();
+    }
+
+    /**
+     * An issue has many subscribers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    /**
+     * Is the authenticated user subscribed to the issue.
+     *
+     * @return bool
+     */
+    public function getIsSubscribedToAttribute()
+    {
+        return $this->subscriptions()
+            ->where('user_id', auth()->id())
+            ->exists();
+    }
+
+    /**
      * Apply all relevant issue filters.
      *
      * @param $query
@@ -98,5 +164,27 @@ class Issue extends Model
     public function scopeFilter($query, $filters)
     {
         return $filters->apply($query);
+    }
+
+    /**
+     * Return the workflow configuration array
+     */
+    public function getLaraflowStates()
+    {
+        return config('tmp.configuration');
+    }
+
+    public function getPossibleTransactionsAttribute()
+    {
+        return $this->laraflowInstance()->getPossibleTransitions();
+    }
+
+    public function getActualStepNameAttribute()
+    {
+        return $this->getActualStepName();
+    }
+
+    public function updateWorkflowStatus()
+    {
     }
 }

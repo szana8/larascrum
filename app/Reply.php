@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Reply extends Model
 {
     /**
      * The relationships to always eager-load.
@@ -12,6 +12,13 @@ class Comment extends Model
      * @var [type]
      */
     protected $with = ['owner'];
+
+    /**
+     * Don't auto-apply mass assignment protection.
+     *
+     * @var array
+     */
+    protected $guarded = [];
 
     /**
      * A comment has an owner.
