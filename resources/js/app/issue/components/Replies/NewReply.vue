@@ -47,12 +47,12 @@
         },
 
         mounted() {
-            EventBus.$on('openReply', this.openReply);
+            EventBus.$on('openNewReplyPopup', this.openNewReplyPopup);
             EventBus.$on('editReply', this.editReply);
         },
 
         methods: {
-            openReply(id, title) {
+            openNewReplyPopup(id, title) {
                 this.id = id;
                 this.title = title;
                 this.isActive = true;
@@ -99,7 +99,7 @@
                 this.mode = 'update';
                 this.reply = reply.text;
 
-                this.openReply(reply.id, reply.title);
+                this.openNewReplyPopup(reply.id, reply.title);
             }
         }
     }

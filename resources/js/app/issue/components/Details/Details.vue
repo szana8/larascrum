@@ -5,23 +5,42 @@
 				<perfect-scrollbar @ps-scroll-y="fireScrollEvent" class="scroll-area w-full mt-2 pr-4" :settings="settings">
 					<div class="bg-white rounded">
 						<div class="border-b border-grey-lighter">
-							<div class="flex justify-between">
-								<div>
-									<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Edit</a>
+							<slide-y-down-transition group>
+								<div class="flex justify-between" v-if="!mode" key="selector">
+									<div>
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Edit</a>
 
-									<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Assign</a>
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Assign</a>
 
-									<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">
-										In Progress
-									</a>
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue" @click="mode = 'workflow'">
+											Move to...
+										</a>
 
-									<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">More</a>
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">More</a>
+									</div>
+
+									<div>
+										<button class="mr-6 mt-4 bg-white border border-grey-light shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-blue hover:text-white mx-4">Export</button>
+									</div>
 								</div>
 
-								<div>
-									<button class="mr-6 mt-4 bg-white border border-grey-light shadow text-grey-darkest text-sm rounded-full py-1 w-24 hover:bg-blue hover:text-white mx-4">Export</button>
+								<div class="flex justify-between" v-if="mode === 'workflow'" key="workflow">
+									<div class="flex">
+										<h4 class="text-sm text-grey-dark inline-block py-5 no-underline font-semibol px-8 border-b border-grey-lighter">Possible statuses:</h4>
+										<div>
+											<button href="#" class="mr-6 mt-4 bg-white border border-grey-light shadow text-grey-darkest text-sm rounded-full py-1 px-2 hover:bg-blue hover:text-white mx-4" v-for="transaction in this.issue.possibleTransactions" :key="transaction.key">{{ transaction.text }}</button>
+										</div>
+									</div>
+
+									<div class="flex items-stretch">
+										<a href="#" class="text-grey hover:text-grey-darker self-center mr-4" @click="mode = null">
+											<img src="storage/icons/close.svg" width="10" height="10">
+										</a>
+									</div>
+
 								</div>
-							</div>
+
+							</slide-y-down-transition>
 
 						</div>
 
@@ -114,12 +133,15 @@
 	import Replies from '../Replies/Replies'
 
 	import { EventBus } from '../../../../event-bus.js'
+	import { SlideYDownTransition,  SlideYUpTransition } from 'vue2-transitions'
 
 	export default {
 
 		components: {
 			Replies,
-			Attributes
+			Attributes,
+			SlideYUpTransition,
+			SlideYDownTransition,
 		},
 
 		props: ['issueId'],
@@ -132,6 +154,7 @@
 				issue: null,
 				loading: true,
 				showMore: false,
+				mode: null
 			}
 		},
 
@@ -163,12 +186,18 @@
 
 			// Open the reply form
 			openReply() {
-				EventBus.$emit('openReply', this.issue.id, this.issue.title);
+				EventBus.$emit('openNewReplyPopup', this.issue.id, this.issue.title);
 			},
 
 			// Fire a scroll event to show/hide the floating action button
 			fireScrollEvent() {
 				EventBus.$emit('scrollIssue');
+			},
+
+			updateWorkflowStatus(status) {
+				axios.put('issues/' + this.issue.id + '/' +  'status/' + status).then((response) => {
+
+				});
 			}
 
 		}

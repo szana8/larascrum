@@ -20,12 +20,12 @@
 					</a>
                 </div>
 
-                <div v-if="isIssueOpen" tag="div" @click="selectIssueType('all')" class="py-2 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer hover:bg-grey-lightest" :class="isActiveClass('all')">
+                <div v-if="isIssueOpen" tag="div" @click="selectIssueType('all')" class="py-2 my-1 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer hover:bg-grey-lightest" :class="isActiveClass('all')">
                     <div class="inline-block w-24">All</div>
                     <div class="inline-block" v-text="project.allIssuesInThisProjectCount"></div>
                 </div>
 
-                <div v-if="isIssueOpen" tag="div" @click="selectIssueType('my')" class="py-2 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer hover:bg-grey-lightest" :class="isActiveClass('my')">
+                <div v-if="isIssueOpen" tag="div" @click="selectIssueType('my')" class="py-2 my-1 text-sm text-grey-dark pl-24 flex project-card no-underline text-grey-dark cursor-pointer hover:bg-grey-lightest" :class="isActiveClass('my')">
                     <div class="inline-block w-24">My</div>
                     <div class="inline-block" v-text="project.myIssuesInThisProjectCount"></div>
                 </div>
@@ -129,7 +129,7 @@
             /* Set the submenu active class depends on the url */
             isActiveClass(param) {
                 if (this.$route.params.project == this.project.slug && this.$route.params.by == param) {
-                    return 'border-r-4 border-blue bg-white rounded'
+                    return 'border-r-4 border-blue bg-white rounded shadow'
                 }
                 return ''
             }

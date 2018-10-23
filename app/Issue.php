@@ -3,15 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use szana8\Laraflow\Traits\Flowable;
 
 class Issue extends Model
 {
+    use Flowable;
+
     /**
      * The relationships to always eager-load.
      *
      * @var [type]
      */
-    protected $with = ['reporter', 'assignee', 'type', 'project'];
+    protected $with = ['reporter', 'assignee', 'type', 'project', 'replies'];
 
     /**
      * Don't auto-apply mass assignment protection.
@@ -25,7 +28,7 @@ class Issue extends Model
      *
      * @var array
      */
-    protected $appends = ['isSubscribedTo'];
+    protected $appends = ['isSubscribedTo', 'possibleTransactions', 'actualStepName'];
 
     /**
      * Every issue has to be a reporter.
@@ -161,5 +164,27 @@ class Issue extends Model
     public function scopeFilter($query, $filters)
     {
         return $filters->apply($query);
+    }
+
+    /**
+     * Return the workflow configuration array
+     */
+    public function getLaraflowStates()
+    {
+        return config('tmp.configuration');
+    }
+
+    public function getPossibleTransactionsAttribute()
+    {
+        return $this->laraflowInstance()->getPossibleTransitions();
+    }
+
+    public function getActualStepNameAttribute()
+    {
+        return $this->getActualStepName();
+    }
+
+    public function updateWorkflowStatus()
+    {
     }
 }

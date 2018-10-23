@@ -40,7 +40,7 @@
 			<div class="flex my-4">
 				<div class="text-grey-dark text-sm w-1/4">Status</div>
 				<div class="flex w-3/4">
-					<h5 class="inline-block text-grey-darkest">TO DO</h5>
+					<h5 class="inline-block text-grey-darkest">{{ this.issue.actualStepName }}</h5>
 				</div>
 			</div>
 

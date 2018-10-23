@@ -21,7 +21,7 @@ class IssueController extends Controller
     {
         $issues = $this->getFilteredIssues($project, $filters);
 
-        return response($issues->load('replies'), 201);
+        return response($issues, 201);
     }
 
     /**
@@ -45,19 +45,7 @@ class IssueController extends Controller
      */
     public function show(Issue $issue)
     {
-        return response($issue->load(['replies', 'priority', 'subscriptions', 'subscriptions.user']), 201);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Issue $issue
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Issue $issue)
-    {
-        //
+        return response($issue->load(['priority', 'subscriptions', 'subscriptions.user']), 201);
     }
 
     /**
