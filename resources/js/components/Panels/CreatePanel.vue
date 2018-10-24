@@ -14,21 +14,16 @@
                 </div>
 
                 <div class="h-180">
-                    <div class="flex justify-between flex-wrap mt-10 px-4" v-if="!nextStep">
+                    <div class="flex justify-between flex-wrap mt-10 px-4 h-172" v-if="!nextStep">
                         <create-panel-card :key="panel.name" v-for="panel in panels" :name="panel.name" :image="panel.image" @selected="refresh" />
                     </div>
 
-                    <div class="flex justify-between flex-wrap mt-10 px-4" v-if="nextStep == 'project'">
-                        <label for="">Project Name</label>
-                        <input type="text" class="text-xl rounded border border-grey" />
+                    <create-project v-if="nextStep == 'project'"></create-project>
+
+                    <div class="flex justify-end mt-0 px-4" v-if="!nextStep">
+                        <button class="bg-blue text-grey-lightest border border-blue rounded-full px-4 py-2 text-sm hover:bg-blue-dark hover:border-blue-dark uppercase mx-2 font-semibold focus:outline-none" @click="setNextStep">Next</button>
                     </div>
 
-                </div>
-
-
-                <div class="flex justify-end mt-0 px-4">
-                    <button class="bg-white hover:bg-grey rounded text-grey-dark border border-grey px-3 py-2 font-semibold cursor-pointer mr-4" @click="setLastStep" v-if="nextStep">Previous</button>
-                    <button class="bg-blue hover:bg-blue-dark rounded text-blue-lightest px-3 py-2 font-semibold cursor-pointer" @click="setNextStep">Next</button>
                 </div>
 
             </div>
@@ -38,6 +33,7 @@
 
 <script>
     import CreatePanelCard from './CreatePanelCard'
+    import CreateProject from './CreateProject'
 
     import ClickOutside from 'vue-click-outside'
     import { EventBus } from '../../event-bus.js'
@@ -45,6 +41,7 @@
 
     export default {
         components: {
+            CreateProject,
             CreatePanelCard,
             SlideYUpTransition
         },
@@ -82,6 +79,10 @@
                     },
                 ]
             }
+        },
+
+        computed: {
+            //
         },
 
         mounted() {

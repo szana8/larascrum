@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\IssueFilters;
 use App\Issue;
-use App\Traits\IssueFilterable;
 use Illuminate\Http\Request;
+use App\Filters\IssueFilters;
+use App\Traits\IssueFilterable;
 use App\Transformers\IssueTransformer;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 

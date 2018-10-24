@@ -62,7 +62,7 @@
 
 						<div class="px-8 py-8">
 							<div class="flex">
-								<img src="storage/images/logo.png" class="w-12 h-12">
+								<img :src="this.issue.project.icon" class="w-12 h-12">
 								<div class="ml-8">
 									<div class="flex">
 										<a href="#" class="text-sm text-blue no-underline font-semibold hover:text-blue-light">{{ this.issue.project.name }}</a>
