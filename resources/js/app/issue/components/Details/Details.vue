@@ -161,8 +161,6 @@
 			SlideYDownTransition,
 		},
 
-		props: ['issueId'],
-
 		data() {
 			return {
 				settings: {

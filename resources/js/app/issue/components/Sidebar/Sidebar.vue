@@ -11,6 +11,7 @@
 
 	import { EventBus } from '../../../../event-bus.js'
 	import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
+	import { mapActions, mapGetters } from 'vuex'
 
 	export default {
 		components: {
@@ -20,7 +21,6 @@
 
 		data() {
 			return {
-				projects: null,
 				isIssueOpen: false,
 				settings: {
 					maxScrollbarLength: 60
@@ -28,19 +28,21 @@
 			}
 		},
 
+		 computed: {
+			...mapGetters({
+            	projects: 'issue/projects'
+			})
+		},
+
 		mounted() {
-			this.getProjects();
+			/* Call the project API to get all of the relevant projects */
+			this.fetch();
 		},
 
 		methods: {
-			/* Call the project API to get all of the relevant projects */
-			getProjects() {
-				axios.get('/api/projects').then((response) => {
-					this.projects = response.data;
-				}).catch((error) => {
-					console.log(error);
-				});
-			}
+			...mapActions({
+                fetch: 'issue/fetchProjects'
+			})
 		}
 	}
 </script>
