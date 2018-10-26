@@ -1,6 +1,6 @@
 <template>
     <div class="mb-2">
-        <div class="bg-white text-center py-4 flex cursor-pointer" :class="{ 'shadow hover:shadow-md': !isOpen }" @click="open(project.id)">
+        <div class="bg-white text-center py-4 flex cursor-pointer" :class="{ 'shadow hover:shadow-md': !isOpen }" @click="setSelectedProject(project.id)">
             <div class="text-center">
                 <img :src="project.icon" class="w-10 h-10 ml-12 rounded-full">
 			</div>
@@ -11,6 +11,7 @@
                 </div>
             </div>
         </div>
+
         <div class="mt-5 mb-4" v-if="isOpen">
             <div class="project-card">
                 <div class="ml-12">
@@ -84,7 +85,7 @@
 </template>
 
 <script>
-    import { EventBus } from '../../../../../event-bus.js'
+    import { mapActions, mapMutations, mapGetters } from 'vuex'
 
     export default {
         props: {
@@ -96,42 +97,50 @@
 
         data() {
             return {
-                isOpen: false,
                 isIssueOpen: false
             }
         },
 
-        mounted() {
-            EventBus.$on('closeEveryOpenProjectCard', this.close)
+        computed: {
+            // Map Vuex getters
+            ...mapGetters({
+				selectedProject: 'issue/selectedProject'
+            }),
+
+            // Check the selected project is open or not, if not open it
+            // and close the other opened projects on the sidebar.
+            isOpen() {
+                return this.selectedProject == this.project.id;
+            }
         },
 
         methods: {
-            /* Show all of the submenu which belongs to the project */
-            open(project_id) {
-                if (project_id == this.project.id && this.isOpen === true)
-                    return this.close();
+            // Map Vuex axtions
+			...mapActions({
+				fetchIssuesByProject: 'issue/fetchIssuesByProject'
+            }),
 
-                EventBus.$emit('closeEveryOpenProjectCard');
-                this.isOpen = true;
-            },
-
-            /* Close the project card */
-            close() {
-                this.isOpen = false;
-            },
+            // Map Vuex mutations
+            ...mapMutations({
+				setSelectedProject: 'issue/setSelectedProject'
+            }),
 
             /* Select the issue type than filter the list and set the proper url */
             selectIssueType(type) {
-                this.$router.replace({name: 'issues_with_project', params: {project: this.project.slug, by: type}})
-                EventBus.$emit('refreshList');
+                this.$router.replace({
+					name: 'issues_with_project',
+					params: {
+						project: this.project.slug,
+						by: type
+					}
+                });
+
+                this.$emit('selected', type);
             },
 
             /* Set the submenu active class depends on the url */
             isActiveClass(param) {
-                if (this.$route.params.project == this.project.slug && this.$route.params.by == param) {
-                    return 'border-r-4 border-blue bg-white rounded shadow'
-                }
-                return ''
+                return this.$route.params.project == this.project.slug && this.$route.params.by == param ? 'border-r-4 border-blue bg-white rounded shadow' : '';
             }
         }
     }
@@ -139,24 +148,6 @@
 </script>
 
 <style scoped>
-.slide-fade-enter-active {
-    transition: all .3s ease;
-}
-
-.slide-fade-leave-active {
-    transition: all .2s ease;
-}
-
-.slide-fade-enter {
-    transform: translateY(-50px);
-    opacity: 0;
-}
-
-.slide-fade-leave-to {
-    transform: translateY(-50px);
-    opacity: 0;
-}
-
 .project-card > .router-link-active {
   @apply bg-white border-r-4 border-blue rounded-r
 }

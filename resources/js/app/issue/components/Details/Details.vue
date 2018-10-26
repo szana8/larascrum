@@ -150,6 +150,7 @@
 
 	import { isEmpty } from 'lodash'
 	import { EventBus } from '../../../../event-bus.js'
+	import { mapActions, mapGetters } from 'vuex'
 	import { SlideYDownTransition,  SlideYUpTransition } from 'vue2-transitions'
 
 	export default {
@@ -166,8 +167,7 @@
 				settings: {
 					maxScrollbarLength: 60
 				},
-				issue: null,
-				loading: true,
+				loading: false,
 				showMore: false,
 				mode: null
 			}
@@ -182,28 +182,17 @@
 			// Show the number of the issue replies.
 			repliesCount() {
 				return this.issue.replies.length > 1 ? this.issue.replies.length + ' replies' : this.issue.replies.length + ' reply';
-			}
-		},
+			},
 
-		mounted() {
-			EventBus.$on('issueSelected', this.loadDetails);
+			...mapGetters({
+				issue: 'issue/issue'
+			}),
 		},
 
 		methods: {
-			// Load the issue details based on the issue id, if the silent mode is true
-			// not show the load animation.
-			loadDetails(id, silent) {
-				if(!silent)
-					this.loading = true
-
-				axios.get('api/issues/' + id).then((response) => {
-					this.issue = response.data.data
-					this.mode = null;
-
-					if(!silent)
-						this.loading = false;
-				})
-			},
+			...mapActions({
+				fetchIssue: 'issue/fetchIssue'
+			}),
 
 			// Open the reply form.
 			openReply() {
@@ -219,7 +208,7 @@
 			updateWorkflowStatus(key, name) {
 				axios.put('api/issues/' + this.issue.id + '/' +  'status/' + key).then((response) => {
 					this.mode = null;
-					this.loadDetails(this.issue.id, true);
+					this.fetchIssue(this.issue.id);
 				}).catch((error) => {
 					console.log(error);
 				});

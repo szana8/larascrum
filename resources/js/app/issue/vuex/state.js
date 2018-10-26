@@ -4,5 +4,8 @@ export default {
         data: null,
         meta: null
     },
-    projects: null
-}
+    projects: null,
+    selectedIssue: null,
+    selectedProject: null,
+    selectedPriority: 0,
+};

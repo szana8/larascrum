@@ -1,17 +1,16 @@
 <template>
 	<div>
 		<perfect-scrollbar class="scroll-area w-full mt-2" :settings="settings">
-			<project v-for="project in projects" :key="project.id" :project="project" />
+			<project v-for="project in projects" :key="project.id" :project="project" @selected="selected" />
 		</perfect-scrollbar>
 	</div>
 </template>
 
 <script>
-	import Project from './Cards/Project'
-
-	import { EventBus } from '../../../../event-bus.js'
-	import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
 	import { mapActions, mapGetters } from 'vuex'
+	import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
+
+	import Project from './Project'
 
 	export default {
 		components: {
@@ -21,7 +20,6 @@
 
 		data() {
 			return {
-				isIssueOpen: false,
 				settings: {
 					maxScrollbarLength: 60
 				}
@@ -29,6 +27,7 @@
 		},
 
 		 computed: {
+			 // Mat Vuex getters
 			...mapGetters({
             	projects: 'issue/projects'
 			})
@@ -36,13 +35,20 @@
 
 		mounted() {
 			/* Call the project API to get all of the relevant projects */
-			this.fetch();
+			this.fetchProjects();
 		},
 
 		methods: {
+			// Mat the Vuex actions
 			...mapActions({
-                fetch: 'issue/fetchProjects'
-			})
+                fetchProjects: 'issue/fetchProjects'
+			}),
+
+			// Fire a selected event when the user select a menu item
+			// from the sidebar projects
+			selected() {
+				this.$emit('selected');
+			}
 		}
 	}
 </script>

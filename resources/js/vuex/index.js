@@ -6,6 +6,7 @@ import issue from '../app/issue/vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+	strict: true,
 	modules: {
 		auth: auth,
 		issue: issue

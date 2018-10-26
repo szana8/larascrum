@@ -1,5 +1,5 @@
-import localforage from 'localforage'
 import { isEmpty } from 'lodash'
+import localforage from 'localforage'
 
 export const setToken = (state, token) => {
 	if (isEmpty(token)) {

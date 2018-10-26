@@ -1,4 +1,4 @@
-import { IssueDashboard } from '../components/'
+import { IssueDashboard } from '../components/';
 
 export default [
 	{
