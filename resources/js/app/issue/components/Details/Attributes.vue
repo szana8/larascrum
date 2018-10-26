@@ -96,8 +96,8 @@
 </template>
 
 <script>
-	import Attachments from '../Attachments/Attachments'
 	import { mapActions, mapGetters } from 'vuex'
+	import Attachments from '../Attachments/Attachments'
 
 	export default {
 
@@ -105,25 +105,13 @@
 			Attachments
 		},
 
-		data() {
-			return {
-				//
-			}
-		},
-
-		mounted() {
-
-		},
-
 		computed: {
+			// Set the necessary subscription class based on the user subscribion.
 			subscriptionClass() {
-				return this.isSubscribed ? 'justify-end bg-blue' : 'justify-start bg-white';
+				return this.issue.isSubscribedTo ? 'justify-end bg-blue' : 'justify-start bg-white';
 			},
 
-			isSubscribed() {
-				return this.issue.isSubscribedTo;
-			},
-
+			// Map Vuex getters
 			...mapGetters({
 				user: 'auth/user',
 				issue: 'issue/issue'
@@ -131,17 +119,15 @@
 		},
 
 		methods: {
+			// Map Vuex actions
 			...mapActions({
 				subscribe: 'issue/subscribe',
 				unSubscribe: 'issue/unSubscribe'
 			}),
 
+			// Subscribe or unsubscribe a user based on the current status.
 			toggleSubscribe() {
-				if (this.isSubscribed) {
-					return this.unSubscribe(this.issue.id);
-				}
-
-				return this.subscribe(this.issue.id);
+				return this.issue.isSubscribedTo ? this.unSubscribe(this.issue.id) : this.subscribe(this.issue.id);
 			},
 
 		}

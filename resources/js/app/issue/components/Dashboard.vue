@@ -8,7 +8,7 @@
 		<div class="w-5/6 flex">
 
 			<div class="w-1/4">
-				<quick-filters @updated=""></quick-filters>
+				<quick-filters></quick-filters>
 
 				<div class="ml-4">
 					<filtered-issues :issues="issues.data"

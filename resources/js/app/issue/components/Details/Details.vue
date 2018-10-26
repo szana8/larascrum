@@ -28,7 +28,7 @@
 									<div class="flex">
 										<h4 class="text-sm text-grey-dark inline-block py-5 no-underline font-semibol px-2 ml-6 border-b border-grey-lighter">Possible statuses:</h4>
 										<div>
-											<button href="#" class="mt-4 mx-2 bg-white border border-grey-light shadow text-grey-darkest text-sm rounded-full py-1 px-3 hover:bg-blue hover:text-white" v-for="transaction in this.issue.possibleTransactions" :key="transaction.key" @click="updateWorkflowStatus(transaction.key)">{{ transaction.text }}</button>
+											<button href="#" class="mt-4 mx-2 bg-white border border-grey-light shadow text-grey-darkest text-sm rounded-full py-1 px-3 hover:bg-blue hover:text-white" v-for="transaction in this.issue.possibleTransactions" :key="transaction.key" @click="updateWorkflow(transaction.key)">{{ transaction.text }}</button>
 										</div>
 									</div>
 
@@ -191,7 +191,7 @@
 
 		methods: {
 			...mapActions({
-				fetchIssue: 'issue/fetchIssue'
+				updateWorkflowStatus: 'issue/updateWorkflowStatus'
 			}),
 
 			// Open the reply form.
@@ -205,13 +205,12 @@
 			},
 
 			// Call the update workdflow api to change the workflow status.
-			updateWorkflowStatus(key, name) {
-				axios.put('api/issues/' + this.issue.id + '/' +  'status/' + key).then((response) => {
-					this.mode = null;
-					this.fetchIssue(this.issue.id);
-				}).catch((error) => {
-					console.log(error);
+			updateWorkflow(key) {
+				this.updateWorkflowStatus({
+					issue: this.issue.id,
+					key: key
 				});
+				this.mode = null;
 			},
 
 			// If the possbile transitions object empty, we hide the Movo to button.

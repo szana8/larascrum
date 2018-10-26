@@ -97,14 +97,28 @@ export const setIssueSubscription = (state, { subscription, isSubscribed }) => {
  };
 
 /**
-* Set the issue object subscribe properties to the prover value.
+* Remove the user subscription from the issue.
 *
 * @param {Object} state	  Vuex State
-* @param {Object} priority	Subscription
+* @param {Object} user	  User
 */
-export const removeIssueSubscription = (state, isSubscribed) => {
-	state.issue.isSubscribedTo = isSubscribed;
-	//console.log(rootState)
-	//let index = state.issue.subscriptions.findIndex(sub => sub.user_id === state.auth.user.data.id && sub.issue_id === state.issue.id);
-	//state.issue.subscriptions.splice(this.issue.subscriptions.indexOf(index), 1);
+export const removeIssueSubscription = (state, user) => {
+	state.issue.isSubscribedTo = false;
+	let index = state.issue.subscriptions.findIndex(sub => sub.user_id === user.data.id && sub.issue_id === state.issue.id);
+	state.issue.subscriptions.splice(state.issue.subscriptions.indexOf(index), 1);
+ };
+
+/**
+ * Push the new reply object to the existing replies of the issue.
+ *
+ * @param {Object} state 	Vuex state
+ * @param {Object} reply 	Reply object
+ */
+ export const addReplyToList = (state, reply) => {
+	state.issue.replies.push(reply);
+ };
+
+ export const replaceReply = (state, {id, reply}) => {
+	var index = state.issue.replies.findIndex(rep => rep.id === id);
+	state.issue.replies[index].text = reply;
  };

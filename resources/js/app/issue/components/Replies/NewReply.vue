@@ -30,6 +30,7 @@
 <script>
     import { EventBus } from '../../../../event-bus.js'
     import { SlideYDownTransition } from 'vue2-transitions'
+    import { mapActions } from 'vuex';
 
     export default {
         components: {
@@ -38,11 +39,11 @@
 
         data() {
             return {
-                isActive: false,
-                reply: null,
                 id: null,
+                reply: null,
                 title: null,
-                mode: 'insert'
+                mode: 'post',
+                isActive: false,
             }
         },
 
@@ -52,11 +53,17 @@
         },
 
         methods: {
+            ...mapActions({
+                replyIssue: 'issue/replyIssue',
+                updateReply: 'issue/updateReply'
+            }),
+
             openNewReplyPopup(id, title) {
                 this.id = id;
                 this.title = title;
                 this.isActive = true;
 
+                // Set the focus to the textarea after the form shown.
                 this.$nextTick(() => this.$refs.reply.focus())
             },
 
@@ -64,39 +71,24 @@
                 this.id = null;
                 this.title = null;
                 this.reply = null;
-                this.mode = 'insert';
+                this.mode = 'post';
                 this.isActive = false;
             },
 
             postReply() {
-                if (!this.reply)
-                    return
-
-                if (this.mode === 'update') {
-                    return axios.put('api/replies/' + this.id, {
-                        text: this.reply
-                    }).then((response) => {
-                        this.$emit('updated', this.id, this.reply);
+                if (this.mode === 'post') {
+                    this.replyIssue({ issue: this.id, reply: this.reply }).then((response) => {
                         this.closeReply();
-                    }).catch((error) => {
-                        console.log(error)
-                    })
+                    });
                 }
 
-
-                axios.post('api/replies/' + this.id + '/reply', {
-                    text: this.reply
-                }).then((response) => {
-                    this.$emit('posted', response.data);
+                this.updateReply({id: this.id, reply: this.reply}).then((response) => {
                     this.closeReply();
-                }).catch((error) => {
-                    console.log(error)
-                })
-
+                });
             },
 
             editReply(reply) {
-                this.mode = 'update';
+                this.mode = 'put';
                 this.reply = reply.text;
 
                 this.openNewReplyPopup(reply.id, reply.title);

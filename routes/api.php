@@ -40,9 +40,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('issues/{issue}/status/{status_id}', 'WorkflowController@update');
 
     // Routes for the Reply functions
+    Route::post('replies/{issue}', 'ReplyController@store');
     Route::put('replies/{reply}', 'ReplyController@update');
     Route::delete('replies/{reply}', 'ReplyController@destroy');
-    Route::post('replies/{issue}/reply', 'ReplyController@store');
 
     // Routes for the Project functions
     Route::get('projects', 'ProjectController@index');

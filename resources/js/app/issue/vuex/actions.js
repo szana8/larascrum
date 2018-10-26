@@ -1,8 +1,8 @@
 /**
  * Load the necessary objects for the future usage.
  */
-import { isEmpty } from 'lodash';
-import localforage from 'localforage';
+//import { isEmpty } from 'lodash';
+//import localforage from 'localforage';
 
 /**
  * Fetch the project list and set it to the project state, only those
@@ -69,7 +69,7 @@ export const selectIssue = ({ commit, dispatch }, issue) => {
  *
  * @param {Object} issue 	Issue
  */
-export const subscribe = ({ commit, dispatch }, issue) => {
+export const subscribe = ({ commit }, issue) => {
 	return axios.post('/api/issues/' + issue + '/subscribe').then((response) => {
 		commit('setIssueSubscription', {subscription: response.data, isSubscribed: true});
 	});
@@ -80,8 +80,46 @@ export const subscribe = ({ commit, dispatch }, issue) => {
  *
  * @param {Object} issue 	Issue
  */
-export const unSubscribe = ({ commit, dispatch }, issue) => {
+export const unSubscribe = ({ commit, rootState }, issue) => {
 	return axios.delete('/api/issues/' + issue + '/unsubscribe').then((response) => {
-		commit('removeIssueSubscription', false);
+		commit('removeIssueSubscription', rootState.auth.user);
+	});
+};
+
+/**
+ * Update the workflow status of the issue with the givven parameter.
+ *
+ * @param {Number} issue 	Issue id
+ * @param {Number} key 		Key of the new workflow status
+ */
+export const updateWorkflowStatus = ({ dispatch }, { issue, key }) => {
+	return axios.put('/api/issues/' + issue + '/' +  'status/' + key).then((response) => {
+		dispatch('fetchIssue', issue);
+	});
+};
+
+/**
+ * Add a new reply to the issue based on the givven parameters.
+ *
+ * @param {Number} issue 	Issue Id
+ * @param {String} reply	Reply text
+ */
+export const replyIssue = ({ commit }, { issue, reply }) => {
+	return axios.post('/api/replies/' + issue, { text: reply }).then((response) => {
+		commit('addReplyToList', response.data);
+		return Promise.resolve('Reply has been added');
+	});
+};
+
+/**
+ * Add a new reply to the issue based on the givven parameters.
+ *
+ * @param {Number} issue 	Issue Id
+ * @param {String} reply	Reply text
+ */
+export const updateReply = ({ commit }, { id, reply }) => {
+	return axios.put('/api/replies/' + id, { text: reply }).then((response) => {
+		commit('replaceReply', {id: id, reply: reply});
+		return Promise.resolve('Reply has been updated');
 	});
 };
