@@ -16,11 +16,19 @@
             FadeTransition
         },
 
-        props: ['whenHidden'],
+        props: {
+            'whenHidden': {
+                type: String
+            },
+            'parent': {
+                type: String
+            }
+        },
 
-        data() {
-            return {
-                isVisible: false
+        computed: {
+            // Check the element is on the parent.
+            checkDisplay() {
+                return !inViewport(document.querySelector(this.whenHidden), { container: document.querySelector(this.parent) });
             }
         },
 
@@ -28,10 +36,5 @@
             EventBus.$on('scrollIssue', this.checkDisplay);
         },
 
-        methods: {
-            checkDisplay() {
-                this.isVisible = !inViewport(document.querySelector(this.whenHidden), { container: document.querySelector('#container') });
-            }
-        }
     }
 </script>

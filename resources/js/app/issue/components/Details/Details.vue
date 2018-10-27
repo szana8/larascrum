@@ -95,10 +95,6 @@
 							</p>
 						</div>
 
-						<!-- <p class="text-center mt-8 border-t border-grey-lighter py-6" v-if="!showMore">
-							<a href="#" class="text-blue no-underline text-sm font-semibold hover:text-blue-light" @click="showMore = true">More</a>
-						</p> -->
-
 					</div>
 
 					<div class="flex justify-between mt-4 mb-10">
@@ -164,32 +160,29 @@
 
 		data() {
 			return {
+				mode: null,
+				loading: false,
 				settings: {
 					maxScrollbarLength: 60
-				},
-				loading: false,
-				showMore: false,
-				mode: null
+				}
 			}
 		},
 
 		computed: {
-			// Show more details.
-			showMoreClass() {
-				return this.showMore === true ? 'h-auto' : 'h-32 overflow-hidden'
-			},
 
 			// Show the number of the issue replies.
 			repliesCount() {
 				return this.issue.replies.length > 1 ? this.issue.replies.length + ' replies' : this.issue.replies.length + ' reply';
 			},
 
+			// Map Vuex getters
 			...mapGetters({
 				issue: 'issue/issue'
 			}),
 		},
 
 		methods: {
+			// Map Vuex actions.
 			...mapActions({
 				updateWorkflowStatus: 'issue/updateWorkflowStatus'
 			}),

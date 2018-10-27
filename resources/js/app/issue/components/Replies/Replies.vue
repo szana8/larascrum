@@ -4,7 +4,7 @@
 
         <new-reply @posted="addNewReplyToList" @updated="updateReply"></new-reply>
 
-        <conditional-element :when-hidden="button">
+        <conditional-element :when-hidden="button" :parent="parent">
              <button class="float bg-blue text-white shadow-lg focus:outline-none hover:bg-blue-dark" @click="openNewReplyPopup">
                 <svg version="1.1" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" class="w-6 h-6 text-white mt-1" xml:space="preserve">
                     <path d="M492,236H276V20c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v216H20c-11.046,0-20,8.954-20,20s8.954,20,20,20h216
@@ -39,8 +39,9 @@
 
         data() {
             return {
+                parent: '#container',
                 replies: this.issue.replies,
-                button: '#js-issue-reply-button'
+                button: '#js-issue-reply-button',
             }
         },
 

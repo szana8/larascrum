@@ -28,9 +28,10 @@
 </template>
 
 <script>
-    import { EventBus } from '../../../../event-bus.js'
-    import { SlideYDownTransition } from 'vue2-transitions'
     import { mapActions } from 'vuex';
+    import { EventBus } from '../../../../event-bus.js'
+
+    import { SlideYDownTransition } from 'vue2-transitions'
 
     export default {
         components: {
@@ -48,23 +49,25 @@
         },
 
         mounted() {
-            EventBus.$on('openNewReplyPopup', this.openNewReplyPopup);
             EventBus.$on('editReply', this.editReply);
+            EventBus.$on('openNewReplyPopup', this.openNewReplyPopup);
         },
 
         methods: {
+            // Map Vuex actions.
             ...mapActions({
                 replyIssue: 'issue/replyIssue',
                 updateReply: 'issue/updateReply'
             }),
 
+            // Open the reply popu and set the cursor foruc to the textarea.
             openNewReplyPopup(id, title) {
                 this.id = id;
                 this.title = title;
                 this.isActive = true;
 
                 // Set the focus to the textarea after the form shown.
-                this.$nextTick(() => this.$refs.reply.focus())
+                this.$nextTick(() => this.$refs.reply.focus());
             },
 
             closeReply() {
@@ -75,18 +78,18 @@
                 this.isActive = false;
             },
 
+            // Create a new reply or update an existing reply.
             postReply() {
+                // If the user create new comment pass the issue id
                 if (this.mode === 'post') {
-                    this.replyIssue({ issue: this.id, reply: this.reply }).then((response) => {
-                        this.closeReply();
-                    });
+                    return this.replyIssue({ issue: this.id, reply: this.reply }).then(() => { this.closeReply(); });
                 }
 
-                this.updateReply({id: this.id, reply: this.reply}).then((response) => {
-                    this.closeReply();
-                });
+                // else we update the existing one
+                return this.updateReply({id: this.id, reply: this.reply}).then(() => { this.closeReply(); });
             },
 
+            // Set the necessary attributes to edit an existing reply, than open the reply popup.
             editReply(reply) {
                 this.mode = 'put';
                 this.reply = reply.text;
