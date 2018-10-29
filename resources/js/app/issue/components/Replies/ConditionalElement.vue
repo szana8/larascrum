@@ -25,10 +25,9 @@
             }
         },
 
-        computed: {
-            // Check the element is on the parent.
-            checkDisplay() {
-                return !inViewport(document.querySelector(this.whenHidden), { container: document.querySelector(this.parent) });
+        data() {
+            return {
+                isVisible: false
             }
         },
 
@@ -36,5 +35,11 @@
             EventBus.$on('scrollIssue', this.checkDisplay);
         },
 
+        methods: {
+             // Check the element is on the parent.
+            checkDisplay() {
+                this.isVisible = !inViewport(document.querySelector(this.whenHidden), { container: document.querySelector(this.parent) });
+            }
+        }
     }
 </script>

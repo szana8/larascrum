@@ -47,4 +47,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Routes for the Project functions
     Route::get('projects', 'ProjectController@index');
     Route::post('projects', 'ProjectController@store');
+
+    Route::get('users', 'UserController@index');
 });

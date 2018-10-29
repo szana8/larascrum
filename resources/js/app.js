@@ -37,8 +37,8 @@ Vue.use(PerfectScrollbar)
 Vue.component('app', require('./components/App.vue'));
 Vue.component('navigation', require('./components/Navigation/Navigation.vue'));
 
-Vue.component('sidebarSearchPanel', require('./components/Panels/SidebarSearchPanel.vue'));
-
+Vue.component('sidebarSearchPanel', require('./components/QuickLinks/SidebarSearchPanel.vue'));
+//Vue.component('v-select', VueSelect.VueSelect);
 /**
  * Check the user token is exist or not, depends on that we redirect the user
  * to the requested page or if the page needs authentication redirect to

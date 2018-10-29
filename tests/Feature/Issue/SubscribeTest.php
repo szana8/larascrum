@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Issue;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -35,7 +35,18 @@ class SubscribeTest extends TestCase
         $issue = $this->createIssueWithFactory();
         $issue->subscribe();
 
-        $this->delete('api/issues/' . $issue->id . '/unscubscribe');
+        $this->delete('api/issues/' . $issue->id . '/unsubscribe');
         $this->assertCount(0, $issue->subscriptions);
+    }
+
+    /** @test */
+    public function an_unautheticated_user_can_not_subscribe_to_issues()
+    {
+        $this->artisan('passport:install');
+
+        $issue = $this->createIssueWithFactory();
+
+        $response = $this->post('api/issues/' . $issue->id . '/subscribe');
+        $this->assertCount(0, $issue->fresh()->subscriptions);
     }
 }

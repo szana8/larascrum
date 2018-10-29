@@ -54,7 +54,7 @@
 
 <script>
 	import { mapGetters, mapActions } from 'vuex'
-	import CreatePanel from '../Panels/CreatePanel'
+	import CreatePanel from '../QuickLinks/CreatePanel'
 	import { EventBus } from '../../event-bus.js'
 
 

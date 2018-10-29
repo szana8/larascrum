@@ -23,7 +23,12 @@
                         <div class="flex my-2 items-stretch">
                             <div for="" class="w-32 text-right self-center text-sm text-grey-darker">Project Lead</div>
                             <div class="ml-4 w-64">
-                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outliney" v-model="owner_id" />
+                                <v-select :options="users" label="name" v-model="owner_id" id="user" class="shadow">
+                                    <template slot="option" slot-scope="option" class="flex items-stretch">
+                                        <img :src="option.avatar_url" class="w-5 h-5 self-center rounded-full">
+                                        <span class="self-center font-normal">{{ option.name }}</span>
+                                    </template>
+                                </v-select>
                             </div>
 
                         </div>
@@ -32,15 +37,12 @@
                             <div for="" class="w-32 text-right self-center text-sm text-grey-darker">Project Type</div>
                             <div class="ml-4">
                                 <div class="inline-block relative w-64">
-                                    <select class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" v-model="type">
-                                        <option value="">Please Select One...</option>
-                                        <option value="business">Business</option>
-                                        <option value="software">Software</option>
-                                        <option value="service_desk">Service Desk</option>
-                                    </select>
-                                    <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                    </div>
+                                    <v-select :options="project_types" label="label" v-model="type" id="project" class="shadow">
+                                        <template slot="option" slot-scope="option" class="flex items-stretch">
+                                            <img :src="option.icon" class="w-5 h-5 self-center">
+                                            <span class="self-center font-normal">{{ option.label }}</span>
+                                        </template>
+                                    </v-select>
                                 </div>
                                 <div class="text-xs text-grey mt-1"></div>
                             </div>
@@ -87,15 +89,55 @@
 
 </template>
 <script>
+    import ProjectNameSlugify from '../../helpers/ProjectNameSlugify'
+    import vSelect from 'vue-select'
+    import {EventBus} from '../../event-bus'
+
+
     export default {
+        components: {
+            vSelect
+        },
+
         data() {
             return {
                 name: null,
                 key: null,
                 owner_id: null,
                 type: null,
-                description: null
+                description: null,
+                slugify: new ProjectNameSlugify(),
+                users: [],
+                project_types: [
+                    {
+                        id: 'business',
+                        label: 'Business',
+                        icon: 'storage/icons/project/business.svg'
+                    },
+                    {
+                        id: 'software',
+                        label: 'Software',
+                        icon: 'storage/icons/project/software.svg'
+                    },
+                    {
+                        id: 'service_desk',
+                        label: 'Service Desk',
+                        icon: 'storage/icons/project/service_desk.svg'
+                    }
+                ]
             }
+        },
+
+        watch: {
+            name() {
+                this.key = this.slugify.generateKey(this.name);
+            }
+        },
+
+        mounted() {
+            axios.get('api/users').then((response) => {
+                this.users = response.data.data;
+            });
         },
 
         methods: {
@@ -103,11 +145,17 @@
                 axios.post('api/projects', {
                     name: this.name,
                     slug: this.key,
-                    owner_id: this.owner_id,
-                    type: this.type,
+                    owner_id: this.owner_id.id,
+                    type: this.type.id,
                     description: this.description
                 }).then((response) => {
-                    console.log(response);
+                    this.name = null;
+                    this.slug = null;
+                    this.owner_id = null;
+                    this.type = null;
+                    this.description = null;
+
+                    EventBus.$emit('project-created', response);
                 })
             }
         }

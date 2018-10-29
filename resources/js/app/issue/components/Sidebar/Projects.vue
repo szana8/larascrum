@@ -9,6 +9,7 @@
 <script>
 	import { mapActions, mapGetters } from 'vuex'
 	import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
+	import { EventBus } from '../../../../event-bus'
 
 	import Project from './Project'
 
@@ -36,6 +37,7 @@
 		mounted() {
 			/* Call the project API to get all of the relevant projects */
 			this.fetchProjects();
+			EventBus.$on('project-created', this.fetchProjects);
 		},
 
 		methods: {

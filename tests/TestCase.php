@@ -21,7 +21,7 @@ abstract class TestCase extends BaseTestCase
         return $this;
     }
 
-    protected function createIssueWithFactory()
+    protected function createIssueWithFactory($issue = true)
     {
         $user = create(User::class, ['active' => true]);
 
@@ -29,7 +29,9 @@ abstract class TestCase extends BaseTestCase
         factory(IssueType::class)->create();
         factory(Priority::class)->create();
         factory(Project::class)->create();
+        if ($issue)
+            return factory(Issue::class)->create();
 
-        return factory(Issue::class)->create();
+        return;
     }
 }

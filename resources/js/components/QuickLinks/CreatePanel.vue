@@ -87,6 +87,7 @@
 
         mounted() {
             EventBus.$on('openCreatePanel', this.open);
+            EventBus.$on('project-created', this.hide);
         },
 
         methods: {
