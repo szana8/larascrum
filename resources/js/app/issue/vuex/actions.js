@@ -123,3 +123,16 @@ export const updateReply = ({ commit }, { id, reply }) => {
 		return Promise.resolve('Reply has been updated');
 	});
 };
+
+/**
+ * Add a new reply to the issue based on the givven parameters.
+ *
+ * @param {Number} issue 	Issue Id
+ * @param {String} reply	Reply text
+ */
+export const deleteReply = ({ commit }, reply) => {
+	return axios.delete('api/replies/' + reply).then((response) => {
+		commit('deleteReply', reply);
+		return Promise.resolve('Reply has been updated');
+	});
+};

@@ -12,8 +12,6 @@
 
             <div>
                 <div class="text-grey-light cursor-pointer hover:text-grey-dark mt-1" v-show="isEditable" @click="isClicked = !isClicked">
-                   <!--  <svg height="20" viewBox="0 -135 369.91339 369" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m369.277344 42.027344c4.367187 26.945312-13.933594 52.328125-40.878906 56.695312-26.945313 4.371094-52.328126-13.933594-56.695313-40.875-4.367187-26.945312 13.933594-52.328125 40.878906-56.695312 26.945313-4.367188 52.328125 13.933594 56.695313 40.875zm0 0" fill="currentcolor" /><path d="m234.421875 49.886719c0 27.296875-22.128906 49.429687-49.429687 49.429687-27.296876 0-49.425782-22.132812-49.425782-49.429687 0-27.300781 22.128906-49.429688 49.425782-49.429688 27.300781 0 49.429687 22.128907 49.429687 49.429688zm0 0" fill="currentcolor"/><path d="m84.382812 14.933594c19.304688 19.304687 19.304688 50.601562 0 69.90625-19.304687 19.304687-50.601562 19.304687-69.90625 0-19.300781-19.304688-19.300781-50.601563 0-69.90625 19.304688-19.300782 50.601563-19.300782 69.90625 0zm0 0" fill="currentcolor"/></svg> -->
-
                     <button class="text-xs text-grey-light hover:text-grey inline-block mx-2" @click="editReply(reply)">Edit</button>
                     <button class="text-xs text-grey-light hover:text-grey inline-block mx-2" @click="deleteReply(reply.id)">Delete</button>
 
@@ -35,6 +33,7 @@
 <script>
     import moment from 'moment'
     import { EventBus } from '../../../../event-bus';
+import { mapActions } from 'vuex';
 
     export default {
 
@@ -46,8 +45,8 @@
 
         data() {
             return {
+                isClicked: false,
                 isEditable: false,
-                isClicked: false
             }
         },
 
@@ -58,6 +57,10 @@
         },
 
         methods: {
+            ...mapActions({
+                deleteReply: 'issue/deleteReply'
+            }),
+
             checkEditable() {
                 this.isEditable = true;
             },
@@ -66,13 +69,7 @@
                 EventBus.$emit('editReply', reply);
             },
 
-            deleteReply(reply) {
-                axios.delete('api/replies/' + reply).then((response) => {
-                    this.$emit('deleted', reply);
-                }).catch((error) => {
-                    console.log(error);
-                });
-            }
+
         }
 
     }

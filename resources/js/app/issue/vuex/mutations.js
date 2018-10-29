@@ -118,14 +118,26 @@ export const removeIssueSubscription = (state, user) => {
 	state.issue.replies.push(reply);
  };
 
- /**
-  * Replace the reply text to the givven reply value.
-  *
-  * @param {Object} state 	Vuex state
+/**
+ * Replace the reply text to the givven reply value.
+ *
+ * @param {Object} state 	Vuex state
  * @param {Number} id     Reply id
  * @param {String} reply   Reply text
-  */
+ */
  export const replaceReply = (state, {id, reply}) => {
 	var index = state.issue.replies.findIndex(rep => rep.id === id);
 	state.issue.replies[index].text = reply;
  };
+
+/**
+ * Delete the reply from the issue replies.
+ *
+ * @param {Object} state 	Vuex state
+ * @param {Number} id     Reply id
+ * @param {String} reply   Reply text
+ */
+export const deleteReply = (state, reply) => {
+	var index = state.issue.replies.findIndex(rep => rep.id === reply);
+	state.issue.replies.splice(index, 1);
+};

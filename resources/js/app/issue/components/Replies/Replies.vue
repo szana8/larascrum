@@ -1,8 +1,8 @@
 <template>
     <div>
-        <reply v-for="reply in replies" :key="reply.id" :reply="reply" @deleted="deleteReplyFromList"></reply>
+        <reply v-for="reply in replies" :key="reply.id" :reply="reply"></reply>
 
-        <new-reply @posted="addNewReplyToList" @updated="updateReply"></new-reply>
+        <new-reply></new-reply>
 
         <conditional-element :when-hidden="button" :parent="parent">
              <button class="float bg-blue text-white shadow-lg focus:outline-none hover:bg-blue-dark" @click="openNewReplyPopup">
@@ -22,6 +22,7 @@
     import ConditionalElement from './ConditionalElement'
 
     import { EventBus } from '../../../../event-bus.js'
+    import { mapGetters } from 'vuex';
 
     export default {
 
@@ -31,18 +32,18 @@
             ConditionalElement
         },
 
-        props: {
-            'issue': {
-                type: Object
-            }
-        },
-
         data() {
             return {
                 parent: '#container',
-                replies: this.issue.replies,
                 button: '#js-issue-reply-button',
             }
+        },
+
+        computed: {
+            ...mapGetters({
+                issue: 'issue/issue',
+                replies: 'issue/replies',
+            })
         },
 
         methods: {
@@ -50,23 +51,6 @@
             openNewReplyPopup() {
                 EventBus.$emit('openNewReplyPopup', this.issue.id, this.issue.title);
             },
-
-            // Add the new reply text to the replies array and refresh the list
-            addNewReplyToList(reply) {
-                this.replies.push(reply)
-            },
-
-            // Delete the selected reply from the list
-            deleteReplyFromList(reply) {
-                var index = this.replies.findIndex(rep => rep.id === reply);
-                this.replies.splice(index, 1);
-            },
-
-            // Updarte the edited reply text in the array
-            updateReply(reply, text) {
-                var index = this.replies.findIndex(rep => rep.id === reply);
-                this.replies[index].text = text;
-            }
         }
     }
 </script>

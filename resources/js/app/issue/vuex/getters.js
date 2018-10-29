@@ -17,6 +17,15 @@ export const issue = (state) => {
 };
 
 /**
+ * Return the replies of the issue object from the Vuex State
+ *
+ * @param {Object} state
+ */
+export const replies = (state) => {
+	return state.issue.replies;
+};
+
+/**
  * Return the list of the projects from the Vuex State
  *
  * @param {Object} state

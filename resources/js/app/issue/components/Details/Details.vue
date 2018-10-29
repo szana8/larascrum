@@ -8,15 +8,15 @@
 							<slide-y-down-transition group>
 								<div class="flex justify-between" v-if="!mode" key="selector">
 									<div>
-										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Edit</a>
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-white hover:border-b hover:border-blue">Edit</a>
 
-										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue">Assign</a>
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-white hover:border-b hover:border-blue">Assign</a>
 
-										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue" @click="mode = 'workflow'" v-if="!isEmpty(this.issue.possibleTransactions)">
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-white hover:border-b hover:border-blue" @click="mode = 'workflow'" v-if="!isEmpty(this.issue.possibleTransactions)">
 											Move to...
 										</a>
 
-										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue" @click="mode = 'more'">More</a>
+										<a href="#" class="inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-white hover:border-b hover:border-blue" @click="mode = 'more'">More</a>
 									</div>
 
 									<div>

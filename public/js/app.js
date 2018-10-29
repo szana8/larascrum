@@ -5632,6 +5632,17 @@ var index_esm = {
 
 /***/ }),
 /* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventBus; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+
+var EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5939,17 +5950,6 @@ module.exports = {
   trim: trim
 };
 
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventBus; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-
-var EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
 /* 5 */
@@ -37690,7 +37690,7 @@ var index = {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 var normalizeHeaderName = __webpack_require__(242);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -64222,7 +64222,7 @@ module.exports = function bind(fn, thisArg) {
 "use strict";
 
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 var settle = __webpack_require__(243);
 var buildURL = __webpack_require__(245);
 var parseHeaders = __webpack_require__(246);
@@ -65147,6 +65147,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeIssueSubscription", function() { return removeIssueSubscription; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addReplyToList", function() { return addReplyToList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "replaceReply", function() { return replaceReply; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteReply", function() { return deleteReply; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_localforage__ = __webpack_require__(8);
@@ -65280,8 +65281,8 @@ var addReplyToList = function addReplyToList(state, reply) {
  * Replace the reply text to the givven reply value.
  *
  * @param {Object} state 	Vuex state
-* @param {Number} id     Reply id
-* @param {String} reply   Reply text
+ * @param {Number} id     Reply id
+ * @param {String} reply   Reply text
  */
 var replaceReply = function replaceReply(state, _ref2) {
   var id = _ref2.id,
@@ -65291,6 +65292,20 @@ var replaceReply = function replaceReply(state, _ref2) {
     return rep.id === id;
   });
   state.issue.replies[index].text = reply;
+};
+
+/**
+ * Delete the reply from the issue replies.
+ *
+ * @param {Object} state 	Vuex state
+ * @param {Number} id     Reply id
+ * @param {String} reply   Reply text
+ */
+var deleteReply = function deleteReply(state, reply) {
+  var index = state.issue.replies.findIndex(function (rep) {
+    return rep.id === reply;
+  });
+  state.issue.replies.splice(index, 1);
 };
 
 /***/ }),
@@ -65309,6 +65324,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateWorkflowStatus", function() { return updateWorkflowStatus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "replyIssue", function() { return replyIssue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateReply", function() { return updateReply; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteReply", function() { return deleteReply; });
 /**
  * Load the necessary objects for the future usage.
  */
@@ -65466,6 +65482,21 @@ var updateReply = function updateReply(_ref14, _ref15) {
   });
 };
 
+/**
+ * Add a new reply to the issue based on the givven parameters.
+ *
+ * @param {Number} issue 	Issue Id
+ * @param {String} reply	Reply text
+ */
+var deleteReply = function deleteReply(_ref16, reply) {
+  var commit = _ref16.commit;
+
+  return axios.delete('api/replies/' + reply).then(function (response) {
+    commit('deleteReply', reply);
+    return Promise.resolve('Reply has been updated');
+  });
+};
+
 /***/ }),
 /* 162 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -65474,6 +65505,7 @@ var updateReply = function updateReply(_ref14, _ref15) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "issues", function() { return issues; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "issue", function() { return issue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "replies", function() { return replies; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "projects", function() { return projects; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedIssue", function() { return selectedIssue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedProject", function() { return selectedProject; });
@@ -65494,6 +65526,15 @@ var issues = function issues(state) {
  */
 var issue = function issue(state) {
   return state.issue;
+};
+
+/**
+ * Return the replies of the issue object from the Vuex State
+ *
+ * @param {Object} state
+ */
+var replies = function replies(state) {
+  return state.issue.replies;
 };
 
 /**
@@ -69936,7 +69977,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Sidebar_Projects__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Sidebar_Projects___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Sidebar_Projects__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Details_Details__ = __webpack_require__(195);
@@ -70146,7 +70187,7 @@ var content = __webpack_require__(186);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(10)("54898191", content, false, {});
+var update = __webpack_require__(10)("bfde41de", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70217,7 +70258,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_perfect_scrollbar__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_perfect_scrollbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue2_perfect_scrollbar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_bus__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_bus__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Project__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Project___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__Project__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -70337,7 +70378,7 @@ var content = __webpack_require__(191);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(10)("a7efced6", content, false, {});
+var update = __webpack_require__(10)("4b5f0b15", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70920,7 +70961,7 @@ var content = __webpack_require__(197);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(10)("8c72bae4", content, false, {});
+var update = __webpack_require__(10)("591d950e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70961,7 +71002,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Replies_Replies___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Replies_Replies__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__event_bus_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue2_transitions__ = __webpack_require__(11);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -71830,7 +71871,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NewReply___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NewReply__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ConditionalElement__ = __webpack_require__(214);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ConditionalElement___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ConditionalElement__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__event_bus_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -71849,6 +71893,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -71864,49 +71909,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         ConditionalElement: __WEBPACK_IMPORTED_MODULE_2__ConditionalElement___default.a
     },
 
-    props: {
-        'issue': {
-            type: Object
-        }
-    },
-
     data: function data() {
         return {
             parent: '#container',
-            replies: this.issue.replies,
             button: '#js-issue-reply-button'
         };
     },
 
 
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["c" /* mapGetters */])({
+        issue: 'issue/issue',
+        replies: 'issue/replies'
+    })),
+
     methods: {
         // Open the new reply form
         openNewReplyPopup: function openNewReplyPopup() {
             __WEBPACK_IMPORTED_MODULE_3__event_bus_js__["a" /* EventBus */].$emit('openNewReplyPopup', this.issue.id, this.issue.title);
-        },
-
-
-        // Add the new reply text to the replies array and refresh the list
-        addNewReplyToList: function addNewReplyToList(reply) {
-            this.replies.push(reply);
-        },
-
-
-        // Delete the selected reply from the list
-        deleteReplyFromList: function deleteReplyFromList(reply) {
-            var index = this.replies.findIndex(function (rep) {
-                return rep.id === reply;
-            });
-            this.replies.splice(index, 1);
-        },
-
-
-        // Updarte the edited reply text in the array
-        updateReply: function updateReply(reply, text) {
-            var index = this.replies.findIndex(function (rep) {
-                return rep.id === reply;
-            });
-            this.replies[index].text = text;
         }
     }
 });
@@ -71966,7 +71985,10 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -71999,8 +72021,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
+
 
 
 
@@ -72015,8 +72036,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            isEditable: false,
-            isClicked: false
+            isClicked: false,
+            isEditable: false
         };
     },
 
@@ -72027,23 +72048,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
 
-    methods: {
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapActions */])({
+        deleteReply: 'issue/deleteReply'
+    }), {
         checkEditable: function checkEditable() {
             this.isEditable = true;
         },
         editReply: function editReply(reply) {
             __WEBPACK_IMPORTED_MODULE_1__event_bus__["a" /* EventBus */].$emit('editReply', reply);
-        },
-        deleteReply: function deleteReply(reply) {
-            var _this = this;
-
-            axios.delete('api/replies/' + reply).then(function (response) {
-                _this.$emit('deleted', reply);
-            }).catch(function (error) {
-                console.log(error);
-            });
         }
-    }
+    })
 
 });
 
@@ -72486,7 +72500,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_transitions__ = __webpack_require__(11);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -72806,7 +72820,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_in_viewport__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_in_viewport___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_in_viewport__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_transitions__ = __webpack_require__(11);
 //
 //
@@ -73189,16 +73203,10 @@ var render = function() {
     "div",
     [
       _vm._l(_vm.replies, function(reply) {
-        return _c("reply", {
-          key: reply.id,
-          attrs: { reply: reply },
-          on: { deleted: _vm.deleteReplyFromList }
-        })
+        return _c("reply", { key: reply.id, attrs: { reply: reply } })
       }),
       _vm._v(" "),
-      _c("new-reply", {
-        on: { posted: _vm.addNewReplyToList, updated: _vm.updateReply }
-      }),
+      _c("new-reply"),
       _vm._v(" "),
       _c(
         "conditional-element",
@@ -73296,7 +73304,7 @@ var render = function() {
                                         "a",
                                         {
                                           staticClass:
-                                            "inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue",
+                                            "inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-white hover:border-b hover:border-blue",
                                           attrs: { href: "#" }
                                         },
                                         [_vm._v("Edit")]
@@ -73306,7 +73314,7 @@ var render = function() {
                                         "a",
                                         {
                                           staticClass:
-                                            "inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue",
+                                            "inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-white hover:border-b hover:border-blue",
                                           attrs: { href: "#" }
                                         },
                                         [_vm._v("Assign")]
@@ -73319,7 +73327,7 @@ var render = function() {
                                             "a",
                                             {
                                               staticClass:
-                                                "inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue",
+                                                "inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-white hover:border-b hover:border-blue",
                                               attrs: { href: "#" },
                                               on: {
                                                 click: function($event) {
@@ -73339,7 +73347,7 @@ var render = function() {
                                         "a",
                                         {
                                           staticClass:
-                                            "inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-grey-lighter hover:border-b hover:border-blue",
+                                            "inline-block py-5 no-underline font-semibold text-sm text-blue px-8 border-b border-white hover:border-b hover:border-blue",
                                           attrs: { href: "#" },
                                           on: {
                                             click: function($event) {
@@ -74050,7 +74058,7 @@ var content = __webpack_require__(228);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(10)("13116bd0", content, false, {});
+var update = __webpack_require__(10)("6f96e090", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -78619,7 +78627,7 @@ module.exports = __webpack_require__(239);
 "use strict";
 
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 var bind = __webpack_require__(142);
 var Axios = __webpack_require__(241);
 var defaults = __webpack_require__(12);
@@ -78706,7 +78714,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(12);
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 var InterceptorManager = __webpack_require__(250);
 var dispatchRequest = __webpack_require__(251);
 
@@ -78791,7 +78799,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -78871,7 +78879,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -78944,7 +78952,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -79004,7 +79012,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -79122,7 +79130,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -79182,7 +79190,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -79241,7 +79249,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 var transformData = __webpack_require__(252);
 var isCancel = __webpack_require__(145);
 var defaults = __webpack_require__(12);
@@ -79334,7 +79342,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 
 /**
  * Transform the data for a request or a response
@@ -80191,7 +80199,7 @@ var content = __webpack_require__(266);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(10)("4fbe6176", content, false, {});
+var update = __webpack_require__(10)("b316cd36", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -80229,7 +80237,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__QuickLinks_CreatePanel__ = __webpack_require__(268);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__QuickLinks_CreatePanel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__QuickLinks_CreatePanel__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_bus_js__ = __webpack_require__(3);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -80381,7 +80389,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CreateProject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__CreateProject__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_click_outside__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_click_outside___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_click_outside__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__event_bus_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue2_transitions__ = __webpack_require__(11);
 //
 //
@@ -80550,7 +80558,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__(3);
 //
 //
 //
@@ -80739,7 +80747,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_ProjectNameSlugify__ = __webpack_require__(275);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(276);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_bus__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_bus__ = __webpack_require__(3);
 //
 //
 //
@@ -81652,9 +81660,9 @@ var render = function() {
                 {
                   staticClass:
                     "list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer",
-                  attrs: { tag: "li", to: "/boards", exact: "" }
+                  attrs: { tag: "li", to: "/projects", exact: "" }
                 },
-                [_vm._v("Boards")]
+                [_vm._v("Projects")]
               ),
               _vm._v(" "),
               _c(
@@ -81662,9 +81670,9 @@ var render = function() {
                 {
                   staticClass:
                     "list-reset py-6 px-4 text-blue-lighter font-semibold no-underline hover:text-blue-lightest cursor-pointer",
-                  attrs: { tag: "li", to: "/calendar", exact: "" }
+                  attrs: { tag: "li", to: "/boards", exact: "" }
                 },
-                [_vm._v("Calendar")]
+                [_vm._v("Boards")]
               ),
               _vm._v(" "),
               _c(
@@ -81789,7 +81797,7 @@ var content = __webpack_require__(282);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(10)("6de127cb", content, false, {});
+var update = __webpack_require__(10)("7d4e5c2a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -81824,7 +81832,7 @@ exports.push([module.i, "\n.slide-leave-active[data-v-4b678da8],\n.slide-enter-a
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_click_outside__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_click_outside___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_click_outside__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_transitions__ = __webpack_require__(11);
