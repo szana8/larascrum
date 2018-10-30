@@ -24,7 +24,7 @@
             <div class="mt-4">
                 <div class="ml-12">
                     <div class="no-underline text-grey-darkest font-semibold text-sm hover:text-blue cursor-pointer">
-					    <img src="svg/reports.png" class="w-4 h-4 mr-4">
+					    <img src="storage/icons/branch.svg" class="w-4 h-4 mr-4">
 						Workflows
 					</div>
                 </div>
@@ -42,7 +42,7 @@
             <div class="mt-4">
                 <div class="ml-12">
                     <a href="#" class="no-underline text-grey-darkest font-semibold text-sm hover:text-blue">
-                        <img src="svg/copy.png" class="w-4 h-4 mr-4">
+                        <img src="storage/icons/multiple-users.svg" class="w-4 h-4 mr-4">
                         Users and roles
                     </a>
                 </div>
@@ -51,7 +51,7 @@
             <div class="mt-4">
                 <div class="ml-12">
                     <a href="#" class="no-underline text-grey-darkest font-semibold text-sm hover:text-blue">
-                        <img src="svg/clock.png" class="w-4 h-4 mr-4">
+                        <img src="storage/icons/maps-and-flags.svg" class="w-4 h-4 mr-4">
                         Permissions
                     </a>
                 </div>
@@ -59,16 +59,8 @@
             <div class="mt-4">
                 <div class="ml-12">
                     <a href="#" class="no-underline text-grey-darkest font-semibold text-sm hover:text-blue">
-                        <img src="svg/signal.png" class="w-4 h-4 mr-4">
+                        <img src="storage/icons/notifications.svg" class="w-4 h-4 mr-4">
                         Notifications
-                    </a>
-                </div>
-            </div>
-            <div class="mt-4">
-                <div class="ml-12">
-                    <a href="#" class="no-underline text-grey-darkest font-semibold text-sm hover:text-blue">
-                        <img src="svg/database.png" class="w-4 h-4 mr-4">
-                        Add-ons
                     </a>
                 </div>
             </div>

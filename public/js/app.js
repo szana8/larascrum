@@ -70264,7 +70264,7 @@ var content = __webpack_require__(191);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("54898191", content, false, {});
+var update = __webpack_require__(8)("bfde41de", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70455,7 +70455,7 @@ var content = __webpack_require__(196);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("a7efced6", content, false, {});
+var update = __webpack_require__(8)("4b5f0b15", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -71038,7 +71038,7 @@ var content = __webpack_require__(202);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("8c72bae4", content, false, {});
+var update = __webpack_require__(8)("591d950e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -74135,7 +74135,7 @@ var content = __webpack_require__(233);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("13116bd0", content, false, {});
+var update = __webpack_require__(8)("6f96e090", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -74752,6 +74752,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -74823,7 +74868,7 @@ var content = __webpack_require__(246);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("cd9e241e", content, false, {});
+var update = __webpack_require__(8)("be61079e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -74981,7 +75026,7 @@ var content = __webpack_require__(250);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("73288818", content, false, {});
+var update = __webpack_require__(8)("525f31d8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -75019,14 +75064,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -75188,9 +75225,7 @@ var render = function() {
           _vm._v(" "),
           _vm._m(4),
           _vm._v(" "),
-          _vm._m(5),
-          _vm._v(" "),
-          _vm._m(6)
+          _vm._m(5)
         ])
       : _vm._e()
   ])
@@ -75234,7 +75269,7 @@ var staticRenderFns = [
           [
             _c("img", {
               staticClass: "w-4 h-4 mr-4",
-              attrs: { src: "svg/reports.png" }
+              attrs: { src: "storage/icons/branch.svg" }
             }),
             _vm._v("\n\t\t\t\t\t\tWorkflows\n\t\t\t\t\t")
           ]
@@ -75282,7 +75317,7 @@ var staticRenderFns = [
           [
             _c("img", {
               staticClass: "w-4 h-4 mr-4",
-              attrs: { src: "svg/copy.png" }
+              attrs: { src: "storage/icons/multiple-users.svg" }
             }),
             _vm._v(
               "\n                        Users and roles\n                    "
@@ -75308,7 +75343,7 @@ var staticRenderFns = [
           [
             _c("img", {
               staticClass: "w-4 h-4 mr-4",
-              attrs: { src: "svg/clock.png" }
+              attrs: { src: "storage/icons/maps-and-flags.svg" }
             }),
             _vm._v(
               "\n                        Permissions\n                    "
@@ -75334,35 +75369,11 @@ var staticRenderFns = [
           [
             _c("img", {
               staticClass: "w-4 h-4 mr-4",
-              attrs: { src: "svg/signal.png" }
+              attrs: { src: "storage/icons/notifications.svg" }
             }),
             _vm._v(
               "\n                        Notifications\n                    "
             )
-          ]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mt-4" }, [
-      _c("div", { staticClass: "ml-12" }, [
-        _c(
-          "a",
-          {
-            staticClass:
-              "no-underline text-grey-darkest font-semibold text-sm hover:text-blue",
-            attrs: { href: "#" }
-          },
-          [
-            _c("img", {
-              staticClass: "w-4 h-4 mr-4",
-              attrs: { src: "svg/database.png" }
-            }),
-            _vm._v("\n                        Add-ons\n                    ")
           ]
         )
       ])
@@ -75428,12 +75439,147 @@ var render = function() {
   return _c("div", { staticClass: "w-full flex" }, [
     _c("div", { staticClass: "w-1/6" }, [_c("projects")], 1),
     _vm._v(" "),
-    _c("div", { staticClass: "w-5/6 flex" }, [
-      _vm._v("\n\n\t\t\tProject Details\n\n\t\t")
-    ])
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-5/6 flex" }, [
+      _c("div", { staticClass: "w-1/4 p-2" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-white shadow p-4 rounded h-64 flex flex-wrap content-between"
+          },
+          [
+            _c("div", { staticClass: "w-full" }, [
+              _c("div", { staticClass: "flex pb-4 items-stretch" }, [
+                _c("img", {
+                  staticClass: "w-12 h-12",
+                  attrs: { src: "storage/icons/copy.png" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "self-center" }, [
+                  _c("h4", { staticClass: "font-normal ml-4" }, [
+                    _vm._v("Issue Types")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-sm mt-3" }, [
+                _vm._v(
+                  "\n                            Keep track of different types of issues, such as bugs or tasks. Each issue types can be configured differently.\n                        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-sm mt-4" }, [
+                _vm._v("\n                            Scheme: "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "no-underline font-semibold text-blue hover:text-blue-light",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v("Simple SCRUM issue type scheme")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "w-full mt-4 text-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-white text-black border border-grey-darker rounded-full px-5 py-2 hover:border-blue hover:text-blue focus:outline-none text-sm"
+                },
+                [_vm._v("Default")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-blue text-white rounded-full px-5 py-2 border border-blue hover:bg-blue-light hover:border-blue-light focus:outline-none text-sm "
+                },
+                [_vm._v("Change")]
+              )
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-1/4 p-2 h-64" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-white shadow p-4 rounded h-64 flex flex-wrap content-between"
+          },
+          [
+            _c("div", { staticClass: "w-full" }, [
+              _c("div", { staticClass: "flex pb-4 items-stretch" }, [
+                _c("img", {
+                  staticClass: "w-12 h-12",
+                  attrs: { src: "storage/icons/branch.svg" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "self-center" }, [
+                  _c("h4", { staticClass: "font-normal ml-4" }, [
+                    _vm._v("Workflows")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-sm mt-3" }, [
+                _vm._v(
+                  '\n                            Issue can follow processes that mirror your team\'s practices. A workflow defines the sequence of steps than an issue will follow, e.g "In Progress", "Resolved"\n                        '
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-sm mt-4" }, [
+                _vm._v("\n                            Workflow: "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "no-underline font-semibold text-blue hover:text-blue-light",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v("Default workflow")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "w-full mt-4 text-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-white text-black border border-grey-darker rounded-full px-5 py-2 hover:border-blue hover:text-blue focus:outline-none text-sm"
+                },
+                [_vm._v("Default")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-blue text-white rounded-full px-5 py-2 border border-blue hover:bg-blue-light hover:border-blue-light focus:outline-none text-sm "
+                },
+                [_vm._v("Change")]
+              )
+            ])
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -81068,7 +81214,7 @@ var content = __webpack_require__(286);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("4fbe6176", content, false, {});
+var update = __webpack_require__(8)("b316cd36", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -82666,7 +82812,7 @@ var content = __webpack_require__(302);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("6de127cb", content, false, {});
+var update = __webpack_require__(8)("7d4e5c2a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
