@@ -26,15 +26,6 @@ export const replies = (state) => {
 };
 
 /**
- * Return the list of the projects from the Vuex State
- *
- * @param {Object} state
- */
-export const projects = (state) => {
-	return state.projects;
-};
-
-/**
  * Return the selected issue from the Vuex State
  *
  * @param {Object} state

@@ -4,15 +4,6 @@
 import { isEmpty } from 'lodash';
 import localforage from 'localforage';
 
-/**
- * Set the project state based on the givven parameter
- *
- * @param {Object} state		Vuex State
- * @param {Object} projects 	Projects list
- */
-export const setProjects = (state, projects) => {
-	state.projects = projects;
-};
 
 /**
  * Set the issue list state based on the givven parameter

@@ -4,15 +4,7 @@
 //import { isEmpty } from 'lodash';
 //import localforage from 'localforage';
 
-/**
- * Fetch the project list and set it to the project state, only those
- * projects can be listed which has a permisson of the user.
- */
-export const fetchProjects = ({ commit }) => {
-	return axios.get('/api/projects').then((response) => {
-		commit('setProjects', response.data);
-	});
-};
+
 
 /**
  * Fetch the list of the issues based on the payload parameter which
@@ -71,7 +63,8 @@ export const selectIssue = ({ commit, dispatch }, issue) => {
  */
 export const subscribe = ({ commit }, issue) => {
 	return axios.post('/api/issues/' + issue + '/subscribe').then((response) => {
-		commit('setIssueSubscription', {subscription: response.data, isSubscribed: true});
+		console.log(response)
+		commit('setIssueSubscription', {subscription: response.data.data, isSubscribed: true});
 	});
 };
 

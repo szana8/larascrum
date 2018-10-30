@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Requests\Project\ProjectCreateRequest;
+use App\Http\Response\Facades\Response;
+use App\Transformers\ProjectTransformer;
 
 class ProjectController extends Controller
 {
@@ -15,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return response(Project::all(), 201);
+        return Response::responseCollectionWithSuccess(Project::all(), new ProjectTransformer);
     }
 
     /**

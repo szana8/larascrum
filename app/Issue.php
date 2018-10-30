@@ -91,6 +91,17 @@ class Issue extends Model
     }
 
     /**
+     * Eager load all of the necessary collections when the user wants to see the
+     * issue details.
+     *
+     * @return void
+     */
+    public function withDetails()
+    {
+        return $this->loadMissing(['priority', 'subscriptions', 'subscriptions.user']);
+    }
+
+    /**
      * Add a reply to the issue.
      *
      * @param $reply
