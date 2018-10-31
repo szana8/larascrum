@@ -22,7 +22,10 @@ export const issue = (state) => {
  * @param {Object} state
  */
 export const replies = (state) => {
-	return state.issue.replies;
+	if (state.issue)
+		return state.issue.replies;
+
+	return;
 };
 
 /**

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\IssueTypeSchemaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,4 +14,8 @@
 */
 
 Route::view('/design', 'design');
+Route::get('/test', function() {
+    return (new IssueTypeSchemaController)->index();
+});
+
 Route::view('/{any}', 'home')->where('any', '.*');

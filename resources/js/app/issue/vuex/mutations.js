@@ -43,7 +43,10 @@ export const setIssue = (state, issue) => {
  * @param {Object} replies	Replies object
  */
 export const setIssueReplies = (state, replies) => {
-	state.issue.replies = replies;
+	if (replies)
+		state.issue.replies = replies;
+	else
+		state.issue.replies = [];
 };
 
 /**

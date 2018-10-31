@@ -39,6 +39,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Routes for the issue workflow functions
     Route::put('issues/{issue}/status/{status_id}', 'WorkflowController@update');
 
+    Route::get('types/schemas', 'IssueTypeSchemaController@index');
+
     // Routes for the Reply functions
     Route::post('replies/{issue}', 'ReplyController@store');
     Route::put('replies/{reply}', 'ReplyController@update');

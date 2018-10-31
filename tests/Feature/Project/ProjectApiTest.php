@@ -35,6 +35,6 @@ class ProjectApiTest extends TestCase
         $response = $this->get('api/projects', ['Authorization' => 'Bearer ' . json_decode($userResponse->getContent())->access_token]);
 
         $response->assertSuccessful();
-        $this->assertEquals(count(json_decode($response->getContent())), $project->count());
+        $this->assertEquals(count(json_decode($response->getContent())->data), $project->count());
     }
 }
