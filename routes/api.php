@@ -41,6 +41,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('types/schemas', 'IssueTypeSchemaController@index');
 
+    Route::get('types', 'IssueTypeController@index');
+
     // Routes for the Reply functions
     Route::post('replies/{issue}', 'ReplyController@store');
     Route::put('replies/{reply}', 'ReplyController@update');

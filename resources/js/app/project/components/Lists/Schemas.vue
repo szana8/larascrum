@@ -1,7 +1,8 @@
 <template>
     <div class="mt-1">
+        <h4 class="text-grey-darkest py-4">Schemas</h4>
         <div v-if="isTypeListNotEmpty">
-            <type v-for="type in types" :key="type.id" :type="type"></type>
+            <schema v-for="type in types" :key="type.id" :type="type"></schema>
         </div>
 
         <div v-else>
@@ -11,14 +12,13 @@
 </template>
 
 <script>
-
     // Import necessary VueJs components
-    import type from './Type'
+    import schema from './Schema'
 
     export default {
 
         components: {
-            type
+            schema
         },
 
         data() {

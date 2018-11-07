@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\IssueType;
 use Illuminate\Http\Request;
+use App\Http\Response\Facades\Response;
+use App\Transformers\IssueTypeTransformer;
 
 class IssueTypeController extends Controller
 {
@@ -14,7 +16,7 @@ class IssueTypeController extends Controller
      */
     public function index()
     {
-        //
+        return Response::responseCollectionWithSuccess(IssueType::all(), new IssueTypeTransformer);
     }
 
     /**

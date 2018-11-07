@@ -14,6 +14,6 @@ export const setProjects = (state, projects) => {
  * @param {Object} state	  Vuex State
  * @param {Number} project	Project id
  */
-export const setSelectedProject = (state, project) => {
-	state.selectedProject = project;
+export const setProject = (state, project) => {
+	state.project = project;
 };

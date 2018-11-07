@@ -12,6 +12,6 @@ export const projects = (state) => {
  *
  * @param {Object} state
  */
-export const selectedProject = (state) => {
-	return state.selectedProject;
+export const project = (state) => {
+	return state.project;
 };

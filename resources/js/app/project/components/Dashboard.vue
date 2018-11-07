@@ -10,7 +10,7 @@
             <div class="w-1/4">
 
 				<div class="ml-4">
-					<issue-types></issue-types>
+
 				</div>
 
 			</div>
@@ -22,12 +22,10 @@
 
 <script>
     import Projects from './Sidebar/Projects'
-    import IssueTypes from './Lists/IssueTypes'
 
     export default {
         components: {
-            Projects,
-            IssueTypes
+            Projects
         }
     }
 </script>
