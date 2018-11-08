@@ -21,7 +21,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body class="md:container lg:h-screen mx-auto bg-grey-lighter">
-        <div id="app" class="md:min-h-screen md:felx md:flex-col bg-brand-lightest font-sans">
+        <div id="app" class="md:min-h-screen md:felx md:flex-col bg-brand-lightest font-sans subpixel-antialiased">
             <app></app>
         </div>
 

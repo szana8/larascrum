@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\IssueTypeSchema;
+
+use App\Scheme;
 use Illuminate\Http\Request;
 use App\Http\Response\Facades\Response;
 use App\Transformers\IssueTypeSchemaTransformer;
+use App\Transformers\SchemeTransformer;
 
-class IssueTypeSchemaController extends Controller
+class SchemeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +18,9 @@ class IssueTypeSchemaController extends Controller
      */
     public function index()
     {
-        $schemas = IssueTypeSchema::with('types')->get();
+        $schemes = Scheme::with('types')->get();
 
-        return Response::responseCollectionWithSuccess($schemas, new IssueTypeSchemaTransformer);
+        return Response::responseCollectionWithSuccess($schemes, new SchemeTransformer);
     }
 
     /**
@@ -35,10 +37,10 @@ class IssueTypeSchemaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\IssueTypeSchema  $issueTypeSchema
+     * @param  \App\Scheme  $scheme
      * @return \Illuminate\Http\Response
      */
-    public function show(IssueTypeSchema $issueTypeSchema)
+    public function show(Scheme $scheme)
     {
         //
     }
@@ -47,10 +49,10 @@ class IssueTypeSchemaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\IssueTypeSchema  $issueTypeSchema
+     * @param  \App\Scheme  $scheme
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, IssueTypeSchema $issueTypeSchema)
+    public function update(Request $request, Scheme $scheme)
     {
         //
     }
@@ -58,10 +60,10 @@ class IssueTypeSchemaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\IssueTypeSchema  $issueTypeSchema
+     * @param  \App\Scheme  $scheme
      * @return \Illuminate\Http\Response
      */
-    public function destroy(IssueTypeSchema $issueTypeSchema)
+    public function destroy(Scheme $scheme)
     {
         //
     }

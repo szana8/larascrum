@@ -1,5 +1,5 @@
 <template>
-    <div class="my-4 bg-grey-lighter rounded p-4 border-l-4 w-90" :class="[this.issue.id == this.selectedIssue ? this.activeClass : this.inactiveClass, 'border-' + this.issue.type.color_code]" @click="selectIssue(issue.id)">
+    <div class="my-4 bg-grey-lighter rounded p-4 border-l-4 w-90 trans-slow" :class="[this.issue.id == this.selectedIssue ? this.activeClass : this.inactiveClass, 'border-' + this.issue.type.color_code]" @click="selectIssue(issue.id)">
         <div class="flex">
            <img :src="issue.reporter.avatar_url" class="block rounded-full mb-4 w-8 h-8">
             <div class="ml-4 w-full">

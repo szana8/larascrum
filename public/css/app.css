@@ -729,6 +729,10 @@ table {
   background-color: transparent;
 }
 
+.bg-ls-blue {
+  background-color: #1c3d5a;
+}
+
 .bg-black {
   background-color: #22292f;
 }
@@ -1021,6 +1025,10 @@ table {
   background-color: transparent;
 }
 
+.hover\:bg-ls-blue:hover {
+  background-color: #1c3d5a;
+}
+
 .hover\:bg-black:hover {
   background-color: #22292f;
 }
@@ -1311,6 +1319,10 @@ table {
 
 .focus\:bg-transparent:focus {
   background-color: transparent;
+}
+
+.focus\:bg-ls-blue:focus {
+  background-color: #1c3d5a;
 }
 
 .focus\:bg-black:focus {
@@ -1677,6 +1689,10 @@ table {
   border-color: transparent;
 }
 
+.border-ls-blue {
+  border-color: #1c3d5a;
+}
+
 .border-black {
   border-color: #22292f;
 }
@@ -1969,6 +1985,10 @@ table {
   border-color: transparent;
 }
 
+.hover\:border-ls-blue:hover {
+  border-color: #1c3d5a;
+}
+
 .hover\:border-black:hover {
   border-color: #22292f;
 }
@@ -2259,6 +2279,10 @@ table {
 
 .focus\:border-transparent:focus {
   border-color: transparent;
+}
+
+.focus\:border-ls-blue:focus {
+  border-color: #1c3d5a;
 }
 
 .focus\:border-black:focus {
@@ -3146,7 +3170,7 @@ table {
 }
 
 .font-sans {
-  font-family: Montserrat, Helvetica, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 .font-serif {
@@ -5210,6 +5234,10 @@ table {
   color: transparent;
 }
 
+.text-ls-blue {
+  color: #1c3d5a;
+}
+
 .text-black {
   color: #22292f;
 }
@@ -5502,6 +5530,10 @@ table {
   color: transparent;
 }
 
+.hover\:text-ls-blue:hover {
+  color: #1c3d5a;
+}
+
 .hover\:text-black:hover {
   color: #22292f;
 }
@@ -5792,6 +5824,10 @@ table {
 
 .focus\:text-transparent:focus {
   color: transparent;
+}
+
+.focus\:text-ls-blue:focus {
+  color: #1c3d5a;
 }
 
 .focus\:text-black:focus {
@@ -6534,6 +6570,41 @@ html {
   background-color: rgba(0, 0, 0, .6);
 }
 
+.trans {
+  -webkit-transition: all .25s;
+  transition: all .25s;
+}
+
+.trans-bg {
+  -webkit-transition-property: background;
+  transition-property: background;
+}
+
+.trans-slow {
+  -webkit-transition-duration: .3s;
+          transition-duration: .3s;
+}
+
+.trans-slower {
+  -webkit-transition-duration: .5s;
+          transition-duration: .5s;
+}
+
+.trans-fast {
+  -webkit-transition-duration: .15s;
+          transition-duration: .15s;
+}
+
+.trans-faster {
+  -webkit-transition-duration: .075s;
+          transition-duration: .075s;
+}
+
+.bg-gradient-php {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3490dc), to(#1c3d5a));
+  background-image: linear-gradient(180deg, #3490dc, #1c3d5a);
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;
@@ -6560,6 +6631,10 @@ html {
 
   .sm\:bg-transparent {
     background-color: transparent;
+  }
+
+  .sm\:bg-ls-blue {
+    background-color: #1c3d5a;
   }
 
   .sm\:bg-black {
@@ -6854,6 +6929,10 @@ html {
     background-color: transparent;
   }
 
+  .sm\:hover\:bg-ls-blue:hover {
+    background-color: #1c3d5a;
+  }
+
   .sm\:hover\:bg-black:hover {
     background-color: #22292f;
   }
@@ -7144,6 +7223,10 @@ html {
 
   .sm\:focus\:bg-transparent:focus {
     background-color: transparent;
+  }
+
+  .sm\:focus\:bg-ls-blue:focus {
+    background-color: #1c3d5a;
   }
 
   .sm\:focus\:bg-black:focus {
@@ -7502,6 +7585,10 @@ html {
     border-color: transparent;
   }
 
+  .sm\:border-ls-blue {
+    border-color: #1c3d5a;
+  }
+
   .sm\:border-black {
     border-color: #22292f;
   }
@@ -7794,6 +7881,10 @@ html {
     border-color: transparent;
   }
 
+  .sm\:hover\:border-ls-blue:hover {
+    border-color: #1c3d5a;
+  }
+
   .sm\:hover\:border-black:hover {
     border-color: #22292f;
   }
@@ -8084,6 +8175,10 @@ html {
 
   .sm\:focus\:border-transparent:focus {
     border-color: transparent;
+  }
+
+  .sm\:focus\:border-ls-blue:focus {
+    border-color: #1c3d5a;
   }
 
   .sm\:focus\:border-black:focus {
@@ -8971,7 +9066,7 @@ html {
   }
 
   .sm\:font-sans {
-    font-family: Montserrat, Helvetica, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
 
   .sm\:font-serif {
@@ -11019,6 +11114,10 @@ html {
     color: transparent;
   }
 
+  .sm\:text-ls-blue {
+    color: #1c3d5a;
+  }
+
   .sm\:text-black {
     color: #22292f;
   }
@@ -11311,6 +11410,10 @@ html {
     color: transparent;
   }
 
+  .sm\:hover\:text-ls-blue:hover {
+    color: #1c3d5a;
+  }
+
   .sm\:hover\:text-black:hover {
     color: #22292f;
   }
@@ -11601,6 +11704,10 @@ html {
 
   .sm\:focus\:text-transparent:focus {
     color: transparent;
+  }
+
+  .sm\:focus\:text-ls-blue:focus {
+    color: #1c3d5a;
   }
 
   .sm\:focus\:text-black:focus {
@@ -12334,6 +12441,10 @@ html {
     background-color: transparent;
   }
 
+  .md\:bg-ls-blue {
+    background-color: #1c3d5a;
+  }
+
   .md\:bg-black {
     background-color: #22292f;
   }
@@ -12626,6 +12737,10 @@ html {
     background-color: transparent;
   }
 
+  .md\:hover\:bg-ls-blue:hover {
+    background-color: #1c3d5a;
+  }
+
   .md\:hover\:bg-black:hover {
     background-color: #22292f;
   }
@@ -12916,6 +13031,10 @@ html {
 
   .md\:focus\:bg-transparent:focus {
     background-color: transparent;
+  }
+
+  .md\:focus\:bg-ls-blue:focus {
+    background-color: #1c3d5a;
   }
 
   .md\:focus\:bg-black:focus {
@@ -13274,6 +13393,10 @@ html {
     border-color: transparent;
   }
 
+  .md\:border-ls-blue {
+    border-color: #1c3d5a;
+  }
+
   .md\:border-black {
     border-color: #22292f;
   }
@@ -13566,6 +13689,10 @@ html {
     border-color: transparent;
   }
 
+  .md\:hover\:border-ls-blue:hover {
+    border-color: #1c3d5a;
+  }
+
   .md\:hover\:border-black:hover {
     border-color: #22292f;
   }
@@ -13856,6 +13983,10 @@ html {
 
   .md\:focus\:border-transparent:focus {
     border-color: transparent;
+  }
+
+  .md\:focus\:border-ls-blue:focus {
+    border-color: #1c3d5a;
   }
 
   .md\:focus\:border-black:focus {
@@ -14743,7 +14874,7 @@ html {
   }
 
   .md\:font-sans {
-    font-family: Montserrat, Helvetica, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
 
   .md\:font-serif {
@@ -16791,6 +16922,10 @@ html {
     color: transparent;
   }
 
+  .md\:text-ls-blue {
+    color: #1c3d5a;
+  }
+
   .md\:text-black {
     color: #22292f;
   }
@@ -17083,6 +17218,10 @@ html {
     color: transparent;
   }
 
+  .md\:hover\:text-ls-blue:hover {
+    color: #1c3d5a;
+  }
+
   .md\:hover\:text-black:hover {
     color: #22292f;
   }
@@ -17373,6 +17512,10 @@ html {
 
   .md\:focus\:text-transparent:focus {
     color: transparent;
+  }
+
+  .md\:focus\:text-ls-blue:focus {
+    color: #1c3d5a;
   }
 
   .md\:focus\:text-black:focus {
@@ -18106,6 +18249,10 @@ html {
     background-color: transparent;
   }
 
+  .lg\:bg-ls-blue {
+    background-color: #1c3d5a;
+  }
+
   .lg\:bg-black {
     background-color: #22292f;
   }
@@ -18398,6 +18545,10 @@ html {
     background-color: transparent;
   }
 
+  .lg\:hover\:bg-ls-blue:hover {
+    background-color: #1c3d5a;
+  }
+
   .lg\:hover\:bg-black:hover {
     background-color: #22292f;
   }
@@ -18688,6 +18839,10 @@ html {
 
   .lg\:focus\:bg-transparent:focus {
     background-color: transparent;
+  }
+
+  .lg\:focus\:bg-ls-blue:focus {
+    background-color: #1c3d5a;
   }
 
   .lg\:focus\:bg-black:focus {
@@ -19046,6 +19201,10 @@ html {
     border-color: transparent;
   }
 
+  .lg\:border-ls-blue {
+    border-color: #1c3d5a;
+  }
+
   .lg\:border-black {
     border-color: #22292f;
   }
@@ -19338,6 +19497,10 @@ html {
     border-color: transparent;
   }
 
+  .lg\:hover\:border-ls-blue:hover {
+    border-color: #1c3d5a;
+  }
+
   .lg\:hover\:border-black:hover {
     border-color: #22292f;
   }
@@ -19628,6 +19791,10 @@ html {
 
   .lg\:focus\:border-transparent:focus {
     border-color: transparent;
+  }
+
+  .lg\:focus\:border-ls-blue:focus {
+    border-color: #1c3d5a;
   }
 
   .lg\:focus\:border-black:focus {
@@ -20515,7 +20682,7 @@ html {
   }
 
   .lg\:font-sans {
-    font-family: Montserrat, Helvetica, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
 
   .lg\:font-serif {
@@ -22563,6 +22730,10 @@ html {
     color: transparent;
   }
 
+  .lg\:text-ls-blue {
+    color: #1c3d5a;
+  }
+
   .lg\:text-black {
     color: #22292f;
   }
@@ -22855,6 +23026,10 @@ html {
     color: transparent;
   }
 
+  .lg\:hover\:text-ls-blue:hover {
+    color: #1c3d5a;
+  }
+
   .lg\:hover\:text-black:hover {
     color: #22292f;
   }
@@ -23145,6 +23320,10 @@ html {
 
   .lg\:focus\:text-transparent:focus {
     color: transparent;
+  }
+
+  .lg\:focus\:text-ls-blue:focus {
+    color: #1c3d5a;
   }
 
   .lg\:focus\:text-black:focus {
@@ -23878,6 +24057,10 @@ html {
     background-color: transparent;
   }
 
+  .xl\:bg-ls-blue {
+    background-color: #1c3d5a;
+  }
+
   .xl\:bg-black {
     background-color: #22292f;
   }
@@ -24170,6 +24353,10 @@ html {
     background-color: transparent;
   }
 
+  .xl\:hover\:bg-ls-blue:hover {
+    background-color: #1c3d5a;
+  }
+
   .xl\:hover\:bg-black:hover {
     background-color: #22292f;
   }
@@ -24460,6 +24647,10 @@ html {
 
   .xl\:focus\:bg-transparent:focus {
     background-color: transparent;
+  }
+
+  .xl\:focus\:bg-ls-blue:focus {
+    background-color: #1c3d5a;
   }
 
   .xl\:focus\:bg-black:focus {
@@ -24818,6 +25009,10 @@ html {
     border-color: transparent;
   }
 
+  .xl\:border-ls-blue {
+    border-color: #1c3d5a;
+  }
+
   .xl\:border-black {
     border-color: #22292f;
   }
@@ -25110,6 +25305,10 @@ html {
     border-color: transparent;
   }
 
+  .xl\:hover\:border-ls-blue:hover {
+    border-color: #1c3d5a;
+  }
+
   .xl\:hover\:border-black:hover {
     border-color: #22292f;
   }
@@ -25400,6 +25599,10 @@ html {
 
   .xl\:focus\:border-transparent:focus {
     border-color: transparent;
+  }
+
+  .xl\:focus\:border-ls-blue:focus {
+    border-color: #1c3d5a;
   }
 
   .xl\:focus\:border-black:focus {
@@ -26287,7 +26490,7 @@ html {
   }
 
   .xl\:font-sans {
-    font-family: Montserrat, Helvetica, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
 
   .xl\:font-serif {
@@ -28335,6 +28538,10 @@ html {
     color: transparent;
   }
 
+  .xl\:text-ls-blue {
+    color: #1c3d5a;
+  }
+
   .xl\:text-black {
     color: #22292f;
   }
@@ -28627,6 +28834,10 @@ html {
     color: transparent;
   }
 
+  .xl\:hover\:text-ls-blue:hover {
+    color: #1c3d5a;
+  }
+
   .xl\:hover\:text-black:hover {
     color: #22292f;
   }
@@ -28917,6 +29128,10 @@ html {
 
   .xl\:focus\:text-transparent:focus {
     color: transparent;
+  }
+
+  .xl\:focus\:text-ls-blue:focus {
+    color: #1c3d5a;
   }
 
   .xl\:focus\:text-black:focus {

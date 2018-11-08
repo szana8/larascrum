@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIssueTypeSchemasTable extends Migration
+class CreateSchemesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateIssueTypeSchemasTable extends Migration
      */
     public function up()
     {
-        Schema::create('issue_type_schemas', function (Blueprint $table) {
+        Schema::create('schemes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
             $table->text('description');
@@ -28,6 +28,6 @@ class CreateIssueTypeSchemasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('issue_type_schemas');
+        Schema::dropIfExists('schemes');
     }
 }

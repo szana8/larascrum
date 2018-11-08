@@ -1,6 +1,6 @@
 <template>
     <div class="w-1/2 xl:w-1/3 my-2">
-        <button class="focus:outline-none text-xs lg:text-sm rounded-full py-1 w-16 xl:w-24" :class="isFilterActive" @click="setSelectedPriority(filter.id)">{{ filter.name }}</button>
+        <button class="focus:outline-none text-xs lg:text-sm rounded-full py-1 w-16 xl:w-24 trans-slow" :class="isFilterActive" @click="setSelectedPriority(filter.id)">{{ filter.name }}</button>
     </div>
 </template>
 

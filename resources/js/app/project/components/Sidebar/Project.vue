@@ -17,7 +17,7 @@
                 <router-link tag="div" :to="{ name: 'project-schema', params: { project: this.selectedProject.slug } }" class="no-underline text-grey-darkest font-semibold text-sm hover:text-blue cursor-pointer py-2">
                     <div class="ml-12">
                         <img src="svg/align-left.svg" class="w-4 h-4 mr-4">
-                        Issue Types
+                        Schemes
                     </div>
                 </router-link>
 

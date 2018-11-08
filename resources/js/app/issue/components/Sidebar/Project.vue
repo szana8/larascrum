@@ -1,6 +1,6 @@
 <template>
     <div class="mb-2">
-        <div class="bg-white text-center py-4 flex cursor-pointer" :class="{ 'shadow hover:shadow-md': !isOpen }" @click="setSelectedProject(project.id)">
+        <div class="bg-white text-center py-4 flex cursor-pointer trans-slow" :class="{ 'shadow hover:shadow-md': !isOpen }" @click="setSelectedProject(project.id)">
             <div class="text-center">
                 <img :src="project.icon" class="w-10 h-10 ml-12 rounded-full">
 			</div>

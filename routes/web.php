@@ -15,7 +15,8 @@ use App\Http\Controllers\IssueTypeSchemaController;
 
 Route::view('/design', 'design');
 Route::get('/test', function() {
-    return (new IssueTypeSchemaController)->index();
+    $scheme = App\Scheme::find(1);
+    return $scheme->types()->sync([1,2,3,4,5]);
 });
 
 Route::view('/{any}', 'home')->where('any', '.*');

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\IssueType;
+use App\Type;
 use Illuminate\Http\Request;
 use App\Http\Response\Facades\Response;
-use App\Transformers\IssueTypeTransformer;
+use App\Transformers\TypeTransformer;
 
-class IssueTypeController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class IssueTypeController extends Controller
      */
     public function index()
     {
-        return Response::responseCollectionWithSuccess(IssueType::all(), new IssueTypeTransformer);
+        return Response::responseCollectionWithSuccess(Type::all(), new TypeTransformer);
     }
 
     /**
@@ -34,11 +34,11 @@ class IssueTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\IssueType $issueType
+     * @param \App\Type $type
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(IssueType $issueType)
+    public function show(Type $type)
     {
         //
     }
@@ -47,11 +47,11 @@ class IssueTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\IssueType           $issueType
+     * @param \App\Type           $type
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, IssueType $issueType)
+    public function update(Request $request, Type $type)
     {
         //
     }
@@ -59,11 +59,11 @@ class IssueTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\IssueType $issueType
+     * @param \App\Type $type
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(IssueType $issueType)
+    public function destroy(Type $type)
     {
         //
     }

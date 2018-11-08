@@ -3,7 +3,7 @@
 use App\Priority;
 use Illuminate\Database\Seeder;
 
-class PrioritiesSeeder extends Seeder
+class PrioritiesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

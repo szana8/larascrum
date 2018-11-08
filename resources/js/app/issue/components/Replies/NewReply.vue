@@ -17,8 +17,8 @@
                 <div class="text-grey-darker py-4 flex justify-between">
                     <span class="text-xs mt-2">Use Markdown with <a href="#" class="text-blue no-underline">Github flavored</a> code blocks.</span>
                     <div class="flex">
-                        <button class="bg-white text-grey-darkest border border-grey-darker rounded-full px-4 py-2 text-sm  hover:border-blue hover:text-blue uppercase font-semibold focus:outline-none" @click="closeReply">Cancel</button>
-                        <button class="bg-blue text-grey-lightest border border-blue rounded-full px-4 py-2 text-sm hover:bg-blue-dark hover:border-blue-dark uppercase mx-2 font-semibold focus:outline-none" @click="postReply">Post</button>
+                        <button class="bg-white text-grey-darkest border border-grey-darker rounded-full px-4 py-2 text-sm  hover:border-blue hover:text-blue uppercase font-semibold focus:outline-none trans-slow" @click="closeReply">Cancel</button>
+                        <button class="bg-blue text-grey-lightest border border-blue rounded-full px-4 py-2 text-sm hover:bg-blue-dark hover:border-blue-dark uppercase mx-2 font-semibold focus:outline-none trans-slow" @click="postReply">Post</button>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,8 @@
 <?php
 
-use App\Issue;
 use Illuminate\Database\Seeder;
 
-class IssueSeeder extends Seeder
+class RepliesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +11,6 @@ class IssueSeeder extends Seeder
      */
     public function run()
     {
-        factory(Issue::class, 200)->create();
+        factory('App\Reply', 1500)->create();
     }
 }

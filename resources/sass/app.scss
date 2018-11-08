@@ -83,3 +83,32 @@ html {
 .hover\:bg-smoke-dark:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }
+
+.trans {
+  transition: all .25s;
+}
+
+.trans-bg {
+  transition-property: background;
+}
+
+.trans-slow {
+  transition-duration: .3s;
+}
+
+.trans-slower {
+  transition-duration: .5s;
+}
+
+.trans-fast {
+  transition-duration: .15s;
+}
+
+.trans-faster {
+  transition-duration: .075s;
+}
+
+.bg-gradient-php {
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#3490dc),to(#1c3d5a));
+  background-image: linear-gradient(180deg,#3490dc,#1c3d5a);
+}

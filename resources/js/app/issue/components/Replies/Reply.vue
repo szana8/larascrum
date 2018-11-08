@@ -12,8 +12,8 @@
 
             <div>
                 <div class="text-grey-light cursor-pointer hover:text-grey-dark mt-1" v-show="isEditable" @click="isClicked = !isClicked">
-                    <button class="text-xs text-grey-light hover:text-grey inline-block mx-2" @click="editReply(reply)">Edit</button>
-                    <button class="text-xs text-grey-light hover:text-grey inline-block mx-2" @click="deleteReply(reply.id)">Delete</button>
+                    <button class="text-xs text-grey-light hover:text-grey inline-block mx-2" @click="edit(reply)">Edit</button>
+                    <button class="text-xs text-grey-light hover:text-grey inline-block mx-2" @click="destroy(reply.id)">Delete</button>
 
                 </div>
             </div>
@@ -58,14 +58,14 @@ import { mapActions } from 'vuex';
 
         methods: {
             ...mapActions({
-                deleteReply: 'issue/deleteReply'
+                destroy: 'issue/deleteReply'
             }),
 
             checkEditable() {
                 this.isEditable = true;
             },
 
-            editReply(reply) {
+            edit(reply) {
                 EventBus.$emit('editReply', reply);
             },
 

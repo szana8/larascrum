@@ -53,11 +53,11 @@ class Issue extends Model
     /**
      * Every issue belongs to a type.
      *
-     * @return App\IssueType Issue type
+     * @return App\Type Issue type
      */
     public function type()
     {
-        return $this->belongsTo(IssueType::class, 'type_id');
+        return $this->belongsTo(Type::class, 'type_id');
     }
 
     /**

@@ -1,6 +1,6 @@
 <template>
     <div class="mt-1">
-        <h4 class="text-grey-darkest py-4">Schemas</h4>
+        <h4 class="text-grey-darkest py-4">Schemes</h4>
         <div v-if="isTypeListNotEmpty">
             <schema v-for="type in types" :key="type.id" :type="type"></schema>
         </div>

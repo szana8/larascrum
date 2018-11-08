@@ -1,9 +1,10 @@
 <?php
 
-use App\IssueType;
+
+use App\Type;
 use Illuminate\Database\Seeder;
 
-class IssueTypeSeeder extends Seeder
+class TypesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +13,7 @@ class IssueTypeSeeder extends Seeder
      */
     public function run()
     {
-        IssueType::insert([
+        Type::insert([
             [
                 'name'        => 'Bug',
                 'slug'        => 'bug',

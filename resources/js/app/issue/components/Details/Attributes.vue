@@ -74,7 +74,7 @@
 				<h4 class="text-grey font-normal text-sm w-1/4">Subscribe</h4>
 				<div class="flex -mt-2 w-3/4 justify-content">
 					<div class="ml-4">
-						<span class="border rounded-full border-grey flex items-center cursor-pointer w-12" :class="subscriptionClass" @click="toggleSubscribe">
+						<span class="border rounded-full border-grey flex items-center cursor-pointer w-12 trans-slow" :class="subscriptionClass" @click="toggleSubscribe">
 							<span class="rounded-full border w-6 h-6 border-grey shadow-inner shadow bg-white" >
 							</span>
 						</span>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIssueTypeSchemaPivot extends Migration
+class CreateTypeSchemeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateIssueTypeSchemaPivot extends Migration
      */
     public function up()
     {
-        Schema::create('issue_type_issue_type_schema', function (Blueprint $table) {
+        Schema::create('scheme_type', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('issue_type_id')->references('id')->on('issue_types')->onDelete('cascade');
-            $table->unsignedInteger('issue_type_schema_id')->references('id')->on('issue_type_schemas')->onDelete('cascade');
+            $table->unsignedInteger('type_id')->references('id')->on('types')->onDelete('cascade');
+            $table->unsignedInteger('scheme_id')->references('id')->on('schemes')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateIssueTypeSchemaPivot extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('issue_type_schema_pivot');
+        Schema::dropIfExists('scheme_type');
     }
 }

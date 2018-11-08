@@ -47,7 +47,7 @@ class IssueTest extends TestCase
     /** @test */
     function an_issue_has_a_valid_type()
     {
-        $this->assertInstanceOf('App\IssueType', $this->issue->type);
+        $this->assertInstanceOf('App\Type', $this->issue->type);
     }
 
     /** @test */

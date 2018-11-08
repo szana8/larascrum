@@ -2,18 +2,18 @@
 
 namespace App\Transformers;
 
-use App\IssueType;
+use App\Type;
 use League\Fractal\TransformerAbstract;
 
-class IssueTypeTransformer extends TransformerAbstract
+class TypeTransformer extends TransformerAbstract
 {
     /**
      * A Fractal transformer.
      *
      * @return array
      */
-    public function transform(IssueType $issueType)
+    public function transform(Type $type)
     {
-        return $issueType->toArray();
+        return $type->toArray();
     }
 }
