@@ -46,6 +46,8 @@ View the full documentation at https://tailwindcss.com.
 let colors = {
   'transparent': 'transparent',
 
+  'ls-blue': '#1c3d5a',
+
   'black': '#22292f',
   'grey-darkest': '#3d4852',
   'grey-darker': '#606f7b',
@@ -194,8 +196,6 @@ module.exports = {
 
   fonts: {
     'sans': [
-      'Montserrat',
-      'Helvetica',
       'system-ui',
       'BlinkMacSystemFont',
       '-apple-system',
@@ -536,6 +536,7 @@ module.exports = {
     '48': '12rem',
     '64': '16rem',
     '128': '24rem',
+    '172': '32rem',
     '180': '34rem',
     '192': '40rem',
     '204': '43rem',

@@ -74,7 +74,7 @@
 				<h4 class="text-grey font-normal text-sm w-1/4">Subscribe</h4>
 				<div class="flex -mt-2 w-3/4 justify-content">
 					<div class="ml-4">
-						<span class="border rounded-full border-grey flex items-center cursor-pointer w-12" :class="subscriptionClass" @click="toggleSubscribe">
+						<span class="border rounded-full border-grey flex items-center cursor-pointer w-12 trans-slow" :class="subscriptionClass" @click="toggleSubscribe">
 							<span class="rounded-full border w-6 h-6 border-grey shadow-inner shadow bg-white" >
 							</span>
 						</span>
@@ -96,9 +96,8 @@
 </template>
 
 <script>
+	import { mapActions, mapGetters } from 'vuex'
 	import Attachments from '../Attachments/Attachments'
-	import { mapGetters } from 'vuex'
-
 
 	export default {
 
@@ -106,57 +105,31 @@
 			Attachments
 		},
 
-		props: {
-			'issue': {
-				type: Object
-			}
-		},
-
-		data() {
-			return {
-				isSubscribed: false
-			}
-		},
-
-		mounted() {
-			this.isSubscribed = this.issue.isSubscribedTo;
-		},
-
 		computed: {
+			// Set the necessary subscription class based on the user subscribion.
 			subscriptionClass() {
-				return this.isSubscribed ? 'justify-end bg-blue' : 'justify-start bg-white';
+				return this.issue.isSubscribedTo ? 'justify-end bg-blue' : 'justify-start bg-white';
 			},
 
+			// Map Vuex getters
 			...mapGetters({
-            	user: 'auth/user',
+				user: 'auth/user',
+				issue: 'issue/issue'
         	})
 		},
 
 		methods: {
+			// Map Vuex actions
+			...mapActions({
+				subscribe: 'issue/subscribe',
+				unSubscribe: 'issue/unSubscribe'
+			}),
 
+			// Subscribe or unsubscribe a user based on the current status.
 			toggleSubscribe() {
-				if (this.isSubscribed) {
-					return this.unScubscribe();
-				}
-
-				return this.subscribe();
+				return this.issue.isSubscribedTo ? this.unSubscribe(this.issue.id) : this.subscribe(this.issue.id);
 			},
 
-			unScubscribe() {
-				axios.delete('api/issues/' + this.issue.id + '/unscubscribe').then((response) => {
-					var index = this.issue.subscriptions.findIndex(sub => sub.user_id === this.user.id && sub.issue_id === this.issue_id);
-					this.issue.subscriptions.splice(this.issue.subscriptions.indexOf(index), 1);
-
-					this.isSubscribed = false;
-				});
-			},
-
-			subscribe() {
-				axios.post('api/issues/' + this.issue.id + '/subscribe').then((response) => {
-					this.isSubscribed = true;
-					this.issue.subscriptions = response.data
-				});
-			}
 		}
 
 	}

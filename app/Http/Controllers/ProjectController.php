@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use App\Http\Requests\Project\ProjectCreateRequest;
+use App\Http\Response\Facades\Response;
+use App\Transformers\ProjectTransformer;
 
 class ProjectController extends Controller
 {
@@ -14,17 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return response(Project::all(), 201);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Response::responseCollectionWithSuccess(Project::all(), new ProjectTransformer);
     }
 
     /**
@@ -34,9 +27,11 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectCreateRequest $request, Project $project)
     {
-        //
+        $project = $project->make($request);
+
+        return response($project, 201);
     }
 
     /**

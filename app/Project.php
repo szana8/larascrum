@@ -29,6 +29,21 @@ class Project extends Model
     protected $appends = ['allIssuesInThisProjectCount', 'myIssuesInThisProjectCount'];
 
     /**
+      * Create a new project record
+     */
+    public function make($request)
+    {
+        return $this->create([
+            'name' => $request['name'],
+            'slug' => $request['slug'],
+            'description' => $request['description'],
+            'type' => $request['type'],
+            'icon' => 'storage/icons/project/' . strtolower($request['type']) . '.svg',
+            'owner_id' => $request['owner_id']
+        ]);
+    }
+
+    /**
      * Every project has many issues.
      *
      * @return App\Issue Collection of Issue objeczs

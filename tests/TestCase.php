@@ -4,7 +4,7 @@ namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use App\User;
-use App\IssueType;
+use App\Type;
 use App\Priority;
 use App\Project;
 use App\Issue;
@@ -21,15 +21,17 @@ abstract class TestCase extends BaseTestCase
         return $this;
     }
 
-    protected function createIssueWithFactory()
+    protected function createIssueWithFactory($issue = true)
     {
         $user = create(User::class, ['active' => true]);
 
         factory(User::class)->create();
-        factory(IssueType::class)->create();
+        factory(Type::class)->create();
         factory(Priority::class)->create();
         factory(Project::class)->create();
+        if ($issue)
+            return factory(Issue::class)->create();
 
-        return factory(Issue::class)->create();
+        return;
     }
 }

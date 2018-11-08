@@ -1,6 +1,6 @@
 <?php
 
-use App\IssueType;
+use App\Type;
 use App\Priority;
 use App\Project;
 use App\User;
@@ -14,7 +14,7 @@ $factory->define(App\Issue::class, function (Faker $faker) {
         'body'                    => $faker->paragraph(10),
         'slug'                    => str_slug($title),
         'type_id'                 => function () {
-            return IssueType::inRandomOrder()->first()->id;
+            return Type::inRandomOrder()->first()->id;
         },
         'project_id'              => function () {
             return Project::inRandomOrder()->first()->id;

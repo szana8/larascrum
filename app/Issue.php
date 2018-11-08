@@ -53,11 +53,11 @@ class Issue extends Model
     /**
      * Every issue belongs to a type.
      *
-     * @return App\IssueType Issue type
+     * @return App\Type Issue type
      */
     public function type()
     {
-        return $this->belongsTo(IssueType::class, 'type_id');
+        return $this->belongsTo(Type::class, 'type_id');
     }
 
     /**
@@ -88,6 +88,17 @@ class Issue extends Model
     public function priority()
     {
         return $this->belongsTo(Priority::class, 'priority_id');
+    }
+
+    /**
+     * Eager load all of the necessary collections when the user wants to see the
+     * issue details.
+     *
+     * @return void
+     */
+    public function withDetails()
+    {
+        return $this->loadMissing(['priority', 'subscriptions', 'subscriptions.user']);
     }
 
     /**
@@ -168,23 +179,31 @@ class Issue extends Model
 
     /**
      * Return the workflow configuration array
+     *
+     * @return array
      */
     public function getLaraflowStates()
     {
         return config('tmp.configuration');
     }
 
+    /**
+     * Return the possible transitions list.
+     *
+     * @return array
+     */
     public function getPossibleTransactionsAttribute()
     {
         return $this->laraflowInstance()->getPossibleTransitions();
     }
 
+    /**
+     * Return the actual step name of the issue.
+     *
+     * @return string
+     */
     public function getActualStepNameAttribute()
     {
         return $this->getActualStepName();
-    }
-
-    public function updateWorkflowStatus()
-    {
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\IssueFilters;
 use App\Issue;
-use App\Project;
-use App\Traits\IssueFilterable;
 use Illuminate\Http\Request;
+use App\Filters\IssueFilters;
+use App\Traits\IssueFilterable;
+use App\Transformers\IssueTransformer;
+use App\Http\Response\Facades\Response;
 
 class IssueController extends Controller
 {
@@ -17,11 +18,9 @@ class IssueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Project $project, IssueFilters $filters)
+    public function index(IssueFilters $filters)
     {
-        $issues = $this->getFilteredIssues($project, $filters);
-
-        return response($issues, 201);
+        return Response::responseCollectionWithSuccess($this->getFilteredIssues($filters), new IssueTransformer, true);
     }
 
     /**
@@ -45,7 +44,7 @@ class IssueController extends Controller
      */
     public function show(Issue $issue)
     {
-        return response($issue->load(['priority', 'subscriptions', 'subscriptions.user']), 201);
+        return Response::responseItemWithSuccess($issue->withDetails(), new IssueTransformer);
     }
 
     /**

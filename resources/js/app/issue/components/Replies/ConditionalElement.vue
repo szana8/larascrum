@@ -16,7 +16,14 @@
             FadeTransition
         },
 
-        props: ['whenHidden'],
+        props: {
+            'whenHidden': {
+                type: String
+            },
+            'parent': {
+                type: String
+            }
+        },
 
         data() {
             return {
@@ -29,8 +36,9 @@
         },
 
         methods: {
+             // Check the element is on the parent.
             checkDisplay() {
-                this.isVisible = !inViewport(document.querySelector(this.whenHidden), { container: document.querySelector('#container') });
+                this.isVisible = !inViewport(document.querySelector(this.whenHidden), { container: document.querySelector(this.parent) });
             }
         }
     }

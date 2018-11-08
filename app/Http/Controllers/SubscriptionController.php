@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Issue;
 use App\Subscription;
 use Illuminate\Http\Request;
-use App\Issue;
+use App\Http\Response\Facades\Response;
+use App\Transformers\SubscriptionTransformer;
 
 class SubscriptionController extends Controller
 {
-
     /**
      * Store a newly created resource in storage.
      *
@@ -19,7 +20,7 @@ class SubscriptionController extends Controller
     {
         $sub = $issue->subscribe()->load('subscriptions.user');
 
-        return response($sub->subscriptions, 201);
+        return Response::responseItemWithSuccess($sub->subscriptions, new SubscriptionTransformer);
     }
 
     /**
@@ -32,6 +33,6 @@ class SubscriptionController extends Controller
     {
         $issue->unSubscribe();
 
-        return response('unsubscribed', 201);
+        return Response::responseWithEmptySuccess();
     }
 }

@@ -2,22 +2,25 @@
 	<div class="w-full flex">
 
 		<div class="w-1/6">
-			<sidebar></sidebar>
+			<projects @selected="refreshList"></projects>
 		</div>
 
 		<div class="w-5/6 flex">
 
 			<div class="w-1/4">
-				<quick-filters @updated="updateQuickFilter"></quick-filters>
+				<quick-filters></quick-filters>
 
 				<div class="ml-4">
-					<filtered-issue-list :issues="issues" :is-more-result-exists="isMoreResult"></filtered-issue-list>
+					<filtered-issues :issues="issues.data"
+						:is-more-result-exists="isMoreResultExists"
+						@scrolled="loadMore">
+					</filtered-issues>
 				</div>
 
 			</div>
 
 			<div class="w-3/4">
-				<issue-details :issue-id="issueId"></issue-details>
+				<issue-details></issue-details>
 			</div>
 
 		</div>
@@ -26,119 +29,104 @@
 </template>
 
 <script>
-	import { mapActions } from 'vuex'
+	import { mapActions, mapGetters } from 'vuex'
 	import { EventBus } from '../../../event-bus.js'
 
-	import Sidebar from './Sidebar/Sidebar'
+	import Projects from './Sidebar/Projects'
 	import IssueDetails from './Details/Details'
 	import QuickFilters from './Filters/QuickFilters'
-	import FilteredIssueList from './Lists/FilteredIssueList'
+	import FilteredIssues from './Lists/FilteredIssues'
 
 	export default {
 		components: {
-			Sidebar,
+			Projects,
 			QuickFilters,
 			IssueDetails,
-			FilteredIssueList,
+			FilteredIssues,
 		},
 
 		data() {
 			return {
-				page: 1,
-				lastPage: 1,
-				issues: null,
-				issueId: null,
-				quickFilter: null,
+				priority: null,
 			}
 		},
 
 		computed: {
-			isMoreResult() {
-				return this.page !== this.lastPage
+			// Map the Vuex getters
+			...mapGetters({
+				issues: 'issue/issues',
+				selectedPriority: 'issue/selectedPriority'
+			}),
+
+			// Return a boolean value based on there is more result or not
+			isMoreResultExists() {
+				return this.issues.meta && this.issues.meta.pagination.current_page !== this.issues.meta.pagination.total_pages;
 			}
 		},
 
 		mounted() {
-			this.getIssues();
+			// Get the first group of the issues when the user load the page
+			// or change the project
+			this.fetchIssues({
+				payload: {
+					page: 1,
+					by: this.$route.params.by,
+					priority: this.priority,
+					project: this.$route.params.project
+				}
+			});
 
-        	EventBus.$on('refreshList', this.getIssues)
-        	EventBus.$on('loadMore', this.loadMore)
+			// Set the global event bus listeners
+			EventBus.$on('refreshList', this.refreshList);
+
+			// Set the quick filter and update the list, and load the first
+			// element of the list to the details tab
+			this.$store.subscribe(mutation => {
+				if (mutation.type == 'issue/setSelectedPriority') {
+					this.refreshList();
+				}
+			});
         },
 
         methods: {
+			// Map Vuex axtions
 			...mapActions({
-                fetchIssues: 'issue/fetchIssues'
+				fetchIssues: 'issue/fetchIssues',
+				loadIssuesNextPage: 'issue/loadIssuesNextPage'
 			}),
 
-			// Get the first group of the issues when the user load the page
-			// or change the project
-            getIssues() {
-				this.resetPages();
-
-				this.$nextTick(() => {
-					this.fetchIssues({
-						payload: {
-							project: this.$route.params.project,
-							by: this.$route.params.by,
-							priority: this.quickFilter,
-							page: this.page
-						}
-					}).then((response) => {
-						this.lastPage = response.last_page
-						this.issues = response.data
-
-						if (response.data[0])
-							EventBus.$emit('issueSelected', response.data[0].id);
-					})
-				})
+			// Calculate the next page number based on the current page
+			// and the total page number.
+			calculatePage() {
+				return this.issues.meta.pagination.current_page !== this.issues.meta.pagination.total_pages ? this.issues.meta.pagination.current_page + 1 : this.issues.meta.pagination.current_page;
 			},
 
 			// Load the next page of the issues and add to the issues object
 			// for the infinite loop
 			loadMore() {
-				if (this.page < this.lastPage) {
-					this.page++;
+				this.loadIssuesNextPage({
+					payload: {
+						page: this.calculatePage(),
+						by: this.$route.params.by,
+						priority: this.priority,
+						project: this.$route.params.project
+					}
+				});
+			},
 
+			// Refresh the list of the issues based on the selected project
+			// and project type
+			refreshList() {
+				this.$nextTick(() => {
 					this.fetchIssues({
 						payload: {
-							project: this.$route.params.project,
+							page: 1,
 							by: this.$route.params.by,
-							priority: this.quickFilter,
-							page: this.page
+							priority: this.selectedPriority,
+							project: this.$route.params.project
 						}
-					}).then((response) => {
-						this.issues = this.issues.concat(response.data)
-					})
-
-				}
-			},
-
-			// Reset the page metadata when the user change the project
-			resetPages() {
-				this.page = 1;
-				this.lastPage = 1;
-			},
-
-			// Set the quick filter and update the list, and load the first
-			// element of the list to the details tab
-			updateQuickFilter(filter) {
-				this.quickFilter = filter
-				this.resetPages();
-
-				this.fetchIssues({
-					payload: {
-						project: this.$route.params.project,
-						by: this.$route.params.by,
-						priority: this.quickFilter,
-						page: this.page
-					}
-				}).then((response) => {
-					this.lastPage = response.last_page
-					this.issues = response.data
-
-					if (response.data[0])
-						EventBus.$emit('issueSelected', response.data[0].id);
-				})
+					});
+				});
 			}
         }
 	}

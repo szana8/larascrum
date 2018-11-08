@@ -17,8 +17,8 @@
                 <div class="text-grey-darker py-4 flex justify-between">
                     <span class="text-xs mt-2">Use Markdown with <a href="#" class="text-blue no-underline">Github flavored</a> code blocks.</span>
                     <div class="flex">
-                        <button class="bg-white text-grey-darkest border border-grey-darker rounded-full px-4 py-2 text-sm  hover:border-blue hover:text-blue uppercase font-semibold focus:outline-none" @click="closeReply">Cancel</button>
-                        <button class="bg-blue text-grey-lightest border border-blue rounded-full px-4 py-2 text-sm hover:bg-blue-dark hover:border-blue-dark uppercase mx-2 font-semibold focus:outline-none" @click="postReply">Post</button>
+                        <button class="bg-white text-grey-darkest border border-grey-darker rounded-full px-4 py-2 text-sm  hover:border-blue hover:text-blue uppercase font-semibold focus:outline-none trans-slow" @click="closeReply">Cancel</button>
+                        <button class="bg-blue text-grey-lightest border border-blue rounded-full px-4 py-2 text-sm hover:bg-blue-dark hover:border-blue-dark uppercase mx-2 font-semibold focus:outline-none trans-slow" @click="postReply">Post</button>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,9 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
     import { EventBus } from '../../../../event-bus.js'
+
     import { SlideYDownTransition } from 'vue2-transitions'
 
     export default {
@@ -38,65 +40,58 @@
 
         data() {
             return {
-                isActive: false,
-                reply: null,
                 id: null,
+                reply: null,
                 title: null,
-                mode: 'insert'
+                mode: 'post',
+                isActive: false,
             }
         },
 
         mounted() {
-            EventBus.$on('openNewReplyPopup', this.openNewReplyPopup);
             EventBus.$on('editReply', this.editReply);
+            EventBus.$on('openNewReplyPopup', this.openNewReplyPopup);
         },
 
         methods: {
+            // Map Vuex actions.
+            ...mapActions({
+                replyIssue: 'issue/replyIssue',
+                updateReply: 'issue/updateReply'
+            }),
+
+            // Open the reply popu and set the cursor foruc to the textarea.
             openNewReplyPopup(id, title) {
                 this.id = id;
                 this.title = title;
                 this.isActive = true;
 
-                this.$nextTick(() => this.$refs.reply.focus())
+                // Set the focus to the textarea after the form shown.
+                this.$nextTick(() => this.$refs.reply.focus());
             },
 
             closeReply() {
                 this.id = null;
                 this.title = null;
                 this.reply = null;
-                this.mode = 'insert';
+                this.mode = 'post';
                 this.isActive = false;
             },
 
+            // Create a new reply or update an existing reply.
             postReply() {
-                if (!this.reply)
-                    return
-
-                if (this.mode === 'update') {
-                    return axios.put('api/replies/' + this.id, {
-                        text: this.reply
-                    }).then((response) => {
-                        this.$emit('updated', this.id, this.reply);
-                        this.closeReply();
-                    }).catch((error) => {
-                        console.log(error)
-                    })
+                // If the user create new comment pass the issue id
+                if (this.mode === 'post') {
+                    return this.replyIssue({ issue: this.id, reply: this.reply }).then(() => { this.closeReply(); });
                 }
 
-
-                axios.post('api/issues/' + this.id + '/reply', {
-                    text: this.reply
-                }).then((response) => {
-                    this.$emit('posted', response.data);
-                    this.closeReply();
-                }).catch((error) => {
-                    console.log(error)
-                })
-
+                // else we update the existing one
+                return this.updateReply({id: this.id, reply: this.reply}).then(() => { this.closeReply(); });
             },
 
+            // Set the necessary attributes to edit an existing reply, than open the reply popup.
             editReply(reply) {
-                this.mode = 'update';
+                this.mode = 'put';
                 this.reply = reply.text;
 
                 this.openNewReplyPopup(reply.id, reply.title);
